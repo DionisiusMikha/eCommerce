@@ -56,35 +56,7 @@
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Search">
                     <div class="tampil">
-                        <ul>
-                            <li>
-                                <img src="assets/img/bg/sm1.jpg" alt="">
-                                <div class="judul">
-                                    <h4>halo gais</h4>
-                                    <p>ini deksripsi</p>
-                                </div>
-                            </li>
-                            <li>
-                                <img src="assets/img/bg/sm1.jpg" alt="">
-                                <div class="judul">
-                                    <h4>halo gais</h4>
-                                    <p>ini deksripsi</p>
-                                </div>
-                            </li>
-                            <li>
-                                <img src="assets/img/bg/sm1.jpg" alt="">
-                                <div class="judul">
-                                    <h4>halo gais</h4>
-                                    <p>ini deksripsi</p>
-                                </div>
-                            </li>
-                            <li>
-                                <img src="assets/img/bg/sm1.jpg" alt="">
-                                <div class="judul">
-                                    <h4>halo gais</h4>
-                                    <p>ini deksripsi</p>
-                                </div>
-                            </li>
+                        <ul id="output">
                         </ul>
                     </div>
                 </div>
