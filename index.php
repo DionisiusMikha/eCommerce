@@ -322,7 +322,7 @@ session_start();
 
 
                                 <?php
-                                $rand1 = rand(1, 52);
+                                $rand1 = rand(1, 72);
                                 $query = "SELECT * FROM barang WHERE IdBarang = $rand1";
                                 $result = mysqli_query($conn, $query);
                                 $row = mysqli_fetch_assoc($result);
@@ -348,10 +348,10 @@ session_start();
                                     <img class="masonry-image" alt="masonry" src="assets/img/bg/sample2.png">
                                     <span class="bottom-text">For Men, Made in ISTTS, 2022</span> -->
                                     <?php
-                                    $rand2 = rand(1, 52);;
+                                    $rand2 = rand(1, 72);;
 
                                     if ($rand2 == $rand1 || $rand2 == $rand3) {
-                                        $rand2 = rand(1, 52);;
+                                        $rand2 = rand(1, 72);
                                     }
 
                                     $query = "SELECT * FROM barang WHERE IdBarang = $rand2";
@@ -378,10 +378,10 @@ session_start();
                                     <img class="masonry-image" alt="masonry" src="assets/img/bg/sample.png">
                                     <span class="bottom-text">For Men, Made in ISTTS, 2022</span> -->
                                     <?php
-                                    $rand3 = rand(1, 52);;
+                                    $rand3 = rand(1, 72);
 
                                     if ($rand3 == $rand1 || $rand3 == $rand2) {
-                                        $rand3 = rand(1, 52);;
+                                        $rand3 = rand(1, 72);;
                                     }
 
                                     $query = "SELECT * FROM barang WHERE IdBarang = $rand3";
@@ -407,10 +407,10 @@ session_start();
                                     <img class="masonry-image" alt="masonry" src="assets/img/bg/sample.png">
                                     <span class="bottom-text">For Men, Made in ISTTS, 2022</span> -->
                                     <?php
-                                    $rand4 = rand(1, 52);;
+                                    $rand4 = rand(1, 72);
 
                                     if ($rand4 == $rand1 || $rand4 == $rand2 || $rand4 == $rand3) {
-                                        $rand4 = rand(1, 52);;
+                                        $rand4 = rand(1, 72);;
                                     }
 
                                     $query = "SELECT * FROM barang WHERE IdBarang = $rand4";
@@ -437,9 +437,9 @@ session_start();
                                     <img class="masonry-image" alt="masonry" src="assets/img/bg/sample.png">
                                     <span class="bottom-text">For Men, Made in ISTTS, 2022</span> -->
                                     <?php
-                                    $rand5 = rand(1, 52);
+                                    $rand5 = rand(1, 72);
                                     if ($rand5 == $rand1 || $rand5 == $rand2 || $rand5 == $rand3 || $rand5 == $rand4) {
-                                        $rand5 = rand(1, 52);;
+                                        $rand5 = rand(1, 72);;
                                     }
 
                                     $query = "SELECT * FROM barang WHERE IdBarang = $rand5";
@@ -467,11 +467,11 @@ session_start();
                                     <span class="bottom-text">For Men, Made in ISTTS, 2022</span> -->
 
                                     <?php
-                                    $rand6 = rand(1, 52);
+                                    $rand6 = rand(1, 72);
                                     if ($rand6 == $rand1 || $rand6 == $rand2 || $rand6 == $rand3 || $rand6 == $rand4 || $rand6 == $rand5) {
-                                        $rand6 = rand(1, 52);;
+                                        $rand6 = rand(1, 72);;
                                     }
-                                    
+
                                     $query = "SELECT * FROM barang WHERE IdBarang = $rand6";
                                     $result = mysqli_query($conn, $query);
                                     $row = mysqli_fetch_assoc($result);
@@ -482,7 +482,7 @@ session_start();
                                     echo "<li><a href='product-details.php?id=" . $row['IdBarang'] . "'><i class='fa fa-shopping-cart'></i></a></li>";
                                     echo "</ul>";
                                     echo "<img draggable='false' class='masonry-image' alt='masonry' src='images/" . $row['gambar'] . ".jpg'>";
-                                    
+
                                     ?>
                                 </div>
                             </div>
