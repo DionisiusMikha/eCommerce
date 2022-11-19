@@ -1,3 +1,8 @@
+<?php
+require_once 'Koneksi.php';
+session_start();
+?>
+
 <!DOCTYPE php>
 <php lang="en">
 
@@ -54,10 +59,10 @@
         <div class="search-popup" id="search-popup">
             <form action="" class="search-form">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
+                    <input type="text" class="form-control" placeholder="Search" id="searchInput" name="searchInput">
                     <div class="tampil">
                         <ul id="output">
-                            
+
                         </ul>
                     </div>
                 </div>
@@ -132,8 +137,18 @@
                                             <span></span>
 
                                             <ul id="menu">
-                                                <li><a href="signin.php">Sign In</a></li>
-                                                <li><a href="signup.php">Sign Up</a></li>
+                                                <!-- <li><a href="signin.php">Sign In</a></li>
+                                                <li><a href="signup.php">Sign Up</a></li> -->
+                                                <?php
+                                                if (isset($_SESSION['full_name'])) {
+                                                    echo "<img src='images/gambar_sim.svg' alt='Profile Picture'>";
+                                                    echo "<li>" . $_SESSION['full_name'] . "</li>";
+                                                    echo "<button class='btn btn-danger' style='margin-left: 10px;'><a href='log.php' style='color: white;'>Logout</a></button>";
+                                                } else {
+                                                    echo "<li><a href='signin.php'>Sign In</a></li>";
+                                                    echo "<li><a href='signup.php'>Sign Up</a></li>";
+                                                }
+                                                ?>
                                             </ul>
                                         </div>
                                     </div>
@@ -294,8 +309,8 @@
                                 <li data-filter=".best">Best Seller</li>
                             </ul>
                             <div class="portfolio-masonry grid">
-                                <div class="masonry-item new grid-item width-25">
-                                    <h1 class="top-text">FIGURE <span>Best Figure Ever</span></h1>
+                                <!-- <div class="masonry-item new grid-item width-25">
+                                    <h1 class="top-text">Figure <span>Best figure Ever</span></h1>
                                     <ul class="cart-menu">
                                         <li><a href="#">$120</a></li>
                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
@@ -303,61 +318,172 @@
                                     </ul>
                                     <img class="masonry-image" alt="masonry" src="assets/img/bg/sample.png">
                                     <span class="bottom-text">For Men, Made in ISTTS, 2022</span>
-                                </div>
+                                </div> -->
+
+
+                                <?php
+                                $rand1 = rand(1, 52);
+                                $query = "SELECT * FROM barang WHERE IdBarang = $rand1";
+                                $result = mysqli_query($conn, $query);
+                                $row = mysqli_fetch_assoc($result);
+                                echo "<div class='masonry-item new grid-item width-25'>";
+                                echo "<h1 class='top-text'>Poster 8x4 <span>Best Poster Ever</span></h1>";
+                                echo "<ul class='cart-menu'>";
+                                echo "<li style='color:#888888'>$" . number_format($row['Harga']) . "</li>";
+                                echo "<li><a href='#'><i class='fa fa-heart'></i></a></li>";
+                                echo "<li><a href='product-details.php?id=" . $row['IdBarang'] . "'><i class='fa fa-shopping-cart'></i></a></li>";
+                                echo "</ul>";
+                                echo "<img draggable='false' class='masonry-image' alt='masonry' src='images/" . $row['gambar'] . ".jpg'>";
+                                echo "<span class='bottom-text'>For Men, Made in ISTTS, 2022</span>";
+                                echo "</div>";
+                                ?>
 
                                 <div class="masonry-item best grid-item width-50">
-                                    <h1 class="top-text">FIGURE <span>Best Figure Ever</span></h1>
+                                    <!-- <h1 class="top-text">Poster 8x3 <span>Best Poster 8x3 Ever</span></h1>
                                     <ul class="cart-menu">
                                         <li><a href="#">$120</a></li>
                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                         <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
                                     </ul>
                                     <img class="masonry-image" alt="masonry" src="assets/img/bg/sample2.png">
-                                    <span class="bottom-text">For Men, Made in ISTTS, 2022</span>
+                                    <span class="bottom-text">For Men, Made in ISTTS, 2022</span> -->
+                                    <?php
+                                    $rand2 = rand(1, 52);;
+
+                                    if ($rand2 == $rand1 || $rand2 == $rand3) {
+                                        $rand2 = rand(1, 52);;
+                                    }
+
+                                    $query = "SELECT * FROM barang WHERE IdBarang = $rand2";
+                                    $result = mysqli_query($conn, $query);
+                                    $row = mysqli_fetch_assoc($result);
+                                    echo "<h1 class='top-text'>Poster 8x3 <span>Best Poster 8x3 Ever</span></h1>";
+                                    echo "<ul class='cart-menu'>";
+                                    echo "<li style='color:#888888'>$" . number_format($row['Harga']) . "</li>";
+                                    echo "<li><a href='#'><i class='fa fa-heart'></i></a></li>";
+                                    echo "<li><a href='product-details.php?id=" . $row['IdBarang'] . "'><i class='fa fa-shopping-cart'></i></a></li>";
+                                    echo "</ul>";
+                                    echo "<img draggable='false' class='masonry-image' alt='masonry' src='images/" . $row['gambar'] . ".jpg'>";
+                                    // echo "<span class='bottom-text
+                                    ?>
                                 </div>
 
                                 <div class="masonry-item new best grid-item width-25">
-                                    <h1 class="top-text">FIGURE <span>Best Figure Ever</span></h1>
+                                    <!-- <h1 class="top-text">Poster 8x4 <span>Best Poster Ever</span></h1>
                                     <ul class="cart-menu">
                                         <li><a href="#">$120</a></li>
                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                         <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
                                     </ul>
                                     <img class="masonry-image" alt="masonry" src="assets/img/bg/sample.png">
-                                    <span class="bottom-text">For Men, Made in ISTTS, 2022</span>
+                                    <span class="bottom-text">For Men, Made in ISTTS, 2022</span> -->
+                                    <?php
+                                    $rand3 = rand(1, 52);;
+
+                                    if ($rand3 == $rand1 || $rand3 == $rand2) {
+                                        $rand3 = rand(1, 52);;
+                                    }
+
+                                    $query = "SELECT * FROM barang WHERE IdBarang = $rand3";
+                                    $result = mysqli_query($conn, $query);
+                                    $row = mysqli_fetch_assoc($result);
+                                    echo "<h1 class='top-text'>Poster 8x4 <span>Best Poster Ever</span></h1>";
+                                    echo "<ul class='cart-menu'>";
+                                    echo "<li style='color:#888888'>$" . number_format($row['Harga']) . "</li>";
+                                    echo "<li><a href='#'><i class='fa fa-heart'></i></a></li>";
+                                    echo "<li><a href='product-details.php?id=" . $row['IdBarang'] . "'><i class='fa fa-shopping-cart'></i></a></li>";
+                                    echo "</ul>";
+                                    echo "<img draggable='false' class='masonry-image' alt='masonry' src='images/" . $row['gambar'] . ".jpg'>";
+                                    ?>
                                 </div>
 
                                 <div class="masonry-item best grid-item width-25">
-                                    <h1 class="top-text">FIGURE <span>Best Figure Ever</span></h1>
+                                    <!-- <h1 class="top-text">Poster 8x4 <span>Best Poster Ever</span></h1>
                                     <ul class="cart-menu">
                                         <li><a href="#">$120</a></li>
                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                         <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
                                     </ul>
                                     <img class="masonry-image" alt="masonry" src="assets/img/bg/sample.png">
-                                    <span class="bottom-text">For Men, Made in ISTTS, 2022</span>
+                                    <span class="bottom-text">For Men, Made in ISTTS, 2022</span> -->
+                                    <?php
+                                    $rand4 = rand(1, 52);;
+
+                                    if ($rand4 == $rand1 || $rand4 == $rand2 || $rand4 == $rand3) {
+                                        $rand4 = rand(1, 52);;
+                                    }
+
+                                    $query = "SELECT * FROM barang WHERE IdBarang = $rand4";
+                                    $result = mysqli_query($conn, $query);
+                                    $row = mysqli_fetch_assoc($result);
+                                    echo "<h1 class='top-text'>Poster 8x4 <span>Best Poster Ever</span></h1>";
+                                    echo "<ul class='cart-menu'>";
+                                    echo "<li style='color:#888888'>$" . number_format($row['Harga']) . "</li>";
+                                    echo "<li><a href='#'><i class='fa fa-heart'></i></a></li>";
+                                    echo "<li><a href='product-details.php?id=" . $row['IdBarang'] . "'><i class='fa fa-shopping-cart'></i></a></li>";
+                                    echo "</ul>";
+                                    echo "<img draggable='false' class='masonry-image' alt='masonry' src='images/" . $row['gambar'] . ".jpg'>";
+
+                                    ?>
                                 </div>
 
                                 <div class="masonry-item new grid-item width-25">
-                                    <h1 class="top-text">FIGURE <span>Best Figure Ever</span></h1>
+                                    <!-- <h1 class="top-text">Poster 8x4 <span>Best Poster Ever</span></h1>
                                     <ul class="cart-menu">
                                         <li><a href="#">$120</a></li>
                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                         <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
                                     </ul>
                                     <img class="masonry-image" alt="masonry" src="assets/img/bg/sample.png">
-                                    <span class="bottom-text">For Men, Made in ISTTS, 2022</span>
+                                    <span class="bottom-text">For Men, Made in ISTTS, 2022</span> -->
+                                    <?php
+                                    $rand5 = rand(1, 52);
+                                    if ($rand5 == $rand1 || $rand5 == $rand2 || $rand5 == $rand3 || $rand5 == $rand4) {
+                                        $rand5 = rand(1, 52);;
+                                    }
+
+                                    $query = "SELECT * FROM barang WHERE IdBarang = $rand5";
+                                    $result = mysqli_query($conn, $query);
+                                    $row = mysqli_fetch_assoc($result);
+                                    echo "<h1 class='top-text'>Poster 8x4 <span>Best Poster Ever</span></h1>";
+                                    echo "<ul class='cart-menu'>";
+                                    echo "<li style='color:#888888'>$" . number_format($row['Harga']) . "</li>";
+                                    echo "<li><a href='#'><i class='fa fa-heart'></i></a></li>";
+                                    echo "<li><a href='product-details.php?id=" . $row['IdBarang'] . "'><i class='fa fa-shopping-cart'></i></a></li>";
+                                    echo "</ul>";
+                                    echo "<img draggable='false' class='masonry-image' alt='masonry' src='images/" . $row['gambar'] . ".jpg'>";
+
+                                    ?>
                                 </div>
 
                                 <div class="masonry-item new grid-item width-50">
-                                    <h1 class="top-text">FIGURE <span>Best Figure Ever</span></h1>
+                                    <!-- <h1 class="top-text">Poster 8x3 <span>Best Poster 8x3 Ever</span></h1>
                                     <ul class="cart-menu">
                                         <li><a href="#">$120</a></li>
                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                         <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
                                     </ul>
                                     <img class="masonry-image" alt="masonry" src="assets/img/bg/sample3.png">
-                                    <span class="bottom-text">For Men, Made in ISTTS, 2022</span>
+                                    <span class="bottom-text">For Men, Made in ISTTS, 2022</span> -->
+
+                                    <?php
+                                    $rand6 = rand(1, 52);
+                                    if ($rand6 == $rand1 || $rand6 == $rand2 || $rand6 == $rand3 || $rand6 == $rand4 || $rand6 == $rand5) {
+                                        $rand6 = rand(1, 52);;
+                                    }
+                                    
+                                    $query = "SELECT * FROM barang WHERE IdBarang = $rand6";
+                                    $result = mysqli_query($conn, $query);
+                                    $row = mysqli_fetch_assoc($result);
+                                    echo "<h1 class='top-text'>Poster 8x3 <span>Best Poster 8x3 Ever</span></h1>";
+                                    echo "<ul class='cart-menu'>";
+                                    echo "<li style='color:#888888'>$" . number_format($row['Harga']) . "</li>";
+                                    echo "<li><a href='#'><i class='fa fa-heart'></i></a></li>";
+                                    echo "<li><a href='product-details.php?id=" . $row['IdBarang'] . "'><i class='fa fa-shopping-cart'></i></a></li>";
+                                    echo "</ul>";
+                                    echo "<img draggable='false' class='masonry-image' alt='masonry' src='images/" . $row['gambar'] . ".jpg'>";
+                                    
+                                    ?>
                                 </div>
                             </div>
                         </div>
@@ -424,7 +550,7 @@
                             <div class="footer-widget widget">
                                 <div class="about_us_widget">
                                     <a href="index.php" class="footer-logo">
-                                        <img src="assets/img/footer-logo.png" alt="footer logo">
+                                        <img draggable="false" src="assets/img/footer-logo.png" alt="footer logo">
                                     </a>
                                 </div>
                             </div>
@@ -507,6 +633,7 @@
         <!-- main js -->
         <script src="assets/js/script.js"></script>
         <script src="assets/js/main.js"></script>
+        <script src="assets/js/index.js"></script>
 
     </body>
 

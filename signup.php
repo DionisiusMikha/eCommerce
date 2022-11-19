@@ -53,9 +53,9 @@
                     <a href="index.php"><img src="assets/img/logo.png" alt="logo" style="width: 100px;"></a>
                 </div>
                 <div class="panel-body">
-                    <form>
+                    <form action="process_signup.php" method="POST">
                         <div class="form-group">
-                            <input class="form-control" placeholder="User Name" name="name" type="text">
+                            <input class="form-control" placeholder="Username" name="username" type="text">
                         </div>
                         <div class="form-group">
                             <input class="form-control" placeholder="Email" name="email" type="email">
@@ -70,7 +70,8 @@
                                 <p>Sign in with <a href="https://mail.google.com/mail/" class="gmail">Gmail</a></p>
                             </div>
                             <div class="btn-wrapper desktop-right">
-                                <a href="#" class="btn sm-btn">Sign Up</a>
+                                <!-- <a href="#" class="btn sm-btn">Sign Up</a> -->
+                                <button class="btn sm-btn text-white" name="btnSignUp">Sign Up</button>
                             </div>
                         </div>
                         <p class="bottom">Already Have An Account Please <a class="signup" href="signin.php">Sign In </a> Now</p>

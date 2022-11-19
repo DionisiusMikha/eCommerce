@@ -53,12 +53,12 @@
                     <a href="index.php"><img src="assets/img/logo.png" alt="logo" style="width: 100px;"></a>
                 </div>
                 <div class="panel-body">
-                    <form>
+                    <form action="process_signin.php" method="POST">
                         <div class="form-group">
-                            <input class="form-control" placeholder="Name" name="name" type="text" autofocus="">
+                            <input class="form-control" placeholder="Username" name="username" type="text" autofocus="">
                         </div>
                         <div class="form-group">
-                            <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                            <input class="form-control" placeholder="Password" name="password" type="password">
                         </div>
                         <div class="action">
                             <div class="action-left">
@@ -67,7 +67,8 @@
                                 <p>Sign in with <a href="https://mail.google.com/mail/" class="gmail">Gmail</a></p>
                             </div>
                             <div class="btn-wrapper desktop-right">
-                                <a href="#" class="btn sm-btn">Sign in</a>
+                                <!-- <a href="#" class="btn sm-btn">Sign in</a> -->
+                                <button name="btnSignIn" class="btn sm-btn">Sign in</button>
                             </div>
                         </div>
                         <p class="bottom">Don't Have An Account Please <a class="signup" href="signup.php">Sign up </a> Now</p>
