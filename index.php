@@ -309,18 +309,6 @@ session_start();
                                 <li data-filter=".best">Best Seller</li>
                             </ul>
                             <div class="portfolio-masonry grid">
-                                <!-- <div class="masonry-item new grid-item width-25">
-                                    <h1 class="top-text">Figure <span>Best figure Ever</span></h1>
-                                    <ul class="cart-menu">
-                                        <li><a href="#">$120</a></li>
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
-                                    <img class="masonry-image" alt="masonry" src="assets/img/bg/sample.png">
-                                    <span class="bottom-text">For Men, Made in ISTTS, 2022</span>
-                                </div> -->
-
-
                                 <?php
                                 $rand1 = rand(1, 72);
                                 $query = "SELECT * FROM barang WHERE IdBarang = $rand1";
@@ -339,14 +327,6 @@ session_start();
                                 ?>
 
                                 <div class="masonry-item best grid-item width-50">
-                                    <!-- <h1 class="top-text">Poster 8x3 <span>Best Poster 8x3 Ever</span></h1>
-                                    <ul class="cart-menu">
-                                        <li><a href="#">$120</a></li>
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
-                                    <img class="masonry-image" alt="masonry" src="assets/img/bg/sample2.png">
-                                    <span class="bottom-text">For Men, Made in ISTTS, 2022</span> -->
                                     <?php
                                     $rand2 = rand(1, 72);;
 
@@ -369,14 +349,6 @@ session_start();
                                 </div>
 
                                 <div class="masonry-item new best grid-item width-25">
-                                    <!-- <h1 class="top-text">Poster 8x4 <span>Best Poster Ever</span></h1>
-                                    <ul class="cart-menu">
-                                        <li><a href="#">$120</a></li>
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
-                                    <img class="masonry-image" alt="masonry" src="assets/img/bg/sample.png">
-                                    <span class="bottom-text">For Men, Made in ISTTS, 2022</span> -->
                                     <?php
                                     $rand3 = rand(1, 72);
 
@@ -398,14 +370,6 @@ session_start();
                                 </div>
 
                                 <div class="masonry-item best grid-item width-25">
-                                    <!-- <h1 class="top-text">Poster 8x4 <span>Best Poster Ever</span></h1>
-                                    <ul class="cart-menu">
-                                        <li><a href="#">$120</a></li>
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
-                                    <img class="masonry-image" alt="masonry" src="assets/img/bg/sample.png">
-                                    <span class="bottom-text">For Men, Made in ISTTS, 2022</span> -->
                                     <?php
                                     $rand4 = rand(1, 72);
 
@@ -428,14 +392,6 @@ session_start();
                                 </div>
 
                                 <div class="masonry-item new grid-item width-25">
-                                    <!-- <h1 class="top-text">Poster 8x4 <span>Best Poster Ever</span></h1>
-                                    <ul class="cart-menu">
-                                        <li><a href="#">$120</a></li>
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
-                                    <img class="masonry-image" alt="masonry" src="assets/img/bg/sample.png">
-                                    <span class="bottom-text">For Men, Made in ISTTS, 2022</span> -->
                                     <?php
                                     $rand5 = rand(1, 72);
                                     if ($rand5 == $rand1 || $rand5 == $rand2 || $rand5 == $rand3 || $rand5 == $rand4) {
@@ -457,15 +413,6 @@ session_start();
                                 </div>
 
                                 <div class="masonry-item new grid-item width-50">
-                                    <!-- <h1 class="top-text">Poster 8x3 <span>Best Poster 8x3 Ever</span></h1>
-                                    <ul class="cart-menu">
-                                        <li><a href="#">$120</a></li>
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
-                                    <img class="masonry-image" alt="masonry" src="assets/img/bg/sample3.png">
-                                    <span class="bottom-text">For Men, Made in ISTTS, 2022</span> -->
-
                                     <?php
                                     $rand6 = rand(1, 72);
                                     if ($rand6 == $rand1 || $rand6 == $rand2 || $rand6 == $rand3 || $rand6 == $rand4 || $rand6 == $rand5) {

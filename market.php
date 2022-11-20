@@ -1,3 +1,7 @@
+<?php
+require_once 'Koneksi.php';
+?>
+
 <!DOCTYPE php>
 <php lang="en">
 
@@ -235,26 +239,45 @@
                                         </div>
                                         <div class="col-lg-12 col-md-6">
                                             <div class="shop-item">
-                                                <h1 class="top-text">Figma <span>Best Figma Ever</span></h1>
-                                                <ul class="cart-menu">
-                                                    <li><a>$120</a></li>
-                                                    <li><a><i class="fa fa-heart"></i></a></li>
-                                                    <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                                </ul>
-                                                <img class="shop-image" alt="shop" src="item-kosonganpng">
-                                                <span class="bottom-text">For Men, Made in China, 2017</span>
+                                                <?php
+                                                $query = "SELECT * FROM barang WHERE IdBarang = 1";
+                                                $result = mysqli_query($conn, $query);
+                                                $row = mysqli_fetch_assoc($result);
+                                                $splitNama = "";
+                                                if (strlen($row['NamaBarang']) > 15) {
+                                                    $splitNama = substr($row['NamaBarang'], 0, 15) . "...";
+                                                } else {
+                                                    $splitNama = $row['NamaBarang'];
+                                                }
+
+                                                $deskripsi = "";
+                                                if (strlen($row['Deskripsi']) > 30) {
+                                                    $deskripsi = substr($row['Deskripsi'], 0, 30) . "...";
+                                                } else {
+                                                    $deskripsi = $row['Deskripsi'];
+                                                }
+                                                echo "<h1 class='top-text'>" . $splitNama . "</h1>";
+                                                echo "<ul class='cart-menu'>";
+                                                echo "<li><a>$" . $row['Harga'] . "</a></li>";
+                                                echo "<li><a><i class='fa fa-heart'></i></a></li>";
+                                                echo "<li><a href='product-details.php?id=" . $row['IdBarang'] . "'><i class='fa fa-shopping-cart'></i></a></li>";
+                                                echo "</ul>";
+                                                echo "<a href='product-details.php?id=" . $row['IdBarang'] . "'>";
+                                                echo "<img draggable='false' class='shop-image' alt='shop item' src='images/" . $row['gambar'] . ".jpg'>";
+                                                echo "</a>";
+                                                ?>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-xl-9 col-lg-8">
                                     <div class="shop-big-thumb">
-                                        <img src="assets/img/shop/shop-big-item.png" alt="shop">
+                                        <img draggable="false" src="assets/img/shop/shop-big-item.png" alt="shop">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
+                                <!-- <div class="col-xl-3 col-lg-4 col-md-6 col-12">
                                     <div class="shop-item">
                                         <h1 class="top-text">Figma <span>Best Figma Ever</span></h1>
                                         <ul class="cart-menu">
@@ -337,7 +360,11 @@
                                         <img class="shop-image" alt="shop" src="item-kosongan">
                                         <span class="bottom-text">For Men, Made in China, 2017</span>
                                     </div>
-                                </div>
+                                </div> -->
+
+                                <?php
+
+                                ?>
                             </div>
                         </div>
                         <!-- Tab-one end -->

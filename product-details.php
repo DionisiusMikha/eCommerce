@@ -1,3 +1,7 @@
+<?php
+require_once 'Koneksi.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -177,53 +181,38 @@
             <div class="row">
                 <div class="col-lg-5">
                     <div class="slider-tabfor">
-                        <div class="single-item">
-                            <img src="assets/img/product-details/bg1.png" alt="">
-                        </div>
-                        <div class="single-item">
-                            <img src="assets/img/product-details/bg2.png" alt="">
-                        </div>
-                        <div class="single-item">
-                            <img src="assets/img/product-details/bg3.png" alt="">
-                        </div>
-                        <div class="single-item">
-                            <img src="assets/img/product-details/bg4.png" alt="">
-                        </div>
-                        <div class="single-item">
-                            <img src="assets/img/product-details/bg3.png" alt="">
-                        </div>
+                        <?php
+                        $IdBarang = $_GET['id'];
+                        $query = "SELECT * FROM barang WHERE IdBarang = '$IdBarang'";
+                        $result = mysqli_query($conn, $query);
+                        $row = mysqli_fetch_assoc($result);
+
+                        for ($i = 0; $i < 3; $i++) {
+                            echo "<div class='single-item'>";
+                            echo "<img draggable='false' alt='Barang' src='images/" . $row['gambar'] . ".jpg'>";
+                            echo "</div>";
+                        }
+                        ?>
                     </div>
                     <div class="slider-tabnav">
-                        <div class="single-item">
-                            <div class="img">
-                                <img src="assets/img/product-details/sm1.png" alt="">
-                            </div>
-                        </div>
-                        <div class="single-item">
-                            <div class="img">
-                                <img src="assets/img/product-details/sm2.png" alt="">
-                            </div>
-                        </div>
-                        <div class="single-item">
-                            <div class="img">
-                                <img src="assets/img/product-details/sm3.png" alt="">
-                            </div>
-                        </div>
-                        <div class="single-item">
-                            <div class="img">
-                                <img src="assets/img/product-details/sm4.png" alt="">
-                            </div>
-                        </div>
-                        <div class="single-item">
-                            <div class="img">
-                                <img src="assets/img/product-details/sm3.png" alt="">
-                            </div>
-                        </div>
+                        <?php
+                        $IdBarang = $_GET['id'];
+                        $query = "SELECT * FROM barang WHERE IdBarang = '$IdBarang'";
+                        $result = mysqli_query($conn, $query);
+                        $row = mysqli_fetch_assoc($result);
+                        for ($i = 0; $i < 5; $i++) {
+                            echo "<div class='single-item'>";
+                            echo "<div class='img'>";
+                            echo "<img draggable='false' alt='Barang' src='images/" . $row['gambar'] . ".jpg'>";
+                            echo "</div>";
+                            echo "</div>";
+                        }
+                        ?>
                     </div>
                 </div>
                 <div class="col-lg-7">
                     <div class="content-part">
-                        <h1>Figure <span>For Men, Made in ISTTS, 2022</span></h1>
+                        <!-- <h1>Figure <span>For Men, Made in ISTTS, 2022</span></h1>
                         <span class="specifications">Brand: Lumos</span>
                         <span class="specifications">SKU: RPL02075 </span>
                         <span class="specifications">Seller: RPL Distribution</span><br>
@@ -232,9 +221,34 @@
                         <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet
                             semper augue.</p>
                         <div class="margin-top-30 margin-bottom-30 btn-wrapper desktop-left">
-                            <a href="product-details.php" class="btn sm-btn">Add to cart</a>
+                            
                             <a href="#" class="btn sm-btn black-btn">Add to favourite <i class="fa fa-heart"></i></a>
-                        </div>
+                        </div> -->
+                        <?php
+                        $IdBarang = $_GET['id'];
+                        $query = "SELECT * FROM barang WHERE IdBarang = '$IdBarang'";
+                        $result = mysqli_query($conn, $query);
+                        $row = mysqli_fetch_assoc($result);
+                        echo "<h1>" . $row['NamaBarang'] . "</h1>";
+                        echo "<span class='specifications'>Brand: " . $row['brand'] . "</span>";
+                        echo "<span class='specifications'>SKU: " . $row['IdBarang'] . "</span>";
+                        echo "<span class='specifications'>Seller: " . $row['seller'] . "</span><br>";
+                        $rating = $row['rating'];
+                        echo "<span class='point'>" . $rating . "</span><span class='rating'>";
+                        for ($i = 0; $i < $rating; $i++) {
+                            if ($rating - $i == 0.5) {
+                                echo "<i class='fa fa-star-half-o'></i>";
+                            } else {
+                                echo "<i class='fa fa-star'></i>";
+                            }
+                        }
+                        echo "</span>";
+                        echo "<p class='price'>Price : $" . number_format($row['Harga']) . "</p>";
+                        echo "<p class='description'>" . $row['Deskripsi'] . "</p";
+                        echo "<div class='margin-top-30 margin-bottom-30 btn-wrapper desktop-left'>";
+                        echo "<button class='btn sm-btn' value='" . $row['IdBarang'] . "' style='color:#fff' id='addToCart'>Add to cart</button>";
+                        echo "</div>";
+                        ?>
                     </div>
                 </div>
             </div>
@@ -346,8 +360,8 @@
                             <h1>Shopping Cart</h1>
                             <button type="button" class="close" data-dismiss="modal">Close - </button>
                         </div>
-                        <div class="invoice-bottom">
-                            <h3 class="item-title">Items (6)</h3>
+                        <div class="invoice-bottom outputCart">
+                            <!-- <h3 class="item-title">Items (6)</h3>
                             <ul class="single-item">
                                 <li class="single-cart-item">
                                     <div class="thumb">
@@ -399,17 +413,17 @@
                                     </div>
                                     <span class="close">x</span>
                                 </li>
-                            </ul>
-                            <div class="total">
+                            </ul> -->
+                            <!-- <div class="total">
                                 <h3>Subtotal</h3>
                                 <p class="text-right">$1250.00</p>
-                            </div>
-                            <div class="btn-checkout btn-wrapper">
+                            </div> -->
+                            <!-- <div class="btn-checkout btn-wrapper">
                                 <a class="btn btn-secondary btn-lg btn-block" href="payment.php">Checkout process</a>
-                            </div>
-                            <div class="btn-wrapper desktop-center">
+                            </div> -->
+                            <!-- <div class="btn-wrapper desktop-center">
                                 <a href="#" class="btn btn-invoice" data-dismiss="modal">Continue Shopping <i class="fa fa-long-arrow-right"></i></a>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -456,6 +470,7 @@
     <!-- main js -->
     <script src="assets/js/script.js"></script>
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/product-details.js"></script>
 
     <script>
         $(window).load(function() {

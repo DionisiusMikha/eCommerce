@@ -15,6 +15,9 @@ if (isset($_POST['btnSignUp'])) {
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $hashPassword = password_hash($password, PASSWORD_DEFAULT);
+    $token = md5(rand());
+    echo "<script>alert('$hashPassword');</script>";
     $full_name = RandomString(10);
     if ($username == "" || $email == "" || $password == "") {
         echo "<script>alert('Please fill all the fields!')</script>";
@@ -25,7 +28,7 @@ if (isset($_POST['btnSignUp'])) {
             echo "<script>alert('Username already exists!')</script>";
             echo "<script>window.location.href='signup.php'</script>";
         } else {
-            $query = "INSERT INTO `users`(`username`, `email`, `password`, `full_name`) VALUES ('$username', '$email', '$password', '$full_name')";
+            $query = "INSERT INTO `users`(`username`, `email`, `password`, `full_name`, `token`) VALUES ('$username', '$email', '$hashPassword', '$full_name', '$token')";
             $result = mysqli_query($conn, $query);
             if ($result) {
                 echo "<script>alert('Sign Up Success!')</script>";

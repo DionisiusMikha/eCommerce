@@ -53,21 +53,12 @@
                     <a href="index.php"><img src="assets/img/logo.png" alt="logo" style="width: 100px;"></a>
                 </div>
                 <div class="panel-body">
-                    <form action="process_signin.php" method="POST">
+                    <form action="processpassword.php" method="POST">
                         <div class="form-group">
-                            <input class="form-control" placeholder="Username" name="username" type="text" autofocus="">
+                            <input class="form-control" placeholder="Email" name="emailforgot" type="email" autofocus="">
                         </div>
-                        <div class="form-group">
-                            <input class="form-control" placeholder="Password" name="password" type="password">
-                        </div>
-                        <div class="action">
-                            <div class="action-left">
-                                <a href="forgot-password.php" class="text-dark">Forgot Password?</a>
-                            </div>
-                            <div class="btn-wrapper desktop-right">
-                                <!-- <a href="#" class="btn sm-btn">Sign in</a> -->
-                                <button name="btnSignIn" class="btn sm-btn">Sign in</button>
-                            </div>
+                        <div class="btn-wrapper desktop-right">
+                            <button name="btnSignIn" class="btn lg-btn" style="width: 100%;">Sign in</button>
                         </div>
                         <p class="bottom">Don't Have An Account Please <a class="signup" href="signup.php">Sign up </a> Now</p>
                     </form>
