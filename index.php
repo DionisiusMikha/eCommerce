@@ -35,8 +35,6 @@ session_start();
         <link rel="stylesheet" href="assets/css/style.css">
         <!-- responsive Stylesheet -->
         <link rel="stylesheet" href="assets/css/responsive.css">
-
-
     </head>
 
     <body>
@@ -101,22 +99,13 @@ session_start();
                                         <a href="product-details.php">Product Details</a>
                                     </li>
                                     <li>
-                                        <a>
-                                            Payment
-                                        </a>
-                                        <!-- <a href="shopping-detail.php">Shopping Cart</a> -->
+                                        <a href="payment.php">Payment</a>
                                     </li>
                                     <li>
-                                        <a>
-                                            Payment
-                                        </a>
-                                        <!-- <a href="payment.php">Payment</a> -->
+                                        <a href="cart.php">Cart</a>
                                     </li>
                                     <li>
-                                        <a>
-                                            Checkout
-                                        </a>
-                                        <!-- <a href="checkout.php">Checkout</a> -->
+                                        <a href="checkout.php">Checkout</a>
                                     </li>
                                 </ul>
                             </li>
@@ -318,7 +307,7 @@ session_start();
                                 echo "<h1 class='top-text'>Poster 8x4 <span>Best Poster Ever</span></h1>";
                                 echo "<ul class='cart-menu'>";
                                 echo "<li style='color:#888888'>$" . number_format($row['Harga']) . "</li>";
-                                echo "<li><a href='#'><i class='fa fa-heart'></i></a></li>";
+
                                 echo "<li><a href='product-details.php?id=" . $row['IdBarang'] . "'><i class='fa fa-shopping-cart'></i></a></li>";
                                 echo "</ul>";
                                 echo "<img draggable='false' class='masonry-image' alt='masonry' src='images/" . $row['gambar'] . ".jpg'>";
@@ -340,7 +329,7 @@ session_start();
                                     echo "<h1 class='top-text'>Poster 8x3 <span>Best Poster 8x3 Ever</span></h1>";
                                     echo "<ul class='cart-menu'>";
                                     echo "<li style='color:#888888'>$" . number_format($row['Harga']) . "</li>";
-                                    echo "<li><a href='#'><i class='fa fa-heart'></i></a></li>";
+
                                     echo "<li><a href='product-details.php?id=" . $row['IdBarang'] . "'><i class='fa fa-shopping-cart'></i></a></li>";
                                     echo "</ul>";
                                     echo "<img draggable='false' class='masonry-image' alt='masonry' src='images/" . $row['gambar'] . ".jpg'>";
@@ -362,7 +351,7 @@ session_start();
                                     echo "<h1 class='top-text'>Poster 8x4 <span>Best Poster Ever</span></h1>";
                                     echo "<ul class='cart-menu'>";
                                     echo "<li style='color:#888888'>$" . number_format($row['Harga']) . "</li>";
-                                    echo "<li><a href='#'><i class='fa fa-heart'></i></a></li>";
+
                                     echo "<li><a href='product-details.php?id=" . $row['IdBarang'] . "'><i class='fa fa-shopping-cart'></i></a></li>";
                                     echo "</ul>";
                                     echo "<img draggable='false' class='masonry-image' alt='masonry' src='images/" . $row['gambar'] . ".jpg'>";
@@ -383,7 +372,7 @@ session_start();
                                     echo "<h1 class='top-text'>Poster 8x4 <span>Best Poster Ever</span></h1>";
                                     echo "<ul class='cart-menu'>";
                                     echo "<li style='color:#888888'>$" . number_format($row['Harga']) . "</li>";
-                                    echo "<li><a href='#'><i class='fa fa-heart'></i></a></li>";
+
                                     echo "<li><a href='product-details.php?id=" . $row['IdBarang'] . "'><i class='fa fa-shopping-cart'></i></a></li>";
                                     echo "</ul>";
                                     echo "<img draggable='false' class='masonry-image' alt='masonry' src='images/" . $row['gambar'] . ".jpg'>";
@@ -404,7 +393,7 @@ session_start();
                                     echo "<h1 class='top-text'>Poster 8x4 <span>Best Poster Ever</span></h1>";
                                     echo "<ul class='cart-menu'>";
                                     echo "<li style='color:#888888'>$" . number_format($row['Harga']) . "</li>";
-                                    echo "<li><a href='#'><i class='fa fa-heart'></i></a></li>";
+
                                     echo "<li><a href='product-details.php?id=" . $row['IdBarang'] . "'><i class='fa fa-shopping-cart'></i></a></li>";
                                     echo "</ul>";
                                     echo "<img draggable='false' class='masonry-image' alt='masonry' src='images/" . $row['gambar'] . ".jpg'>";
@@ -425,7 +414,7 @@ session_start();
                                     echo "<h1 class='top-text'>Poster 8x3 <span>Best Poster 8x3 Ever</span></h1>";
                                     echo "<ul class='cart-menu'>";
                                     echo "<li style='color:#888888'>$" . number_format($row['Harga']) . "</li>";
-                                    echo "<li><a href='#'><i class='fa fa-heart'></i></a></li>";
+
                                     echo "<li><a href='product-details.php?id=" . $row['IdBarang'] . "'><i class='fa fa-shopping-cart'></i></a></li>";
                                     echo "</ul>";
                                     echo "<img draggable='false' class='masonry-image' alt='masonry' src='images/" . $row['gambar'] . ".jpg'>";

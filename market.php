@@ -126,22 +126,10 @@ require_once 'Koneksi.php';
                                     <a href="product-details.php">Product Details</a>
                                 </li>
                                 <li>
-                                    <a>
-                                        Shopping Cart
-                                    </a>
-                                    <!-- <a href="shopping-cart.php">Shopping Cart</a> -->
+                                    <a href="payment.php">Payment</a>
                                 </li>
                                 <li>
-                                    <a>
-                                        Payment
-                                    </a>
-                                    <!-- <a href="payment.php">Payment</a> -->
-                                </li>
-                                <li>
-                                    <a>
-                                        Checkout
-                                    </a>
-                                    <!-- <a href="checkout.php">Checkout</a> -->
+                                    <a href="checkout.php">Checkout</a>
                                 </li>
                             </ul>
                         </li>

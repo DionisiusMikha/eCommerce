@@ -114,7 +114,7 @@ require_once 'Koneksi.php';
             <div class="collapse navbar-collapse" id="billatrail_main_menu">
                 <ul class="navbar-nav">
                     <li class="current-menu-item">
-                        <a href="index.php">Home</a>
+                        <a href="#">Home</a>
                     </li>
                     <li class="menu-item-has-children">
                         <a href="market.php">Shop</a>
@@ -123,25 +123,13 @@ require_once 'Koneksi.php';
                                 <a href="market.php">Shop</a>
                             </li>
                             <li>
-                                <a>
-                                    Product Detail
-                                </a>
                                 <a href="product-details.php">Product Details</a>
                             </li>
                             <li>
-                                <a href="shopping-cart.php">Shopping Cart</a>
+                                <a href="payment.php">Payment</a>
                             </li>
                             <li>
-                                <a>
-                                    Payment
-                                </a>
-                                <!-- <a href="payment.php">Payment</a> -->
-                            </li>
-                            <li>
-                                <a>
-                                    Checkout
-                                </a>
-                                <!-- <a href="checkout.php">Checkout</a> -->
+                                <a href="checkout.php">Checkout</a>
                             </li>
                         </ul>
                     </li>
