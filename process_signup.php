@@ -12,15 +12,19 @@ function RandomString($length)
 }
 
 if (isset($_POST['btnSignUp'])) {
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    $username = mysqli_real_escape_string($conn, $_POST['username']);
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $password = mysqli_real_escape_string($conn, $_POST['password']);
     $hashPassword = password_hash($password, PASSWORD_DEFAULT);
     $token = md5(rand());
     echo "<script>alert('$hashPassword');</script>";
     $full_name = RandomString(10);
     if ($username == "" || $email == "" || $password == "") {
         echo "<script>alert('Please fill all the fields!')</script>";
+        echo "<script>window.location.href='signup.php'</script>";
+    } else if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $username) || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $email) || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $password)) {
+        echo "<script>alert('Please do not use special characters!')</script>";
+        echo "<script>window.location.href='signup.php'</script>";
     } else {
         $query = "SELECT * FROM `users` WHERE `username` = '$username'";
         $result = mysqli_query($conn, $query);

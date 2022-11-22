@@ -2,7 +2,7 @@
 require_once 'Koneksi.php';
 
 if (isset($_POST['btnSignIn'])) {
-    $username = strtolower(stripslashes($_POST['username']));
+    $username = mysqli_real_escape_string($conn, strtolower(stripslashes($_POST['username'])));
     $password = mysqli_real_escape_string($conn, $_POST['password']);
     if ($username == "" || $password == "") {
         echo "<script>alert('Please fill all the fields!')</script>";
