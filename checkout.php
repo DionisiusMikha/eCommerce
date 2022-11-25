@@ -1,4 +1,6 @@
 <?php
+require_once 'Koneksi.php';
+session_start();
 require_once dirname(__FILE__) . '/Midtrans.php';
 
 // Set your Merchant Server Key

@@ -20,7 +20,8 @@ while ($row = mysqli_fetch_array($result)) {
     echo "</div>";
     echo "<div class='d-flex'>";
     echo "<div class='content' style='margin-top: 20px; margin-left:20px;'>";
-    echo "<h3>" . $namaSplit . "<br> <span>" . $row['Deskripsi'] . "</span></h3>";
+    echo "<h3>" . $namaSplit . "<br>";
+    echo "<p>" . $row['Deskripsi'] . "</p>";
     echo "<span>$" . number_format($row['Harga']) . "</span>";
     echo "</div>";
     echo "<div class='content' style='margin-left:auto; margin-right:15px; margin-top:20px;'>";
@@ -32,4 +33,3 @@ while ($row = mysqli_fetch_array($result)) {
     echo "</div>";
     echo "</li>";
 }
-?>
