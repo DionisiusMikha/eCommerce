@@ -16,6 +16,8 @@ if (isset($_POST['btnSignIn'])) {
                 session_start();
                 $_SESSION['username'] = $username;
                 $_SESSION['full_name'] = $row['full_name'];
+                // $_SESSION['id'] = $row['id '];
+                $_SESSION['logged_in'] = true;
                 echo "<script>alert('Sign In Success!')</script>";
                 echo "<script>window.location.href='index.php'</script>";
             } else {

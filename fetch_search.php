@@ -8,11 +8,13 @@ $result = mysqli_query($conn, $query);
 if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) {
         echo "<li>";
-        echo "<img src='images/" . $row['gambar'] . ".jpg' alt='' loading='lazy' />";
+        echo "<a href='product-details.php?id=" . $row['IdBarang'] . "'>";
+        echo "<img draggable=false src='images/" . $row['gambar'] . ".jpg' alt='' loading='lazy' />";
         echo "<div class='judul'>";
         echo "<h3>" . $row['NamaBarang'] . "</h3>";
-        echo "<p>" . $row['Harga'] . "</p>";
+        echo "<p>$" . number_format($row['Harga']) . "</p>";
         echo "</div>";
+        echo "</a>";
         echo "</li>";
     }
 }

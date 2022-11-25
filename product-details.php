@@ -1,5 +1,62 @@
 <?php
 require_once 'Koneksi.php';
+session_start();
+$tidakAda = false;
+$id = $_GET['id'];
+
+if (!is_numeric($id)) {
+    header('Location: 404.php');
+}
+
+if (!isset($id)) {
+    header('Location: 404.php');
+} else {
+    $query = "SELECT * FROM barang WHERE IdBarang = $id";
+    $result = mysqli_query($conn, $query);
+    if (mysqli_num_rows($result) == 0) {
+        $tidakAda = true;
+    }
+}
+
+if (!isset($_GET['id']) || !is_numeric($_GET['id']) || $tidakAda) {
+    header('Location: 404.php');
+}
+
+if (isset($_POST['addToCart'])) {
+    $idBarang = mysqli_real_escape_string($conn, stripslashes($_POST['addToCart']));
+
+    $query = "SELECT * FROM barang WHERE IdBarang = $idBarang";
+    $result = mysqli_query($conn, $query);
+    $row = mysqli_fetch_assoc($result);
+
+    $id = $row['IdBarang'];
+    $harga = $row['Harga'];
+
+    $ada = false;
+    $query3 = "SELECT * FROM cart WHERE c_IdBarang = $id AND c_username = '$_SESSION[username]'";
+    $result3 = mysqli_query($conn, $query3);
+    if (mysqli_num_rows($result3) > 0) {
+        $ada = true;
+    } else {
+        $ada = false;
+    }
+
+    if ($ada) {
+        $query4 = "UPDATE cart SET quantity = quantity + 1 WHERE c_IdBarang = $id AND c_username = '$_SESSION[username]'";
+        $result4 = mysqli_query($conn, $query4);
+        if ($result4) {
+            header('Location: cart.php');
+        }
+    } else {
+        $query5 = "INSERT INTO cart(c_IdBarang, c_username , quantity, c_harga) VALUES ($id, '$_SESSION[username]', 1, $harga)";
+        $result5 = mysqli_query($conn, $query5);
+        if ($result5) {
+            header('Location: cart.php');
+        }
+    }
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -150,8 +207,18 @@ require_once 'Koneksi.php';
                                     <span></span>
 
                                     <ul id="menu">
-                                        <li><a href="signin.php">Sign In</a></li>
-                                        <li><a href="signup.php">Sign Up</a></li>
+                                        <!-- <li><a href="signin.php">Sign In</a></li>
+                                        <li><a href="signup.php">Sign Up</a></li> -->
+                                        <?php
+                                        if (isset($_SESSION['full_name'])) {
+                                            echo "<img src='images/gambar_sim.svg' alt='Profile Picture'>";
+                                            echo "<li>" . $_SESSION['full_name'] . "</li>";
+                                            echo "<button class='btn btn-danger' style='margin-left: 10px;'><a href='log.php' style='color: white;'>Logout</a></button>";
+                                        } else {
+                                            echo "<li><a href='signin.php'>Sign In</a></li>";
+                                            echo "<li><a href='signup.php'>Sign Up</a></li>";
+                                        }
+                                        ?>
                                     </ul>
                                 </div>
                             </div>
@@ -171,6 +238,7 @@ require_once 'Koneksi.php';
                     <div class="slider-tabfor">
                         <?php
                         $IdBarang = $_GET['id'];
+                        $IdBarang = mysqli_real_escape_string($conn, $IdBarang);
                         $query = "SELECT * FROM barang WHERE IdBarang = '$IdBarang'";
                         $result = mysqli_query($conn, $query);
                         $row = mysqli_fetch_assoc($result);
@@ -220,7 +288,6 @@ require_once 'Koneksi.php';
                         echo "<h1>" . $row['NamaBarang'] . "</h1>";
                         echo "<span class='specifications'>Brand: " . $row['brand'] . "</span>";
                         echo "<span class='specifications'>SKU: " . $row['IdBarang'] . "</span>";
-                        echo "<span class='specifications'>Seller: " . $row['seller'] . "</span><br>";
                         $rating = $row['rating'];
                         echo "<span class='point'>" . $rating . "</span><span class='rating'>";
                         for ($i = 0; $i < $rating; $i++) {
@@ -234,7 +301,9 @@ require_once 'Koneksi.php';
                         echo "<p class='price'>Price : $" . number_format($row['Harga']) . "</p>";
                         echo "<p class='description'>" . $row['Deskripsi'] . "</p";
                         echo "<div class='margin-top-30 margin-bottom-30 btn-wrapper desktop-left'>";
-                        echo "<button class='btn sm-btn' value='" . $row['IdBarang'] . "' style='color:#fff' id='addToCart'>Add to cart</button>";
+                        echo "<form method='POST'>";
+                        echo "<button class='btn sm-btn' value='" . $row['IdBarang'] . "' style='color:#fff' id='addToCart' name='addToCart'>Add to cart</button>";
+                        echo "</form>";
                         echo "</div>";
                         ?>
                     </div>
@@ -339,7 +408,7 @@ require_once 'Koneksi.php';
     <!-- footer area end -->
 
     <!-- Modal -->
-    <div class="modal fade" id="cart-modal" role="dialog">
+    <!-- <div class="modal fade" id="cart-modal" role="dialog">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-body">
@@ -348,8 +417,8 @@ require_once 'Koneksi.php';
                             <h1>Shopping Cart</h1>
                             <button type="button" class="close" data-dismiss="modal">Close - </button>
                         </div>
-                        <div class="invoice-bottom outputCart">
-                            <!-- <h3 class="item-title">Items (6)</h3>
+                        <div class="invoice-bottom outputCart"> -->
+    <!-- <h3 class="item-title">Items (6)</h3>
                             <ul class="single-item">
                                 <li class="single-cart-item">
                                     <div class="thumb">
@@ -402,22 +471,22 @@ require_once 'Koneksi.php';
                                     <span class="close">x</span>
                                 </li>
                             </ul> -->
-                            <!-- <div class="total">
+    <!-- <div class="total">
                                 <h3>Subtotal</h3>
                                 <p class="text-right">$1250.00</p>
                             </div> -->
-                            <!-- <div class="btn-checkout btn-wrapper">
+    <!-- <div class="btn-checkout btn-wrapper">
                                 <a class="btn btn-secondary btn-lg btn-block" href="payment.php">Checkout process</a>
                             </div> -->
-                            <!-- <div class="btn-wrapper desktop-center">
+    <!-- <div class="btn-wrapper desktop-center">
                                 <a href="#" class="btn btn-invoice" data-dismiss="modal">Continue Shopping <i class="fa fa-long-arrow-right"></i></a>
                             </div> -->
-                        </div>
+    <!-- </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- back to top area start -->
     <div class="back-to-top">
@@ -461,15 +530,15 @@ require_once 'Koneksi.php';
     <script src="assets/js/product-details.js"></script>
 
     <script>
-        $(window).load(function() {
-            $('#cart-modal').modal('show');
-        });
+        // $(window).load(function() {
+        //     $('#cart-modal').modal('show');
+        // });
 
-        function modal() {
-            $(window).load(function() {
-                $('#cart-modal').modal('show');
-            });
-        }
+        // function modal() {
+        //     $(window).load(function() {
+        //         $('#cart-modal').modal('show');
+        //     });
+        // }
     </script>
 
 </body>

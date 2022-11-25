@@ -1,3 +1,15 @@
+<?php
+require_once 'Koneksi.php';
+
+session_start();
+
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true) {
+    echo "<script>alert('Please sign in first!')</script>";
+    echo "<script>window.location.href='signin.php'</script>";
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,8 +42,6 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- responsive Stylesheet -->
     <link rel="stylesheet" href="assets/css/responsive.css">
-
-
 </head>
 
 <body>
@@ -108,8 +118,18 @@
                                     <span></span>
 
                                     <ul id="menu">
-                                        <li><a href="signin.php">Sign In</a></li>
-                                        <li><a href="signup.php">Sign Up</a></li>
+                                        <!-- <li><a href="signin.php">Sign In</a></li>
+                                        <li><a href="signup.php">Sign Up</a></li> -->
+                                        <?php
+                                        if (isset($_SESSION['full_name'])) {
+                                            echo "<img src='images/gambar_sim.svg' alt='Profile Picture'>";
+                                            echo "<li>" . $_SESSION['full_name'] . "</li>";
+                                            echo "<button class='btn btn-danger' style='margin-left: 10px;'><a href='log.php' style='color: white;'>Logout</a></button>";
+                                        } else {
+                                            echo "<li><a href='signin.php'>Sign In</a></li>";
+                                            echo "<li><a href='signup.php'>Sign Up</a></li>";
+                                        }
+                                        ?>
                                     </ul>
                                 </div>
                             </div>
@@ -133,31 +153,8 @@
                                     <div class="tab-pane fade in active show">
                                         <h2 class="content-title">Cart</h2>
                                         <div class="form-group">
-                                            <ul class="single-item" style="list-style:none;">
-                                                <li class="single-cart-item" style="border: 0.1px solid black; background-color:rgb(245, 245, 245);">
-                                                    <div class="thumb" style="margin-top: 20px; margin-left:20px;">
-                                                        <img src="assets/img/product-details/sm1.png" alt="" style="width: 10%;">
-                                                    </div>
-                                                    <div class="content" style="margin-top: 20px; margin-left:20px;">
-                                                        <h3>Figure<br> <span>For Men, Made in ISTTS, 2022</span></h3>
-                                                        <span>$250.00</span>
-                                                    </div>
-                                                    <div class="content" style="margin-left:20px;">
-                                                        - 0 +
-                                                    </div>
-                                                </li>
-                                                <li class="single-cart-item" style="border: 0.1px solid black; background-color:rgb(245, 245, 245);">
-                                                    <div class="thumb" style="margin-top: 20px; margin-left:20px;">
-                                                        <img src="assets/img/product-details/sm1.png" alt="" style="width: 10%;">
-                                                    </div>
-                                                    <div class="content" style="margin-top: 20px; margin-left:20px;">
-                                                        <h3>Figure<br> <span>For Men, Made in ISTTS, 2022</span></h3>
-                                                        <span>$250.00</span>
-                                                    </div>
-                                                    <div class="content" style=" margin-left:20px;">
-                                                        - 0 +
-                                                    </div>
-                                                </li>
+                                            <ul class="single-item" id="isiQuantity" style="list-style:none;">
+
                                             </ul>
                                         </div>
                                     </div>
@@ -173,10 +170,14 @@
                             <h5>Make sure nothing is wrong</h5>
                         </div>
                         <div class="invoice-bottom">
-                            <p class="item-title">Total items (2)</p>
+                            <div class="item-title" id="total-items">
+                                <!-- <p>Total items (2)</p> -->
+                            </div>
                             <div class="total">
                                 <h3>Total</h3>
-                                <p class="text-right">$1250.00</p>
+                                <!-- <p class="text-right">$1250.00</p> -->
+                                <div class="text-right" id="text-right">
+                                </div>
                             </div>
                             <div class="btn-payment btn-wrapper">
                                 <a class="btn btn-secondary btn-lg btn-block" href="checkout.php">Buy</a>
@@ -291,7 +292,6 @@
         <span class="back-top"><i class="fa fa-angle-up"></i></span>
     </div>
     <!-- back to top area end -->
-
     <!-- jquery -->
     <script src="assets/js/jquery-2.2.4.min.js"></script>
     <!-- popper -->
@@ -325,6 +325,50 @@
     <!-- main js -->
     <script src="assets/js/script.js"></script>
     <script src="assets/js/main.js"></script>
+
+    <script>
+        let plus = document.getElementById('plus');
+        let minus = document.getElementById('minus');
+
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch_quantity();
+            fetch_harga();
+            jumlah();
+        });
+
+        function fetch_quantity() {
+            c = new XMLHttpRequest();
+            c.onreadystatechange = function() {
+                if (c.readyState == 4 && c.status == 200) {
+                    document.getElementById('isiQuantity').innerHTML = c.responseText;
+                }
+            }
+            c.open("GET", "quantity.php", true);
+            c.send();
+        }
+
+        function fetch_harga() {
+            r = new XMLHttpRequest();
+            r.onreadystatechange = function() {
+                if (r.readyState == 4 && r.status == 200) {
+                    document.getElementById('text-right').innerHTML = r.responseText;
+                }
+            }
+            r.open("GET", "fetch_harga.php", true);
+            r.send();
+        }
+
+        function jumlah() {
+            lol = new XMLHttpRequest();
+            lol.onreadystatechange = function() {
+                if (lol.readyState == 4 && lol.status == 200) {
+                    document.getElementById('total-items').innerHTML = lol.responseText;
+                }
+            }
+            lol.open("GET", "jumlah.php", true);
+            lol.send();
+        }
+    </script>
 
 </body>
 

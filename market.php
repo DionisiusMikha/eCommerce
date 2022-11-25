@@ -1,5 +1,6 @@
 <?php
 require_once 'Koneksi.php';
+session_start();
 ?>
 
 <!DOCTYPE php>
@@ -58,37 +59,10 @@ require_once 'Koneksi.php';
         <div class="search-popup" id="search-popup">
             <form action="" class="search-form">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
+                    <input type="text" class="form-control" placeholder="Search" id="searchInput">
                     <div class="tampil">
-                        <ul>
-                            <li>
-                                <img src="assets/img/bg/sm1.jpg" alt="">
-                                <div class="judul">
-                                    <h4>halo gais</h4>
-                                    <p>ini deksripsi</p>
-                                </div>
-                            </li>
-                            <li>
-                                <img src="assets/img/bg/sm1.jpg" alt="">
-                                <div class="judul">
-                                    <h4>halo gais</h4>
-                                    <p>ini deksripsi</p>
-                                </div>
-                            </li>
-                            <li>
-                                <img src="assets/img/bg/sm1.jpg" alt="">
-                                <div class="judul">
-                                    <h4>halo gais</h4>
-                                    <p>ini deksripsi</p>
-                                </div>
-                            </li>
-                            <li>
-                                <img src="assets/img/bg/sm1.jpg" alt="">
-                                <div class="judul">
-                                    <h4>halo gais</h4>
-                                    <p>ini deksripsi</p>
-                                </div>
-                            </li>
+                        <ul id="output">
+
                         </ul>
                     </div>
                 </div>
@@ -150,8 +124,16 @@ require_once 'Koneksi.php';
                                         <span></span>
 
                                         <ul id="menu">
-                                            <li><a href="signin.php">Sign In</a></li>
-                                            <li><a href="signup.php">Sign Up</a></li>
+                                            <?php
+                                            if (isset($_SESSION['full_name'])) {
+                                                echo "<img src='images/gambar_sim.svg' alt='Profile Picture'>";
+                                                echo "<li>" . $_SESSION['full_name'] . "</li>";
+                                                echo "<button class='btn btn-danger' style='margin-left: 10px;'><a href='log.php' style='color: white;'>Logout</a></button>";
+                                            } else {
+                                                echo "<li><a href='signin.php'>Sign In</a></li>";
+                                                echo "<li><a href='signup.php'>Sign Up</a></li>";
+                                            }
+                                            ?>
                                         </ul>
                                     </div>
                                 </div>
@@ -246,7 +228,7 @@ require_once 'Koneksi.php';
                                                 }
                                                 echo "<h1 class='top-text'>" . $splitNama . "</h1>";
                                                 echo "<ul class='cart-menu'>";
-                                                echo "<li><a>$" . $row['Harga'] . "</a></li>";
+                                                echo "<li><a>$" . number_format($row['Harga']) . "</a></li>";
                                                 echo "<li><a><i class='fa fa-heart'></i></a></li>";
                                                 echo "<li><a href='product-details.php?id=" . $row['IdBarang'] . "'><i class='fa fa-shopping-cart'></i></a></li>";
                                                 echo "</ul>";
@@ -264,689 +246,62 @@ require_once 'Koneksi.php';
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <!-- <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Figma <span>Best Figma Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Figma <span>Best Figma Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Figma <span>Best Figma Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Figma <span>Best Figma Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Figma <span>Best Figma Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-6 col-lg-4 col-md-6 col-12">
-                                    <div class="shop-item lg-item">
-                                        <h1 class="top-text">Figma <span>Best Figma Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Figma <span>Best Figma Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div> -->
+                            <?php
 
-                                <?php
+                            $jumlahDataPerHalaman = 16;
+                            $jumlahData = "SELECT COUNT(*) FROM barang";
+                            $resultData = mysqli_query($conn, $jumlahData);
+                            $rowData = mysqli_fetch_assoc($resultData);
+                            $jumlahData = $rowData['COUNT(*)'];
+                            $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
+                            $page = (isset($_GET['page'])) ? $_GET['page'] : 1;
+                            $page = mysqli_escape_string($conn, $page);
 
-                                ?>
-                            </div>
+                            if ($page > $jumlahHalaman) {
+                                $page = $jumlahHalaman;
+                                header("Location: shop.php?page=$page");
+                            } else if ($page < 1) {
+                                $page = 1;
+                            }
+
+                            $data = ($jumlahDataPerHalaman * $page) - $jumlahDataPerHalaman + 1;
+
+                            $query = "SELECT * from barang LIMIT $data, $jumlahDataPerHalaman";
+                            $result = mysqli_query($conn, $query);
+                            $jumlahRow = mysqli_num_rows($result);
+                            $jumlahCol = 4;
+                            $jumlahRowPerCol = ceil($jumlahRow / $jumlahCol);
+                            for ($i = 0; $i < $jumlahRowPerCol; $i++) {
+                                echo "<div class='row'>";
+                                for ($j = 0; $j < $jumlahCol; $j++) {
+                                    $row = mysqli_fetch_array($result);
+                                    $namaSplit = "";
+                                    if (strlen($row['NamaBarang']) > 15) {
+                                        $namaSplit = substr($row['NamaBarang'], 0, 15) . "...";
+                                    } else {
+                                        $namaSplit = $row['NamaBarang'];
+                                    }
+                                    if ($row) {
+                                        echo "<div class='col-xl-3 col-lg-4 col-md-6 col-12'>";
+                                        echo "<div class='shop-item'>";
+                                        echo "<h1 class='top-text'>" . $namaSplit . "</h1>";
+                                        echo "<ul class='cart-menu'>";
+                                        echo "<li style='color:#888888;'>$" . number_format($row['Harga']) . "</li>";
+                                        echo "<li><a href='product-details.php?id=" . $row['IdBarang'] . "'><i class='fa fa-shopping-cart'></i></a></li>";
+                                        echo "</ul>";
+                                        echo "<img draggable=false class='shop-image' alt='shop' src='images/" . $row['gambar'] . ".jpg'>";
+                                        echo "<span class='bottom-text'>For Men, Made in China, 2017</span>";
+                                        echo "</div>";
+                                        echo "</div>";
+                                    }
+                                }
+                                echo "</div>";
+                            }
+
+
+                            ?>
                         </div>
                         <!-- Tab-one end -->
-
-                        <!-- Tab-second START -->
-                        <div class="tab-second-content inactive">
-                            <div class="row padding-top-120">
-                                <div class="col-xl-3 col-lg-4">
-                                    <div class="shop-content">
-                                        <h2>Figma product is here</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet semper augue.</p>
-                                        <div class="btn-wrapper">
-                                            <a href="#" class="btn sm-btn btn-style-3">See Details</a>
-                                        </div>
-                                    </div>
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Figure <span>Best Figure Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-9 col-lg-8">
-                                    <div class="shop-big-thumb">
-                                        <img src="assets/img/shop/shop-big-item.png" alt="shop">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xl-3 col-lg-3">
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Figure <span>Best Figure Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-3">
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Figure <span>Best Figure Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-3">
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Figure <span>Best Figure Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-3">
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Figure <span>Best Figure Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-3">
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Figure <span>Best Figure Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-6 col-lg-6">
-                                    <div class="shop-item lg-item">
-                                        <h1 class="top-text">Figure <span>Best Figure Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-3">
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Figure <span>Best Figure Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Tab-second END -->
-
-                        <!-- Tab-third START -->
-                        <div class="tab-third-content inactive">
-                            <div class="row padding-top-120">
-                                <div class="col-xl-3 col-lg-4">
-                                    <div class="shop-content">
-                                        <h2>Nendoroid product is here</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet semper augue.</p>
-                                        <div class="btn-wrapper">
-                                            <a href="#" class="btn sm-btn btn-style-3">See Details</a>
-                                        </div>
-                                    </div>
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Nendoroid <span>Best Nendoroid Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-9 col-lg-8">
-                                    <div class="shop-big-thumb">
-                                        <img src="assets/img/shop/shop-big-item.png" alt="shop">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xl-3 col-lg-3">
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Nendoroid <span>Best Nendoroid Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-3">
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Nendoroid <span>Best Nendoroid Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-3">
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Nendoroid <span>Best Nendoroid Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-3">
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Nendoroid <span>Best Nendoroid Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-3">
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Nendoroid <span>Best Nendoroid Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-6 col-lg-6">
-                                    <div class="shop-item lg-item">
-                                        <h1 class="top-text">Nendoroid <span>Best Nendoroid Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-3">
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Nendoroid <span>Best Nendoroid Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Tab-third END -->
-
-                        <!-- Tab-fourth START -->
-                        <div class="tab-fourth-content inactive">
-                            <div class="row padding-top-120">
-                                <div class="col-xl-3 col-lg-4">
-                                    <div class="shop-content">
-                                        <h2>Figure product is here</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet semper augue.</p>
-                                        <div class="btn-wrapper">
-                                            <a href="#" class="btn sm-btn btn-style-3">See Details</a>
-                                        </div>
-                                    </div>
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Figure <span>Best Figure Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-9 col-lg-8">
-                                    <div class="shop-big-thumb">
-                                        <img src="assets/img/shop/shop-big-item.png" alt="shop">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xl-3 col-lg-3">
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Figure <span>Best Figure Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-3">
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Figure <span>Best Figure Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-3">
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Figure <span>Best Figure Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-3">
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Figure <span>Best Figure Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-3">
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Figure <span>Best Figure Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-6 col-lg-6">
-                                    <div class="shop-item lg-item">
-                                        <h1 class="top-text">Figure <span>Best Figure Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-3">
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Figure <span>Best Figure Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Tab-fourth END -->
-
-                        <!-- Tab-fifth START -->
-                        <div class="tab-fifth-content inactive active">
-                            <div class="row padding-top-120">
-                                <div class="col-xl-3 col-lg-4">
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-6">
-                                            <div class="shop-content">
-                                                <h2>Plush product is here</h2>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet semper augue.</p>
-                                                <div class="btn-wrapper">
-                                                    <a href="#" class="btn sm-btn btn-style-3">See Details</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12 col-md-6">
-                                            <div class="shop-item">
-                                                <h1 class="top-text">Plush <span>Best Plush Ever</span></h1>
-                                                <ul class="cart-menu">
-                                                    <li><a>$120</a></li>
-                                                    <li><a><i class="fa fa-heart"></i></a></li>
-                                                    <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                                </ul>
-                                                <img class="shop-image" alt="shop" src="item-kosongan">
-                                                <span class="bottom-text">For Men, Made in China, 2017</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-9 col-lg-8">
-                                    <div class="shop-big-thumb">
-                                        <img src="assets/img/shop/shop-big-item.png" alt="shop">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Plush <span>Best Plush Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Plush <span>Best Plush Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Plush <span>Best Plush Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Plush <span>Best Plush Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Plush <span>Best Plush Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-6 col-lg-4 col-md-6 col-12">
-                                    <div class="shop-item lg-item">
-                                        <h1 class="top-text">Plush <span>Best Plush Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Plush <span>Best Plush Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Tab-fifth END -->
-
-                        <!-- Tab-sixth START -->
-                        <div class="tab-sixth-content inactive">
-                            <div class="row padding-top-120">
-                                <div class="col-xl-3 col-lg-4">
-                                    <div class="shop-content">
-                                        <h2>Scale Figure product is here</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet semper augue.</p>
-                                        <div class="btn-wrapper">
-                                            <a href="#" class="btn sm-btn btn-style-3">See Details</a>
-                                        </div>
-                                    </div>
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Scale Figure <span>Best Scale Figure Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-9 col-lg-8">
-                                    <div class="shop-big-thumb">
-                                        <img src="assets/img/shop/shop-big-item.png" alt="shop">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xl-3 col-lg-3">
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Scale Figure <span>Best Scale Figure Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-3">
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Scale Figure <span>Best Scale Figure Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-3">
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Scale Figure <span>Best Scale Figure Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-3">
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Scale Figure <span>Best Scale Figure Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-3">
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Scale Figure <span>Best Scale Figure Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-6 col-lg-6">
-                                    <div class="shop-item lg-item">
-                                        <h1 class="top-text">Scale Figure <span>Best Scale Figure Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 col-lg-3">
-                                    <div class="shop-item">
-                                        <h1 class="top-text">Scale Figure <span>Best Scale Figure Ever</span></h1>
-                                        <ul class="cart-menu">
-                                            <li><a>$120</a></li>
-                                            <li><a><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="product-details.php"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                        <img class="shop-image" alt="shop" src="item-kosongan">
-                                        <span class="bottom-text">For Men, Made in China, 2017</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Tab-six END -->
                     </div>
                     <div class="shop-pagination">
                         <ul>
@@ -1108,6 +463,7 @@ require_once 'Koneksi.php';
         <!-- main js -->
         <script src="assets/js/script.js"></script>
         <script src="assets/js/main.js"></script>
+        <script src="assets/js/index.js"></script>
 
     </body>
 

@@ -90,10 +90,10 @@ session_start();
                                 <a href="#">Home</a>
                             </li>
                             <li class="menu-item-has-children">
-                                <a href="market.php">Shop</a>
+                                <a href="market.php?page=1">Shop</a>
                                 <ul class="sub-menu">
                                     <li>
-                                        <a href="market.php">Shop</a>
+                                        <a href="market.php?page=1">Shop</a>
                                     </li>
                                     <li>
                                         <a href="product-details.php">Product Details</a>
