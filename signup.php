@@ -55,6 +55,9 @@
                 <div class="panel-body">
                     <form action="process_signup.php" method="POST">
                         <div class="form-group">
+                            <input class="form-control" placeholder="Full Name" name="full_name" type="text">
+                        </div>
+                        <div class="form-group">
                             <input class="form-control" placeholder="Username" name="username" type="text">
                         </div>
                         <div class="form-group">

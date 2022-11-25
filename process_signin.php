@@ -12,7 +12,7 @@ if (isset($_POST['btnSignIn'])) {
         $result = mysqli_query($conn, $query);
         if (mysqli_num_rows($result) === 1) {
             $row = mysqli_fetch_assoc($result);
-            if (password_verify($password, $row['password'])) {
+            if ($password == $row["password"]) {
                 session_start();
                 $_SESSION['username'] = $username;
                 $_SESSION['full_name'] = $row['full_name'];
