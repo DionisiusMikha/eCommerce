@@ -1,3 +1,37 @@
+<?php
+require_once dirname(__FILE__) . '/Midtrans.php';
+
+// Set your Merchant Server Key
+\Midtrans\Config::$serverKey = 'SB-Mid-server-GWAW904tRTnZhyvlAS8BmM-H';
+// Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+\Midtrans\Config::$isProduction = false;
+// Set sanitization on (default)
+\Midtrans\Config::$isSanitized = true;
+// Set 3DS transaction for credit card to true
+\Midtrans\Config::$is3ds = true;
+
+$order_id = rand();
+$params = array(
+    'transaction_details' => array(
+        'order_id' => $order_id,
+        'gross_amount' => rand(),
+    ),
+    'customer_details' => array(
+        'first_name' => 'Dionisius Mikha',
+        'email' => 'tolongdigantinanti@gmail.com',
+        'phone' => '081',
+    ),
+);
+
+$snapToken = \Midtrans\Snap::getSnapToken($params);
+echo "
+        <script>
+            var token = '" . $snapToken . "';
+        </script>
+    ";
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,7 +84,7 @@
                                             <form action="#" class="form">
                                                 <div class="form-field margin-top-30 margin-bottom-30">
                                                     <label for="name">Full Name</label>
-                                                    <input id="name" type="text" placeholder="Mr Lukman zaman 🗿" class="input-form" />
+                                                    <input id="name" type="text" placeholder="Mr Blablabla" class="input-form" />
                                                 </div>
                                                 <div class="form-field margin-top-30 margin-bottom-30">
                                                     <label for="phn">Phone Number</label>
@@ -140,7 +174,7 @@
                                 <p class="text-right">$1250.00</p>
                             </div>
                             <div class="btn-payment btn-wrapper">
-                                <a class="btn btn-secondary btn-lg btn-block">Continue to payment</a>
+                                <button class="btn btn-secondary btn-lg btn-block" name="continue" id="continue">Continue to payment</button>
                             </div>
                             <div class="btn-wrapper desktop-center">
                                 <a href="cart.php" class="btn btn-invoice"><i class="fa fa-long-arrow-left"></i> Back </a>
@@ -286,6 +320,33 @@
     <!-- main js -->
     <script src="assets/js/script.js"></script>
     <script src="assets/js/main.js"></script>
+
+    <!-- script midtrans -->
+    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="<Set your ClientKey here>"></script>
+    <script>
+        document.getElementById('continue').onclick = function() {
+            // SnapToken acquired from previous step
+            snap.pay(token, {
+                // Optional
+                onSuccess: function(result) {
+                    alert('Berhasil Bayar!');
+                    window.location.href = "payment.php";
+                },
+                // Optional
+                onPending: function(result) {
+                    alert('Menunggu Pembayaran!');
+                    /* You may add your own js here, this is just example */
+                    document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                },
+                // Optional
+                onError: function(result) {
+                    alert('Pembayaran Gagal yang benar kamu!');
+                    /* You may add your own js here, this is just example */
+                    document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                }
+            });
+        };
+    </script>
 
 </body>
 
