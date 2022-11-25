@@ -35,8 +35,6 @@ session_start();
         <link rel="stylesheet" href="assets/css/style.css">
         <!-- responsive Stylesheet -->
         <link rel="stylesheet" href="assets/css/responsive.css">
-
-
     </head>
 
     <body>

@@ -31,7 +31,7 @@ CREATE TABLE `barang` (
   `rating` varchar(5) NOT NULL,
   `Deskripsi` varchar(500) NOT NULL,
   PRIMARY KEY (`IdBarang`)
-) ENGINE=InnoDB AUTO_INCREMENT=152 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=153 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `barang` */
 
@@ -111,8 +111,29 @@ insert  into `barang`(`IdBarang`,`NamaBarang`,`Harga`,`Stok`,`gambar`,`brand`,`s
 (73,'Sailor Moon Eternal Q Posket Princess Uranus A',11229,67,'bnp2589297-a_0_1668648033','','','2',''),
 (74,'1/400 An-225 Large Transport Aircraft Ukraine',24884,82,'af1af10172_0_1668749409','','','1',''),
 (75,'1/32 WW.II German Tank Destroyer Jagdtiger Porsche Type',35225,85,'wltws55702_0_1668743422','','','',''),
-(76,'[Bonus] Azur Lane JUUs Time Chibi Figure Le Malin(Provisional Pre-order)',0,0,'FIGURE-145850','','','',''),
-(151,'',0,0,'','','','','');
+(76,'[Bonus] Azur Lane JUUs Time Chibi Figure Le Malin(Provisional Pre-order)',0,0,'FIGURE-145850','','','','');
+
+/*Table structure for table `cart` */
+
+DROP TABLE IF EXISTS `cart`;
+
+CREATE TABLE `cart` (
+  `c_IdBarang` int(11) NOT NULL AUTO_INCREMENT,
+  `c_username` varchar(255) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `c_harga` int(11) NOT NULL,
+  PRIMARY KEY (`c_IdBarang`,`c_username`)
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8mb4;
+
+/*Data for the table `cart` */
+
+insert  into `cart`(`c_IdBarang`,`c_username`,`quantity`,`c_harga`) values 
+(7,'check1',9,75609),
+(9,'check1',3,90781),
+(22,'check1',2,19798),
+(40,'check1',1,39564),
+(53,'check1',1,35939),
+(71,'check1',2,89659);
 
 /*Table structure for table `users` */
 
