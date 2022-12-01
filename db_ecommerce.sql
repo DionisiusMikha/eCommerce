@@ -128,12 +128,9 @@ CREATE TABLE `cart` (
 /*Data for the table `cart` */
 
 insert  into `cart`(`c_IdBarang`,`c_username`,`quantity`,`c_harga`) values 
-(7,'check1',9,75609),
-(9,'check1',3,90781),
-(22,'check1',2,19798),
-(40,'check1',1,39564),
-(53,'check1',1,35939),
-(71,'check1',2,89659);
+(1,'check1',1,15000),
+(2,'',1,45956),
+(2,'check1',1,45956);
 
 /*Table structure for table `users` */
 
@@ -145,13 +142,16 @@ CREATE TABLE `users` (
   `password` char(255) NOT NULL,
   `full_name` varchar(255) NOT NULL,
   `token` varchar(40) NOT NULL,
+  `saldo` int(11) NOT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `users` */
 
-insert  into `users`(`username`,`email`,`password`,`full_name`,`token`) values 
-('check1','check1@check1.com','$2y$10$iu9QVs5k94vsj0enrmsmQu.dGgXKCli9atHtpwPw.L49CRnrZb7HO','CNvSQtUkqG','09e03a90dbcb0e61aa888093acd3de1c');
+insert  into `users`(`username`,`email`,`password`,`full_name`,`token`,`saldo`) values 
+('check1','check1@check1.com','$2y$10$iu9QVs5k94vsj0enrmsmQu.dGgXKCli9atHtpwPw.L49CRnrZb7HO','CNvSQtUkqG','09e03a90dbcb0e61aa888093acd3de1c',0),
+('check2','Check2@Check2.com','check2','check2','b1763db9bfbbc5ff36212b17259b02d3',0),
+('check3','check3@check3.com','$2y$10$r9EgNaMlTtPB/KvCLrtyv.zNpBhIs5fJS/Y/ZbvhHOCHQ3rtDT89q','check3','cebd3615b825ef825bf713e345561dd9',0);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

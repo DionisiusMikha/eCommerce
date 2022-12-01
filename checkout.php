@@ -32,6 +32,11 @@ echo "
         </script>
     ";
 
+
+$sudahPencet = false;
+if (isset($_POST['continue'])) {
+    $sudahPencet = true;
+}
 ?>
 
 <!DOCTYPE html>
@@ -118,14 +123,38 @@ echo "
                 </div>
                 <div class="col-lg-5">
                     <div class="invoice">
-                        <div class="invoice-top">
+                        <?php
+                        if ($sudahPencet == true) {
+                            $tanggalEstimasiAwal = date("d F");
+                            if (date("Y") != date("Y", strtotime("+1 day"))) {
+                                $tanggalEstimasiAwal .= " " . date("Y");
+                            }
+                            $tanggalEstimasiAkhir = date("d F", strtotime("+3 day"));
+                            if (date("Y") != date("Y", strtotime("+3 day"))) {
+                                $tanggalEstimasiAkhir .= " " . date("Y", strtotime("+3 day"));
+                            }
+                            if (date("Y") == date("Y", strtotime("+3 day"))) {
+                                $tanggalEstimasiAkhir = date("d", strtotime("+3 day")) . " " . date("F", strtotime("+3 day")) . " " . date("Y", strtotime("+3 day"));
+                            }
+
+                            $invoice = "";
+                            // INVOICE 
+                            echo "<div class='invoice-top'>";
+                            echo "<h1>Invoice #" . $invoice . "</h1>";
+                            echo "<h5>Estimated Delivery : " . $tanggalEstimasiAwal . " - " . $tanggalEstimasiAkhir . " </h5>";
+                        }
+                        ?>
+                        <!-- <div class="invoice-top">
                             <h1>Invoice # 428836 Summary</h1>
                             <h5>Estimated Delivery : 25 - 28 July</h5>
-                        </div>
+                        </div> -->
                         <div class="invoice-bottom">
-                            <p class="item-title">Items (6)</p>
+                            <!-- <p class="item-title">Items (6)</p> -->
+                            <div class="item-title" id="outputItemTitle">
+
+                            </div>
                             <ul class="single-item">
-                                <li class="single-cart-item">
+                                <!-- <li class="single-cart-item">
                                     <div class="thumb">
                                         <img src="item-checkout" alt="">
                                     </div>
@@ -169,11 +198,34 @@ echo "
                                         <h3>Figure<br> <span>For Men, Made in ISTTS, 2022</span></h3>
                                         <span>$250.00</span>
                                     </div>
-                                </li>
+                                </li> -->
+                                <?php
+                                $query = "SELECT * FROM cart, barang WHERE cart.c_IdBarang = barang.IdBarang AND cart.c_username = '$_SESSION[username]'";
+                                $result = mysqli_query($conn, $query);
+                                $total = 0;
+                                foreach ($result as $row) {
+                                    $deskripsiSplit = "";
+                                    if (strlen($row["Deskripsi"]) > 35) {
+                                        $deskripsiSplit = substr($row["Deskripsi"], 0, 35) . "...";
+                                    } else {
+                                        $deskripsiSplit = $row["Deskripsi"];
+                                    }
+                                    echo "<li class='single-cart-item'>";
+                                    echo "<div class='thumb'>";
+                                    echo "<img src='images/" . $row['gambar'] . ".jpg' alt='" . $row['NamaBarang'] . "'>";
+                                    echo "</div>";
+                                    echo "<div class='content'>";
+                                    echo "<h3>" . $row['NamaBarang'] . "<br> <span>" . $deskripsiSplit . "</span></h3>";
+                                    echo "<span>$" . $row['Harga'] . "</span>";
+                                    echo "</div>";
+                                    echo "</li>";
+                                    $total += $row['Harga'];
+                                }
+                                ?>
                             </ul>
                             <div class="total">
                                 <h3>Total</h3>
-                                <p class="text-right">$1250.00</p>
+                                <p class="text-right">$<?= number_format($total) ?></p>
                             </div>
                             <div class="btn-payment btn-wrapper">
                                 <button class="btn btn-secondary btn-lg btn-block" name="continue" id="continue">Continue to payment</button>
@@ -328,26 +380,50 @@ echo "
     <script>
         document.getElementById('continue').onclick = function() {
             // SnapToken acquired from previous step
-            snap.pay(token, {
-                // Optional
-                onSuccess: function(result) {
-                    alert('Berhasil Bayar!');
-                    window.location.href = "payment.php";
-                },
-                // Optional
-                onPending: function(result) {
-                    alert('Menunggu Pembayaran!');
-                    /* You may add your own js here, this is just example */
-                    document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
-                },
-                // Optional
-                onError: function(result) {
-                    alert('Pembayaran Gagal yang benar kamu!');
-                    /* You may add your own js here, this is just example */
-                    document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
-                }
-            });
+            let name = document.getElementById('name').value;
+            let phone = document.getElementById('phn').value;
+            let city = document.getElementById('city').value;
+            let address = document.getElementById('address').value;
+
+            if (name == '' || phone == '' || city == '' || address == '') {
+                alert('Please fill all the fields');
+            } else {
+                snap.pay(token, {
+                    // Optional
+                    onSuccess: function(result) {
+                        alert('Berhasil Bayar!');
+                        window.location.href = "payment.php";
+                    },
+                    // Optional
+                    onPending: function(result) {
+                        alert('Menunggu Pembayaran!');
+                        /* You may add your own js here, this is just example */
+                        document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                    },
+                    // Optional
+                    onError: function(result) {
+                        alert('Pembayaran Gagal yang benar kamu!');
+                        /* You may add your own js here, this is just example */
+                        document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
+                    }
+                });
+            }
         };
+
+        function jumlah() {
+            lol = new XMLHttpRequest();
+            lol.onreadystatechange = function() {
+                if (lol.readyState == 4 && lol.status == 200) {
+                    document.getElementById('outputItemTitle').innerHTML = lol.responseText;
+                }
+            }
+            lol.open("GET", "jumlah2.php", true);
+            lol.send();
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            jumlah();
+        });
     </script>
 
 </body>

@@ -32,7 +32,7 @@ if (isset($_POST['btnSignUp'])) {
             echo "<script>alert('Username already exists!')</script>";
             echo "<script>window.location.href='signup.php'</script>";
         } else {
-            $query = "INSERT INTO `users`(`username`, `email`, `password`, `full_name`, `token`) VALUES ('$username', '$email', '$hashPassword', '$full_name', '$token')";
+            $query = "INSERT INTO `users`(`username`, `email`, `password`, `full_name`, `token`) VALUES ('$username', '$email', '$hashPassword', '$full_name', '$token', 99999999)";
             $result = mysqli_query($conn, $query);
             if ($result) {
                 echo "<script>alert('Sign Up Success!')</script>";

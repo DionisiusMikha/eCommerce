@@ -8,6 +8,10 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true) {
     echo "<script>window.location.href='signin.php'</script>";
 }
 
+if (isset($_POST['btnBuy'])) {
+    header('Location: checkout.php');
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -180,7 +184,9 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true) {
                                 </div>
                             </div>
                             <div class="btn-payment btn-wrapper">
-                                <a class="btn btn-secondary btn-lg btn-block" href="checkout.php">Buy</a>
+                                <form action="" method="post">
+                                    <button class="btn btn-secondary btn-lg btn-block" id="btnBuy" name="btnBuy">Buy</button>
+                                </form>
                             </div>
                             <div class="btn-wrapper desktop-center">
                                 <a href="cart.php" class="btn btn-invoice"><i class="fa fa-long-arrow-left"></i> Back </a>
@@ -368,6 +374,76 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true) {
             lol.open("GET", "jumlah.php", true);
             lol.send();
         }
+
+        function tambahQuantity() {
+            let btnPlus = document.getElementById('plus');
+            dor = new XMLHttpRequest();
+            dor.onreadystatechange = function() {
+                if (dor.readyState == 4 && dor.status == 200) {
+                    document.getElementById('kwan').innerHTML = dor.responseText;
+                    fetch_harga();
+                }
+            }
+            dor.open("POST", "tambahQuantity.php", true);
+            dor.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            dor.send("plus=" + btnPlus.value);
+        }
+
+        // setInterval(() => {
+        //     fetch_quantity();
+        //     fetch_harga();
+        //     jumlah();
+        // }, 200);
+
+        function kurangQuantity() {
+            let btnMinus = document.getElementById('minus');
+            let quantity = parseInt(document.getElementById('kwan').innerText);
+            if (quantity <= 1)[
+                deleteBarang()
+            ]
+            else {
+                dionisius = new XMLHttpRequest();
+                dionisius.onreadystatechange = function() {
+                    if (dionisius.readyState == 4 && dionisius.status == 200) {
+                        document.getElementById('kwan').innerHTML = dionisius.responseText;
+                        fetch_harga();
+                    }
+                }
+                dionisius.open("POST", "kurangQuantity.php", true);
+                dionisius.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                dionisius.send("minus=" + btnMinus.value);
+            }
+
+        }
+
+        function deleteBarang() {
+            let conf = confirm("Apakah anda yakin ingin menghapus barang ini?");
+            if (conf == true) {
+                let trash = document.getElementById('trash');
+                wilbert = new XMLHttpRequest();
+                wilbert.onreadystatechange = function() {
+                    if (wilbert.readyState == 4 && wilbert.status == 200) {
+                        document.getElementById('kwan').innerHTML = wilbert.responseText;
+                        fetch_harga();
+                        jumlah();
+                        fetch_quantity();
+
+                    }
+                }
+                wilbert.open("POST", "deleteBarang.php", true);
+                wilbert.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                wilbert.send("trash=" + trash.value);
+            } else {
+                return false;
+            }
+        }
+
+        // document.getElementById("btnBuy").addEventListener("click", function() {
+        //     let conf = confirm("Apakah anda yakin ingin membeli barang ini?");
+        //     if (conf == true) {
+
+        //     }
+        // });
     </script>
 
 </body>
