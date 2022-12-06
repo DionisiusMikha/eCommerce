@@ -35,10 +35,12 @@ session_start();
         <link rel="stylesheet" href="assets/css/style.css">
         <!-- responsive Stylesheet -->
         <link rel="stylesheet" href="assets/css/responsive.css">
+
+        <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
     </head>
 
     <body>
-
+        <!-- <h1>CAHYA</h1> -->
         <!-- preloader area start -->
         <div class="preloader" id="preloader">
             <div class="preloader-inner">
@@ -532,6 +534,8 @@ session_start();
         </div>
         <!-- back to top area end -->
 
+        
+
         <!-- jquery -->
         <script src="assets/js/jquery-2.2.4.min.js"></script>
         <!-- popper -->
@@ -570,6 +574,12 @@ session_start();
         <script src="assets/js/script.js"></script>
         <script src="assets/js/main.js"></script>
         <script src="assets/js/index.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                $(".alertPopUp").hide();
+            });
+        </script>
 
     </body>
 

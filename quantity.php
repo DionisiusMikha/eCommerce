@@ -31,10 +31,10 @@ while ($row = mysqli_fetch_array($result)) {
     echo "<span>$" . number_format($row['Harga']) . "</span>";
     echo "</div>";
     echo "<div class='content' style='margin-left:auto; margin-right:15px; margin-top:20px;'>";
-    echo "<button id='trash' style='margin-right:5px;' class='btn' data-value='" . $row['quantity'] . "'  value='" . $row['IdBarang'] . "' onclick='deleteBarang()'><i class='fa fa-trash'></i></button>";
-    echo "<button id='minus' class='btn' value='" . $row['IdBarang'] . "' onclick='kurangQuantity()'><i class='fa fa-minus'></i></button>";
-    echo "<span id='kwan' style='margin-left:5px; margin-right:5px; font-size:20px; font-weight:bold;'>" . $row['quantity'] . "</span>";
-    echo "<button id='plus' class='btn' value='" . $row['IdBarang'] . "' onclick='tambahQuantity()'><i class='fa fa-plus'></i></button>";
+    echo "<button id='trash' style='margin-right:5px;' class='btn' data-value='" . $row['quantity'] . "' onclick='deleteBarang(" . $row['IdCart'] . ")'><i class='fa fa-trash'></i></button>";
+    echo "<button id='minus' class='btn' onclick='kurangQuantity(" . $row['IdCart'] . ")' ><i class='fa fa-minus'></i></button>";
+    echo "<span id='kwan' class='kwan' style='margin-left:5px; margin-right:5px; font-size:20px; font-weight:bold;'>" . $row['quantity'] . "</span>";
+    echo "<button id='plus' class='btn' onclick='tambahQuantity(" . $row['IdCart'] . ")'><i class='fa fa-plus'></i></button>";
     echo "</div>";
     echo "</div>";
     echo "</li>";

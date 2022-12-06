@@ -48,14 +48,15 @@ if (isset($_POST['addToCart'])) {
             header('Location: cart.php');
         }
     } else {
-        $query5 = "INSERT INTO cart(c_IdBarang, c_username , quantity, c_harga) VALUES ($id, '$_SESSION[username]', 1, $harga)";
+        $queryLalalala = "SELECT * FROM cart";
+        $jum = mysqli_num_rows(mysqli_query($conn, $queryLalalala));
+        $query5 = "INSERT INTO cart(IdCart, c_IdBarang, c_username , quantity, c_harga) VALUES ($jum + 1, $id, '$_SESSION[username]', 1, $harga)";
         $result5 = mysqli_query($conn, $query5);
         if ($result5) {
             header('Location: cart.php');
         }
     }
 }
-
 
 ?>
 

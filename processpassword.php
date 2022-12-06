@@ -32,3 +32,10 @@ if (isset($_POST['btnSignIn'])) {
         }
     }
 }
+
+
+$to = $email;
+$subject = "Reset Password - Kyou.com";
+$message = "Klik link dibawah ini untuk mereset password anda : DISINI NANTI ISI LINK WEBSITE YA SAYANG/resetpassword.php?email=$email&token=$token";
+$headers = "From: kyou.com";
+mail($to, $subject, $message, $headers);

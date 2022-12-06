@@ -12,18 +12,19 @@ function RandomString($length)
 }
 
 if (isset($_POST['btnSignUp'])) {
-    $username = mysqli_real_escape_string($conn, $_POST['username']);
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $password = mysqli_real_escape_string($conn, $_POST['password']);
-    $full_name = mysqli_real_escape_string($conn, $_POST['full_name']);
+    $username = mysqli_real_escape_string($conn, htmlentities($_POST['username']));
+    $email = mysqli_real_escape_string($conn, htmlentities($_POST['email']));
+    $password = mysqli_real_escape_string($conn, htmlentities($_POST['password']));
+    $full_name = mysqli_real_escape_string($conn, htmlentities($_POST['full_name']));
+
+    // $username = stripslashes($username);
+    // $password = stripslashes($password);
+
     $hashPassword = password_hash($password, PASSWORD_DEFAULT);
     $token = md5(rand());
     echo "<script>alert('$hashPassword');</script>";
     if ($username == "" || $email == "" || $password == "") {
         echo "<script>alert('Please fill all the fields!')</script>";
-        echo "<script>window.location.href='signup.php'</script>";
-    } else if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $username) || preg_match('/[\'^£$%&*()}{#~?><>,|=_+¬-]/', $email) || preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $password)) {
-        echo "<script>alert('Please do not use special characters!')</script>";
         echo "<script>window.location.href='signup.php'</script>";
     } else {
         $query = "SELECT * FROM `users` WHERE `username` = '$username'";
@@ -32,7 +33,7 @@ if (isset($_POST['btnSignUp'])) {
             echo "<script>alert('Username already exists!')</script>";
             echo "<script>window.location.href='signup.php'</script>";
         } else {
-            $query = "INSERT INTO `users`(`username`, `email`, `password`, `full_name`, `token`) VALUES ('$username', '$email', '$hashPassword', '$full_name', '$token', 99999999)";
+            $query = "INSERT INTO `users`(`username`, `email`, `password`, `full_name`, `token`, `saldo`, `status`) VALUES ('$username', '$email', '$hashPassword', '$full_name', '$token', 99999999, '1')";
             $result = mysqli_query($conn, $query);
             if ($result) {
                 echo "<script>alert('Sign Up Success!')</script>";

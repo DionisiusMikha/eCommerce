@@ -14,12 +14,16 @@ if (isset($_POST['btnSignIn'])) {
             $row = mysqli_fetch_assoc($result);
             if (password_verify($password, $row['password'])) {
                 session_start();
-                $_SESSION['username'] = $username;
-                $_SESSION['full_name'] = $row['full_name'];
-                // $_SESSION['id'] = $row['id '];
-                $_SESSION['logged_in'] = true;
-                echo "<script>alert('Sign In Success!')</script>";
-                echo "<script>window.location.href='index.php'</script>";
+                if ($row['status'] == 0) {
+                    echo "<script>alert('Akun anda sedang di suspend!')</script>";
+                    echo "<script>window.location.href='signin.php'</script>";
+                } else {
+                    $_SESSION['username'] = $username;
+                    $_SESSION['full_name'] = $row['full_name'];
+                    $_SESSION['logged_in'] = true;
+                    echo "<script>alert('Sign In Success!')</script>";
+                    echo "<script>window.location.href='index.php'</script>";
+                }
             } else {
                 echo "<script>alert('Wrong password!')</script>";
                 echo "<script>window.location.href='signin.php'</script>";

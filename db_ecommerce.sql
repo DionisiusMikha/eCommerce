@@ -31,13 +31,13 @@ CREATE TABLE `barang` (
   `rating` varchar(5) NOT NULL,
   `Deskripsi` varchar(500) NOT NULL,
   PRIMARY KEY (`IdBarang`)
-) ENGINE=InnoDB AUTO_INCREMENT=153 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=167 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `barang` */
 
 insert  into `barang`(`IdBarang`,`NamaBarang`,`Harga`,`Stok`,`gambar`,`brand`,`seller`,`rating`,`Deskripsi`) values 
 (1,'1/400 An-225 Large Transport Aircraft Russia',15000,75,'af1af10171_0_1668749428','','','0.5',''),
-(2,'sailor-moon-eternal-super-sailor-moon-ii-ver-a-q-glitter-glamours-banpresto',45956,13,'sailor-moon-eternal-super-sailor-moon-ii-ver-a-q-glitter-glamours-banpresto','','','1','Merol muspi rolod tis tema rutetcesnoc gnicisipida tile. Eropmet mairepa tnuicsen muitnesearp atidepxe orebil silicaf mainev rutnuuqesnoc mauqsiuq? Eadnaiduper siroproc aguf tnuicsen eadnasucer saila murolod muspi mallu tis siitidnalb etneipas ouq atcid, silicaf sunim, tu euqmuc tse taecalp irutpecxe orev di. Satpulov isin tiredneherper, rorre sitaicipsrep apluc saitselom tua oitpo?esr ereh'),
+(2,'sailor-moon-eternal-super-sailor-moon-ii-ver-a-q-glitter-glamours-banpresto',45956,12222,'sailor-moon-eternal-super-sailor-moon-ii-ver-a-q-glitter-glamours-banpresto','','','1','Merol muspi rolod tis tema rutetcesnoc gnicisipida tile. Eropmet mairepa tnuicsen muitnesearp atidepxe orebil silicaf mainev rutnuuqesnoc mauqsiuq? Eadnaiduper siroproc aguf tnuicsen eadnasucer saila murolod muspi mallu tis siitidnalb etneipas ouq atcid, silicaf sunim, tu euqmuc tse taecalp irutpecxe orev di. Satpulov isin tiredneherper, rorre sitaicipsrep apluc saitselom tua oitpo?esr ereh'),
 (3,'bleach-ichigo-kurosaki-mub-tsume',55193,56,'bleach-ichigo-kurosaki-mub-tsume','','','1.5',''),
 (4,'dc-multiverse-batman-dc-future-state-mcfarlane-toys',11434,4,'dc-multiverse-batman-dc-future-state-mcfarlane-toys','','','1.5',''),
 (5,'dragon-ball-super-broly-full-power-sh-figuarts-bandai',27767,64,'dragon-ball-super-broly-full-power-sh-figuarts-bandai','','','1.5',''),
@@ -111,26 +111,30 @@ insert  into `barang`(`IdBarang`,`NamaBarang`,`Harga`,`Stok`,`gambar`,`brand`,`s
 (73,'Sailor Moon Eternal Q Posket Princess Uranus A',11229,67,'bnp2589297-a_0_1668648033','','','2',''),
 (74,'1/400 An-225 Large Transport Aircraft Ukraine',24884,82,'af1af10172_0_1668749409','','','1',''),
 (75,'1/32 WW.II German Tank Destroyer Jagdtiger Porsche Type',35225,85,'wltws55702_0_1668743422','','','',''),
-(76,'[Bonus] Azur Lane JUUs Time Chibi Figure Le Malin(Provisional Pre-order)',0,0,'FIGURE-145850','','','','');
+(76,'[Bonus] Azur Lane JUUs Time Chibi Figure Le Malin(Provisional Pre-order)',12012,45,'FIGURE-145850','','','','');
 
 /*Table structure for table `cart` */
 
 DROP TABLE IF EXISTS `cart`;
 
 CREATE TABLE `cart` (
-  `c_IdBarang` int(11) NOT NULL AUTO_INCREMENT,
+  `IdCart` int(11) NOT NULL AUTO_INCREMENT,
   `c_username` varchar(255) NOT NULL,
   `quantity` int(11) NOT NULL,
   `c_harga` int(11) NOT NULL,
-  PRIMARY KEY (`c_IdBarang`,`c_username`)
-) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8mb4;
+  `c_IdBarang` int(11) NOT NULL,
+  PRIMARY KEY (`IdCart`,`c_username`,`c_IdBarang`),
+  KEY `IdCart` (`c_IdBarang`)
+) ENGINE=InnoDB AUTO_INCREMENT=87 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `cart` */
 
-insert  into `cart`(`c_IdBarang`,`c_username`,`quantity`,`c_harga`) values 
-(1,'check1',1,15000),
-(2,'',1,45956),
-(2,'check1',1,45956);
+insert  into `cart`(`IdCart`,`c_username`,`quantity`,`c_harga`,`c_IdBarang`) values 
+(1,'check1',1,79530,66),
+(2,'check1',1,21908,55),
+(3,'check1',1,60381,63),
+(4,'check1',1,85733,45),
+(5,'check1',1,17687,29);
 
 /*Table structure for table `users` */
 
@@ -143,15 +147,11 @@ CREATE TABLE `users` (
   `full_name` varchar(255) NOT NULL,
   `token` varchar(40) NOT NULL,
   `saldo` int(11) NOT NULL,
+  `status` varchar(1) NOT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `users` */
-
-insert  into `users`(`username`,`email`,`password`,`full_name`,`token`,`saldo`) values 
-('check1','check1@check1.com','$2y$10$iu9QVs5k94vsj0enrmsmQu.dGgXKCli9atHtpwPw.L49CRnrZb7HO','CNvSQtUkqG','09e03a90dbcb0e61aa888093acd3de1c',0),
-('check2','Check2@Check2.com','check2','check2','b1763db9bfbbc5ff36212b17259b02d3',0),
-('check3','check3@check3.com','$2y$10$r9EgNaMlTtPB/KvCLrtyv.zNpBhIs5fJS/Y/ZbvhHOCHQ3rtDT89q','check3','cebd3615b825ef825bf713e345561dd9',0);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

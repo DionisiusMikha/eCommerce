@@ -158,7 +158,9 @@ if (isset($_POST['btnBuy'])) {
                                         <h2 class="content-title">Cart</h2>
                                         <div class="form-group">
                                             <ul class="single-item" id="isiQuantity" style="list-style:none;">
+                                                <?php
 
+                                                ?>
                                             </ul>
                                         </div>
                                     </div>
@@ -298,6 +300,28 @@ if (isset($_POST['btnBuy'])) {
         <span class="back-top"><i class="fa fa-angle-up"></i></span>
     </div>
     <!-- back to top area end -->
+
+    <!-- POP UP ALERT -->
+    <div class="element-modal-content" id="modalSignin">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-lg-5 offset-lg-1">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <div class="alert-circle">
+                                <i class="fa fa-times"></i>
+                            </div>
+                            <h5 class="card-title">Error!</h5>
+                            <p class="card-text">Please Sign in First!</p>
+                            <div class="btn-wrapper">
+                                <a href="signin.php" class="btn btn-element btn-normal btn-red">OK</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- jquery -->
     <script src="assets/js/jquery-2.2.4.min.js"></script>
     <!-- popper -->
@@ -340,6 +364,9 @@ if (isset($_POST['btnBuy'])) {
             fetch_quantity();
             fetch_harga();
             jumlah();
+
+            // let modal = document.getElementById('modalSignin');
+            // modal.style.display = '';
         });
 
         function fetch_quantity() {
@@ -375,64 +402,61 @@ if (isset($_POST['btnBuy'])) {
             lol.send();
         }
 
-        function tambahQuantity() {
-            let btnPlus = document.getElementById('plus');
+        function tambahQuantity(IdCart) {
             dor = new XMLHttpRequest();
             dor.onreadystatechange = function() {
                 if (dor.readyState == 4 && dor.status == 200) {
-                    document.getElementById('kwan').innerHTML = dor.responseText;
+                    document.getElementsByClassName('kwan')[IdCart - 1].innerHTML = dor.responseText;
                     fetch_harga();
                 }
             }
             dor.open("POST", "tambahQuantity.php", true);
             dor.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            dor.send("plus=" + btnPlus.value);
+            alert(IdCart);
+            dor.send("plus=" + IdCart);
+
         }
 
-        // setInterval(() => {
-        //     fetch_quantity();
-        //     fetch_harga();
-        //     jumlah();
-        // }, 200);
-
-        function kurangQuantity() {
-            let btnMinus = document.getElementById('minus');
-            let quantity = parseInt(document.getElementById('kwan').innerText);
+        function kurangQuantity(IdCart) {
+            // let btnMinus = document.getElementById('minus');
+            let quantity = parseInt(document.getElementsByClassName('kwan')[IdCart - 1].innerHTML);
             if (quantity <= 1)[
-                deleteBarang()
+                deleteBarang(IdCart)
             ]
             else {
                 dionisius = new XMLHttpRequest();
                 dionisius.onreadystatechange = function() {
                     if (dionisius.readyState == 4 && dionisius.status == 200) {
-                        document.getElementById('kwan').innerHTML = dionisius.responseText;
+                        document.getElementsByClassName('kwan')[IdCart - 1].innerHTML = dionisius.responseText;
                         fetch_harga();
+                        console.log(dionisius.responseText);
+                        // fetch_quantity();
+
                     }
                 }
                 dionisius.open("POST", "kurangQuantity.php", true);
                 dionisius.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                dionisius.send("minus=" + btnMinus.value);
+                dionisius.send("minus=" + IdCart);
             }
 
         }
 
-        function deleteBarang() {
+        function deleteBarang(IdCart) {
             let conf = confirm("Apakah anda yakin ingin menghapus barang ini?");
             if (conf == true) {
-                let trash = document.getElementById('trash');
+                // let trash = document.getElementById('trash');
                 wilbert = new XMLHttpRequest();
                 wilbert.onreadystatechange = function() {
                     if (wilbert.readyState == 4 && wilbert.status == 200) {
-                        document.getElementById('kwan').innerHTML = wilbert.responseText;
+                        // document.getElementByClassName('kwan')[IdCart - 1].innerHTML = wilbert.responseText;
                         fetch_harga();
                         jumlah();
                         fetch_quantity();
-
                     }
                 }
                 wilbert.open("POST", "deleteBarang.php", true);
                 wilbert.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                wilbert.send("trash=" + trash.value);
+                wilbert.send("trash=" + IdCart);
             } else {
                 return false;
             }

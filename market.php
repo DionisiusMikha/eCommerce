@@ -287,7 +287,16 @@ session_start();
                                         echo "<li style='color:#888888;'>$" . number_format($row['Harga']) . "</li>";
                                         echo "<li><a href='product-details.php?id=" . $row['IdBarang'] . "'><i class='fa fa-shopping-cart'></i></a></li>";
                                         echo "</ul>";
-                                        echo "<img draggable=false class='shop-image' alt='shop' src='images/" . $row['gambar'] . ".jpg'>";
+                                        // if image has extension
+                                        if (strpos($row['gambar'], '.') !== false) {
+                                            echo "<a href='product-details.php?id=" . $row['IdBarang'] . "'>";
+                                            echo "<img draggable='false' class='shop-image' alt='shop item' src='images/" . $row['gambar'] . "'>";
+                                            echo "</a>";
+                                        } else {
+                                            echo "<a href='product-details.php?id=" . $row['IdBarang'] . "'>";
+                                            echo "<img draggable='false' class='shop-image' alt='shop item' src='images/" . $row['gambar'] . ".jpg'>";
+                                            echo "</a>";
+                                        }
                                         echo "<span class='bottom-text'>For Men, Made in China, 2017</span>";
                                         echo "</div>";
                                         echo "</div>";
@@ -303,7 +312,7 @@ session_start();
                     </div>
                     <div class="shop-pagination">
                         <ul>
-                            <li>
+                            <!-- <li>
                                 <span class="page-bumber">1</span>
                             </li>
                             <li>
@@ -320,7 +329,24 @@ session_start();
                             </li>
                             <li>
                                 <span class="next page-bumber"><i class="fa fa-long-arrow-right"></i></span>
-                            </li>
+                            </li> -->
+
+                            <!-- pagination PHP -->
+                            <?php
+                            for ($i = 1; $i <= $jumlahHalaman; $i++) {
+                                // jika page > 5 maka tampilkan tambahan ...
+                                if ($i > 5) {
+                                    echo "<li><span class='page-bumber'>...</span></li>";
+                                    break;
+                                }
+                                if ($i == $page) {
+                                    echo "<li><span class=''>$i</span></li>";
+                                } else {
+                                    echo "<li><a href='market.php?page=$i'><span class=''>$i</span></a></li>";
+                                }
+                            }
+                            echo "<li><a href='market.php?page=" . ($page + 1) . "'><span class='next page-bumber'><i class='fa fa-long-arrow-right'></i></span></a></li>";
+                            ?>
                         </ul>
                     </div>
                 </div>
