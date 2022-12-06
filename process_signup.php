@@ -17,12 +17,9 @@ if (isset($_POST['btnSignUp'])) {
     $password = mysqli_real_escape_string($conn, htmlentities($_POST['password']));
     $full_name = mysqli_real_escape_string($conn, htmlentities($_POST['full_name']));
 
-    // $username = stripslashes($username);
-    // $password = stripslashes($password);
-
     $hashPassword = password_hash($password, PASSWORD_DEFAULT);
     $token = md5(rand());
-    echo "<script>alert('$hashPassword');</script>";
+    // echo "<script>alert('$hashPassword');</script>";
     if ($username == "" || $email == "" || $password == "") {
         echo "<script>alert('Please fill all the fields!')</script>";
         echo "<script>window.location.href='signup.php'</script>";
