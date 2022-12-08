@@ -200,18 +200,6 @@ if (isset($_POST['editBarang'])) {
             fetch_table_barang();
         });
 
-        function deleteBarang(IdBarang) {
-            ketawa = new XMLHttpRequest();
-            ketawa.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    fetch_table_barang();
-                }
-            }
-            ketawa.open("POST", "delete_barang.php", true);
-            ketawa.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            ketawa.send("IdBarang=" + IdBarang);
-        }
-
         function editBarang(noBarang) {
             let namaBarang = document.getElementsByClassName("namaBarangtb")[noBarang - 1].innerHTML;
             let hargaBarang = document.getElementsByClassName("hargatb")[noBarang - 1].innerHTML;

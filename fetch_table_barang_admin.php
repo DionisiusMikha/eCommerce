@@ -35,6 +35,6 @@ while ($row = mysqli_fetch_assoc($result)) {
         echo "<td id='ratingtb'>" . $row['rating'] . "</td>";
     }
     echo "<td>" . $deskripsiSplit . "</td>";
-    echo "<td><button class='btn btn-primary' onclick='editBarang(" . $ctr++ . ")'>Edit</button><button class='btn btn-danger' onclick='deleteBarang(" . $row['IdBarang'] . ")'>Delete</button></td>";
+    echo "<td style='width: 60px;'><button class='btn btn-primary' onclick='editBarang(" . $ctr++ . ")'>Edit</button></td>";
     echo "</tr>";
 }

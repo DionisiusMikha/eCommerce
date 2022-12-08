@@ -1,5 +1,6 @@
 <?php
 require_once 'Koneksi.php';
+session_start();
 
 if (isset($_POST['btnSignIn'])) {
     $username = mysqli_real_escape_string($conn, strtolower(stripslashes($_POST['username'])));
@@ -13,10 +14,10 @@ if (isset($_POST['btnSignIn'])) {
         if (mysqli_num_rows($result) === 1) {
             $row = mysqli_fetch_assoc($result);
             if (password_verify($password, $row['password'])) {
-                session_start();
                 if ($row['status'] == 0) {
-                    echo "<script>alert('Akun anda sedang di suspend!')</script>";
+                    $_SESSION['error'] = "Akun anda sedang di suspend!";
                     echo "<script>window.location.href='signin.php'</script>";
+
                 } else {
                     $_SESSION['username'] = $username;
                     $_SESSION['full_name'] = $row['full_name'];
@@ -25,11 +26,11 @@ if (isset($_POST['btnSignIn'])) {
                     echo "<script>window.location.href='index.php'</script>";
                 }
             } else {
-                echo "<script>alert('Wrong password!')</script>";
+                $_SESSION['error'] = "Incorrect password!";
                 echo "<script>window.location.href='signin.php'</script>";
             }
         } else {
-            echo "<script>alert('Username not found!')</script>";
+            $_SESSION['error'] = "Username not found!";
             echo "<script>window.location.href='signin.php'</script>";
         }
     }

@@ -12,13 +12,6 @@ if (isset($_POST['btnBuy'])) {
     header('Location: checkout.php');
 }
 
-$query = "SELECT * FROM cart WHERE c_username = '" . $_SESSION['username'] . "'";
-$result = mysqli_query($conn, $query);
-
-if (mysqli_num_rows($result) == 0) {
-    echo "<script>window.location.href='cart_empty.php'</script>";
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -53,6 +46,29 @@ if (mysqli_num_rows($result) == 0) {
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- responsive Stylesheet -->
     <link rel="stylesheet" href="assets/css/responsive.css">
+
+    <style>
+        .kosong {
+            width: 50%;
+            height: 50%;
+            margin: 0 auto;
+        }
+
+        .kosong img {
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        .txt {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 
 <body>
@@ -149,54 +165,13 @@ if (mysqli_num_rows($result) == 0) {
     <!-- delivery-area start -->
     <div class="delivery-area">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-7">
-                    <div class="row">
-                        <div class="delivery-content">
-                            <div class="delivery-tab">
-                                <div class="tab-content">
-                                    <div class="tab-pane fade in active show">
-                                        <h2 class="content-title">Cart</h2>
-                                        <div class="form-group">
-                                            <ul class="single-item" id="isiQuantity" style="list-style:none;">
-                                                <?php
-
-                                                ?>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-5">
-                    <div class="invoice">
-                        <div class="invoice-top">
-                            <h1>Please Check Your Order!</h1>
-                            <h5>Make sure nothing is wrong</h5>
-                        </div>
-                        <div class="invoice-bottom">
-                            <div class="item-title" id="total-items">
-                                <!-- <p>Total items (2)</p> -->
-                            </div>
-                            <div class="total">
-                                <h3>Total</h3>
-                                <!-- <p class="text-right">$1250.00</p> -->
-                                <div class="text-right" id="text-right">
-                                </div>
-                            </div>
-                            <div class="btn-payment btn-wrapper">
-                                <form action="" method="post">
-                                    <button class="btn btn-secondary btn-lg btn-block" id="btnBuy" name="btnBuy">Buy</button>
-                                </form>
-                            </div>
-                            <div class="btn-wrapper desktop-center" id="btnBack">
-                                <a href="#" class="btn btn-invoice"><i class="fa fa-long-arrow-left"></i> Back </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="kosong">
+                <img src="assets/img/bg/empty-cart.png" alt="">
+            </div>
+            <div class="txt">
+                <h1>Oops! Your cart is empty</h1>
+                <p>Looks like you haven't added anything to your cart yet.</p>
+                <a href="market.php?page=1" class="btn btn-primary p-3 rounded" style="font-size: 20px;border-radius:55px;">Continue Shopping</a>
             </div>
         </div>
     </div>
@@ -360,117 +335,6 @@ if (mysqli_num_rows($result) == 0) {
     <!-- main js -->
     <script src="assets/js/script.js"></script>
     <script src="assets/js/main.js"></script>
-
-    <script>
-        let plus = document.getElementById('plus');
-        let minus = document.getElementById('minus');
-
-        document.addEventListener('DOMContentLoaded', function() {
-            fetch_quantity();
-            fetch_harga();
-            jumlah();
-
-            // let modal = document.getElementById('modalSignin');
-            // modal.style.display = '';
-        });
-
-        function fetch_quantity() {
-            c = new XMLHttpRequest();
-            c.onreadystatechange = function() {
-                if (c.readyState == 4 && c.status == 200) {
-                    document.getElementById('isiQuantity').innerHTML = c.responseText;
-                }
-            }
-            c.open("GET", "quantity.php", true);
-            c.send();
-        }
-
-        function fetch_harga() {
-            r = new XMLHttpRequest();
-            r.onreadystatechange = function() {
-                if (r.readyState == 4 && r.status == 200) {
-                    document.getElementById('text-right').innerHTML = r.responseText;
-                }
-            }
-            r.open("GET", "fetch_harga.php", true);
-            r.send();
-        }
-
-        function jumlah() {
-            lol = new XMLHttpRequest();
-            lol.onreadystatechange = function() {
-                if (lol.readyState == 4 && lol.status == 200) {
-                    document.getElementById('total-items').innerHTML = lol.responseText;
-                }
-            }
-            lol.open("GET", "jumlah.php", true);
-            lol.send();
-        }
-
-        function tambahQuantity(IdCart) {
-            dor = new XMLHttpRequest();
-            dor.onreadystatechange = function() {
-                if (dor.readyState == 4 && dor.status == 200) {
-                    document.getElementsByClassName('kwan')[IdCart - 1].innerHTML = dor.responseText;
-                    fetch_harga();
-                }
-            }
-            dor.open("POST", "tambahQuantity.php", true);
-            dor.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            // alert(IdCart);
-            dor.send("plus=" + IdCart);
-
-        }
-
-        function kurangQuantity(IdCart) {
-            // let btnMinus = document.getElementById('minus');
-            let quantity = parseInt(document.getElementsByClassName('kwan')[IdCart - 1].innerHTML);
-            if (quantity <= 1)[
-                deleteBarang(IdCart)
-            ]
-            else {
-                dionisius = new XMLHttpRequest();
-                dionisius.onreadystatechange = function() {
-                    if (dionisius.readyState == 4 && dionisius.status == 200) {
-                        document.getElementsByClassName('kwan')[IdCart - 1].innerHTML = dionisius.responseText;
-                        fetch_harga();
-                        console.log(dionisius.responseText);
-                        // fetch_quantity();
-
-                    }
-                }
-                dionisius.open("POST", "kurangQuantity.php", true);
-                dionisius.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                dionisius.send("minus=" + IdCart);
-            }
-
-        }
-
-        function deleteBarang(IdCart) {
-            let conf = confirm("Apakah anda yakin ingin menghapus barang ini?");
-            if (conf == true) {
-                // let trash = document.getElementById('trash');
-                wilbert = new XMLHttpRequest();
-                wilbert.onreadystatechange = function() {
-                    if (wilbert.readyState == 4 && wilbert.status == 200) {
-                        // document.getElementByClassName('kwan')[IdCart - 1].innerHTML = wilbert.responseText;
-                        fetch_harga();
-                        jumlah();
-                        fetch_quantity();
-                    }
-                }
-                wilbert.open("POST", "deleteBarang.php", true);
-                wilbert.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                wilbert.send("trash=" + IdCart);
-            } else {
-                return false;
-            }
-        }
-
-        document.getElementById("btnBack").addEventListener("click", function() {
-            window.history.back();
-        });
-    </script>
 
 </body>
 

@@ -95,13 +95,7 @@ session_start();
                                     <a href="market.php">Shop</a>
                                 </li>
                                 <li>
-                                    <a href="product-details.php">Product Details</a>
-                                </li>
-                                <li>
-                                    <a href="payment.php">Payment</a>
-                                </li>
-                                <li>
-                                    <a href="checkout.php">Checkout</a>
+                                    <a href="cart.php">Cart</a>
                                 </li>
                             </ul>
                         </li>
@@ -144,7 +138,7 @@ session_start();
         <!-- nav area end -->
 
         <!-- shop-banner start -->
-        <div class="shop-banner padding-bottom-100 padding-top-40">
+        <div class="shop-banner padding-bottom-30 padding-top-40">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xl-4 col-md-6">
@@ -171,22 +165,6 @@ session_start();
 
         <!-- shop-tab start -->
         <div class="shop-tab">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="tab-accordion">
-                        <div class="tab">
-                            <ul>
-                                <li class="tab-one active">All</li>
-                                <li class="tab-second">Figma</li>
-                                <li class="tab-third">Nendoroid</li>
-                                <li class="tab-fourth">Figure</li>
-                                <li class="tab-fifth">Plush</li>
-                                <li class="tab-sixth">Scale Figure</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="tab-content">
                 <div class="container">
                     <div class="tab-content-area">
@@ -287,7 +265,6 @@ session_start();
                                         echo "<li style='color:#888888;'>$" . number_format($row['Harga']) . "</li>";
                                         echo "<li><a href='product-details.php?id=" . $row['IdBarang'] . "'><i class='fa fa-shopping-cart'></i></a></li>";
                                         echo "</ul>";
-                                        // if image has extension
                                         if (strpos($row['gambar'], '.') !== false) {
                                             echo "<a href='product-details.php?id=" . $row['IdBarang'] . "'>";
                                             echo "<img draggable='false' class='shop-image' alt='shop item' src='images/" . $row['gambar'] . "'>";

@@ -216,10 +216,10 @@ if (isset($_POST['continue'])) {
                                     echo "</div>";
                                     echo "<div class='content'>";
                                     echo "<h3>" . $row['NamaBarang'] . "<br> <span>" . $deskripsiSplit . "</span></h3>";
-                                    echo "<span>$" . $row['Harga'] . "</span>";
+                                    echo "<span>$" . $row['Harga'] . " x " . $row['quantity'] . "</span>";
                                     echo "</div>";
                                     echo "</li>";
-                                    $total += $row['Harga'];
+                                    $total += $row['Harga'] * $row['quantity'];
                                 }
                                 ?>
                             </ul>
@@ -283,7 +283,7 @@ if (isset($_POST['continue'])) {
         </div>
     </div>
     <!-- brand-area end -->
-
+    8
     <div class="bottom-bg"></div>
 
     <!-- footer area start -->

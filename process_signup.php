@@ -1,6 +1,6 @@
 <?php
 require_once 'Koneksi.php';
-
+session_start();
 function RandomString($length)
 {
     $key = "";
@@ -21,13 +21,17 @@ if (isset($_POST['btnSignUp'])) {
     $token = md5(rand());
     // echo "<script>alert('$hashPassword');</script>";
     if ($username == "" || $email == "" || $password == "") {
-        echo "<script>alert('Please fill all the fields!')</script>";
+        // echo "<script>alert('Please fill all the fields!')</script>";
+        // echo "<script>window.location.href='signup.php'</script>";
+        $_SESSION['error'] = "Please fill all the fields!";
         echo "<script>window.location.href='signup.php'</script>";
     } else {
         $query = "SELECT * FROM `users` WHERE `username` = '$username'";
         $result = mysqli_query($conn, $query);
         if (mysqli_num_rows($result) > 0) {
-            echo "<script>alert('Username already exists!')</script>";
+            // echo "<script>alert('Username already exists!')</script>";
+            // echo "<script>window.location.href='signup.php'</script>";
+            $_SESSION['error'] = "Username already exists!";
             echo "<script>window.location.href='signup.php'</script>";
         } else {
             $query = "INSERT INTO `users`(`username`, `email`, `password`, `full_name`, `token`, `saldo`, `status`) VALUES ('$username', '$email', '$hashPassword', '$full_name', '$token', 99999999, '1')";

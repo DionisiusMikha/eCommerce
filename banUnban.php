@@ -2,7 +2,7 @@
 require_once 'Koneksi.php';
 session_start();
 $username = $_REQUEST['username'];
-echo "<script>alert('$username');</script>";
+// echo "<script>alert('$username');</script>";
 $query = "UPDATE users SET status = 1 WHERE username = '$username'";
 $result = mysqli_query($conn, $query);
 if ($result) {

@@ -98,16 +98,7 @@ session_start();
                                         <a href="market.php?page=1">Shop</a>
                                     </li>
                                     <li>
-                                        <a href="product-details.php">Product Details</a>
-                                    </li>
-                                    <li>
-                                        <a href="payment.php">Payment</a>
-                                    </li>
-                                    <li>
                                         <a href="cart.php">Cart</a>
-                                    </li>
-                                    <li>
-                                        <a href="checkout.php">Checkout</a>
                                     </li>
                                 </ul>
                             </li>
@@ -534,7 +525,7 @@ session_start();
         </div>
         <!-- back to top area end -->
 
-        
+
 
         <!-- jquery -->
         <script src="assets/js/jquery-2.2.4.min.js"></script>

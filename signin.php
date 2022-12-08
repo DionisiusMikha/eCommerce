@@ -1,3 +1,8 @@
+<?php
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,7 +51,7 @@
     </div>
     <!-- preloader area end -->
 
-    <div class="signinup-area">
+    <div class="signinup-area" style="border-bottom: 0;">
         <div class="content col-lg-6 col-md-6">
             <div class="login-panel">
                 <div class="panel-heading">
@@ -56,9 +61,16 @@
                     <form action="process_signin.php" method="POST">
                         <div class="form-group">
                             <input class="form-control" placeholder="Username" name="username" type="text" autofocus="">
+
                         </div>
                         <div class="form-group">
                             <input class="form-control" placeholder="Password" name="password" type="password">
+                            <?php
+                            if (isset($_SESSION['error'])) {
+                                echo "<p style='color: red;'>" . $_SESSION['error'] . "</p>";
+                                unset($_SESSION['error']);
+                            }
+                            ?>
                         </div>
                         <div class="action">
                             <div class="action-left">
@@ -75,6 +87,10 @@
             </div>
         </div>
     </div>
+
+
+
+
 
     <!-- jquery -->
     <script src="assets/js/jquery-2.2.4.min.js"></script>
@@ -109,9 +125,18 @@
     <!-- main js -->
     <script src="assets/js/script.js"></script>
     <script src="assets/js/main.js"></script>
-
     <script>
-        
+        function openPop(text) {
+            alert("MASUK");
+            document.getElementById("popup").style.display = "initial";
+            document.getElementById("bg-pop").style.display = "initial";
+            document.getElementsById("tulisanSenyum").innerHTML = "";
+        }
+
+        function closePop() {
+            document.getElementById("popup").style.display = "none";
+            document.getElementById("bg-pop").style.display = "none";
+        }
     </script>
 
 </body>

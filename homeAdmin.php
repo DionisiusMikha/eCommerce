@@ -53,8 +53,10 @@ if (isset($_POST['MB'])) {
             fetch_table();
         });
 
-        function banUser() {
+        function banUser(ctr) {
             let username = document.getElementById("ban").value;
+
+            let ban = document.getElementsByClassName("ban")[ctr - 1];
 
             lol = new XMLHttpRequest();
             lol.onreadystatechange = function() {
@@ -65,11 +67,13 @@ if (isset($_POST['MB'])) {
             };
             lol.open("POST", "banUser.php", true);
             lol.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            lol.send("username=" + username);
+            lol.send("username=" + ban.value);
         }
 
-        function unbanUser() {
+        function unbanUser(ctr) {
             let username = document.getElementById("unban").value;
+
+            let ban = document.getElementsByClassName("ban")[ctr - 1];
 
             lol = new XMLHttpRequest();
             lol.onreadystatechange = function() {
@@ -80,7 +84,7 @@ if (isset($_POST['MB'])) {
             };
             lol.open("POST", "banUnban.php", true);
             lol.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            lol.send("username=" + username);
+            lol.send("username=" + ban.value);
         }
     </script>
 </body>

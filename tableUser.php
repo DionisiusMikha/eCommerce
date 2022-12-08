@@ -27,13 +27,13 @@ if (mysqli_num_rows($result) > 0) {
         if ($row['status'] == 1) {
             echo "<td style='width:100px;'>Active</td>";
         } else {
-            echo "<td>Non Active</td>";
+            echo "<td style='width:100px;'>Non Active</td>";
         }
 
         if ($row['status'] == 1) {
-            echo "<td style='width:65px;'><button id='ban' onclick='banUser()' value='" . $row['username'] . "'>Ban</button></td>";
+            echo "<td style='width:65px;'><button id='ban' onclick='banUser(" . $no . ")' value='" . $row['username'] . "' class='ban'>Ban</button></td>";
         } else {
-            echo "<td style='width:65px;'><button id='unban' onclick='unbanUser()' value='" . $row['username'] . "'>Unban</button></td>";
+            echo "<td style='width:65px;'><button id='unban' onclick='unbanUser(" . $no . ")' value='" . $row['username'] . "' class='ban'>Unban</button></td>";
         }
         $no++;
     }

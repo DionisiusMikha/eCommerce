@@ -17,7 +17,3 @@ input.addEventListener("keyup", function () {
     document.getElementById("output").innerHTML = "";
   }
 });
-
-document.getElementById("my-image").ondragstart = function () {
-  return false;
-};
