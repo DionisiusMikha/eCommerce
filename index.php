@@ -296,8 +296,16 @@ session_start();
                                 $query = "SELECT * FROM barang WHERE IdBarang = $rand1";
                                 $result = mysqli_query($conn, $query);
                                 $row = mysqli_fetch_assoc($result);
+
+                                $namaSplit = "";
+                                if (strlen($row['NamaBarang']) > 20) {
+                                    $namaSplit = substr($row['NamaBarang'], 0, 20) . "...";
+                                } else {
+                                    $namaSplit = $row['NamaBarang'];
+                                }
+
                                 echo "<div class='masonry-item new grid-item width-25'>";
-                                echo "<h1 class='top-text'>Poster 8x4 <span>Best Poster Ever</span></h1>";
+                                echo "<h1 class='top-text'>" . $namaSplit . "</h1>";
                                 echo "<ul class='cart-menu'>";
                                 echo "<li style='color:#888888'>$" . number_format($row['Harga']) . "</li>";
 
@@ -319,7 +327,14 @@ session_start();
                                     $query = "SELECT * FROM barang WHERE IdBarang = $rand2";
                                     $result = mysqli_query($conn, $query);
                                     $row = mysqli_fetch_assoc($result);
-                                    echo "<h1 class='top-text'>Poster 8x3 <span>Best Poster 8x3 Ever</span></h1>";
+
+                                    $namaSplit = "";
+                                    if (strlen($row['NamaBarang']) > 35) {
+                                        $namaSplit = substr($row['NamaBarang'], 0, 35) . "...";
+                                    } else {
+                                        $namaSplit = $row['NamaBarang'];
+                                    }
+                                    echo "<h1 class='top-text'>" . $namaSplit . "</h1>";
                                     echo "<ul class='cart-menu'>";
                                     echo "<li style='color:#888888'>$" . number_format($row['Harga']) . "</li>";
 
@@ -341,7 +356,14 @@ session_start();
                                     $query = "SELECT * FROM barang WHERE IdBarang = $rand3";
                                     $result = mysqli_query($conn, $query);
                                     $row = mysqli_fetch_assoc($result);
-                                    echo "<h1 class='top-text'>Poster 8x4 <span>Best Poster Ever</span></h1>";
+
+                                    $namaSplit = "";
+                                    if (strlen($row['NamaBarang']) > 20) {
+                                        $namaSplit = substr($row['NamaBarang'], 0, 20) . "...";
+                                    } else {
+                                        $namaSplit = $row['NamaBarang'];
+                                    }
+                                    echo "<h1 class='top-text'>" . $namaSplit . "</h1>";
                                     echo "<ul class='cart-menu'>";
                                     echo "<li style='color:#888888'>$" . number_format($row['Harga']) . "</li>";
 
@@ -362,7 +384,14 @@ session_start();
                                     $query = "SELECT * FROM barang WHERE IdBarang = $rand4";
                                     $result = mysqli_query($conn, $query);
                                     $row = mysqli_fetch_assoc($result);
-                                    echo "<h1 class='top-text'>Poster 8x4 <span>Best Poster Ever</span></h1>";
+
+                                    $namaSplit = "";
+                                    if (strlen($row['NamaBarang']) > 20) {
+                                        $namaSplit = substr($row['NamaBarang'], 0, 20) . "...";
+                                    } else {
+                                        $namaSplit = $row['NamaBarang'];
+                                    }
+                                    echo "<h1 class='top-text'>" . $namaSplit . "</h1>";
                                     echo "<ul class='cart-menu'>";
                                     echo "<li style='color:#888888'>$" . number_format($row['Harga']) . "</li>";
 
@@ -383,7 +412,14 @@ session_start();
                                     $query = "SELECT * FROM barang WHERE IdBarang = $rand5";
                                     $result = mysqli_query($conn, $query);
                                     $row = mysqli_fetch_assoc($result);
-                                    echo "<h1 class='top-text'>Poster 8x4 <span>Best Poster Ever</span></h1>";
+
+                                    $namaSplit = "";
+                                    if (strlen($row['NamaBarang']) > 20) {
+                                        $namaSplit = substr($row['NamaBarang'], 0, 20) . "...";
+                                    } else {
+                                        $namaSplit = $row['NamaBarang'];
+                                    }
+                                    echo "<h1 class='top-text'>" . $namaSplit . "</h1>";
                                     echo "<ul class='cart-menu'>";
                                     echo "<li style='color:#888888'>$" . number_format($row['Harga']) . "</li>";
 
@@ -404,7 +440,14 @@ session_start();
                                     $query = "SELECT * FROM barang WHERE IdBarang = $rand6";
                                     $result = mysqli_query($conn, $query);
                                     $row = mysqli_fetch_assoc($result);
-                                    echo "<h1 class='top-text'>Poster 8x3 <span>Best Poster 8x3 Ever</span></h1>";
+
+                                    $namaSplit = "";
+                                    if (strlen($row['NamaBarang']) > 35) {
+                                        $namaSplit = substr($row['NamaBarang'], 0, 35) . "...";
+                                    } else {
+                                        $namaSplit = $row['NamaBarang'];
+                                    }
+                                    echo "<h1 class='top-text'>" . $namaSplit . "</h1>";
                                     echo "<ul class='cart-menu'>";
                                     echo "<li style='color:#888888'>$" . number_format($row['Harga']) . "</li>";
 
@@ -571,6 +614,7 @@ session_start();
                 $(".alertPopUp").hide();
             });
         </script>
+        <script src="assets/js/helper.js"></script>
 
     </body>
 

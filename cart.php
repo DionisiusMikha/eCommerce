@@ -413,17 +413,16 @@ if (mysqli_num_rows($result) == 0) {
                 if (dor.readyState == 4 && dor.status == 200) {
                     document.getElementsByClassName('kwan')[IdCart - 1].innerHTML = dor.responseText;
                     fetch_harga();
+                    console.log(dor.responseText);
                 }
             }
             dor.open("POST", "tambahQuantity.php", true);
             dor.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             // alert(IdCart);
             dor.send("plus=" + IdCart);
-
         }
 
         function kurangQuantity(IdCart) {
-            // let btnMinus = document.getElementById('minus');
             let quantity = parseInt(document.getElementsByClassName('kwan')[IdCart - 1].innerHTML);
             if (quantity <= 1)[
                 deleteBarang(IdCart)
