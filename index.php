@@ -1,6 +1,15 @@
 <?php
 require_once 'Koneksi.php';
 session_start();
+
+if (isset($_GET['q'])) {
+    $q = $_GET['q'];
+    $q = mysqli_real_escape_string($conn, $q);
+    $q = htmlentities($q);
+    $q = strtolower($q);
+    header("Location: search.php?q=$q");
+}
+
 ?>
 
 <!DOCTYPE php>
@@ -40,7 +49,6 @@ session_start();
     </head>
 
     <body>
-        <!-- <h1>CAHYA</h1> -->
         <!-- preloader area start -->
         <div class="preloader" id="preloader">
             <div class="preloader-inner">
@@ -59,7 +67,7 @@ session_start();
         <div class="search-popup" id="search-popup">
             <form action="" class="search-form">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search" id="searchInput" name="searchInput">
+                    <input type="text" class="form-control" placeholder="Search" id="q" name="q">
                     <div class="tampil">
                         <ul id="output">
 
@@ -312,7 +320,17 @@ session_start();
                                 echo "<li><a href='product-details.php?id=" . $row['IdBarang'] . "'><i class='fa fa-shopping-cart'></i></a></li>";
                                 echo "</ul>";
                                 echo "<img draggable='false' class='masonry-image' alt='masonry' src='images/" . $row['gambar'] . ".jpg'>";
-                                echo "<span class='bottom-text'>For Men, Made in ISTTS, 2022</span>";
+                                // echo "<span class='bottom-text'>For Men, Made in ISTTS, 2022</span>";
+                                // isi dengan rating
+                                echo "<span class='rating'>";
+                                for ($i = 0; $i < $row['rating']; $i++) {
+                                    if ($row['rating'] - $i == 0.5) {
+                                        echo "<i class='fa fa-star-half-o'></i>";
+                                    } else {
+                                        echo "<i class='fa fa-star'></i>";
+                                    }
+                                }
+                                echo "</span>";
                                 echo "</div>";
                                 ?>
 
@@ -320,7 +338,7 @@ session_start();
                                     <?php
                                     $rand2 = rand(1, 72);;
 
-                                    if ($rand2 == $rand1 || $rand2 == $rand3) {
+                                    if ($rand2 == $rand1da) {
                                         $rand2 = rand(1, 72);
                                     }
 
@@ -614,7 +632,6 @@ session_start();
                 $(".alertPopUp").hide();
             });
         </script>
-        <script src="assets/js/helper.js"></script>
 
     </body>
 

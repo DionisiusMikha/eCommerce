@@ -6,6 +6,7 @@ if (!isset($_SESSION['khususAdmin'])) {
     header("Location: admin.php");
 }
 
+echo "<th>No</th>";
 echo "<th>Nama Barang</th>";
 echo "<th>Harga Barang</th>";
 echo "<th>Stok Barang</th>";
@@ -26,6 +27,7 @@ while ($row = mysqli_fetch_assoc($result)) {
         $deskripsiSplit = $deskripsi;
     }
     echo "<tr>";
+    echo "<td>" . $row['IdBarang'] . "</td>";
     echo "<td id='namaBarangtb' class='namaBarangtb'>" . $row['NamaBarang'] . "</td>";
     echo "<td id='hargatb' class='hargatb'>$" . number_format($row['Harga']) . "</td>";
     echo "<td id='stoktb' class='stoktb'>" . $row['Stok'] . "</td>";
@@ -38,3 +40,5 @@ while ($row = mysqli_fetch_assoc($result)) {
     echo "<td style='width: 60px;'><button class='btn btn-primary' onclick='editBarang(" . $ctr++ . ")'>Edit</button></td>";
     echo "</tr>";
 }
+
+// 89

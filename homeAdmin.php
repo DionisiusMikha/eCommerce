@@ -13,6 +13,10 @@ if (isset($_POST['logout'])) {
 if (isset($_POST['MB'])) {
     header("Location: masterBarang.php");
 }
+
+if (isset($_POST['MT'])) {
+    header("Location: masterTransaction.php");
+}
 ?>
 
 <!DOCTYPE html>
@@ -31,6 +35,7 @@ if (isset($_POST['MB'])) {
         <button name="logout">Logout</button>
         <button name="MU">Master User</button>
         <button name="MB">Master Barang</button>
+        <button name="MT">Master Transaction</button>
     </form> <br>
 
     <table border="1" style="text-align: center;" id="table">

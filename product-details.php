@@ -48,7 +48,7 @@ if (isset($_POST['addToCart'])) {
             header('Location: cart.php');
         }
     } else {
-        $queryLalalala = "SELECT * FROM cart";
+        $queryLalalala = "SELECT * FROM cart WHERE c_username = '$_SESSION[username]'";
         $jum = mysqli_num_rows(mysqli_query($conn, $queryLalalala));
         $query5 = "INSERT INTO cart(IdCart, c_IdBarang, c_username , quantity, c_harga) VALUES ($jum + 1, $id, '$_SESSION[username]', 1, $harga)";
         $result5 = mysqli_query($conn, $query5);
@@ -181,13 +181,7 @@ if (isset($_POST['addToCart'])) {
                                 <a href="market.php">Shop</a>
                             </li>
                             <li>
-                                <a href="product-details.php">Product Details</a>
-                            </li>
-                            <li>
-                                <a href="payment.php">Payment</a>
-                            </li>
-                            <li>
-                                <a href="checkout.php">Checkout</a>
+                                <a href="cart.php">Cart</a>
                             </li>
                         </ul>
                     </li>
@@ -246,7 +240,11 @@ if (isset($_POST['addToCart'])) {
 
                         for ($i = 0; $i < 3; $i++) {
                             echo "<div class='single-item'>";
-                            echo "<img draggable='false' alt='Barang' src='images/" . $row['gambar'] . ".jpg'>";
+                            if (strpos($row['gambar'], '.') !== false) {
+                                echo "<img draggable='false' class='shop-image' alt='shop item' src='images/" . $row['gambar'] . "'>";
+                            } else {
+                                echo "<img draggable='false' class='shop-image' alt='shop item' src='images/" . $row['gambar'] . ".jpg'>";
+                            }
                             echo "</div>";
                         }
                         ?>
@@ -260,7 +258,11 @@ if (isset($_POST['addToCart'])) {
                         for ($i = 0; $i < 5; $i++) {
                             echo "<div class='single-item'>";
                             echo "<div class='img'>";
-                            echo "<img draggable='false' alt='Barang' src='images/" . $row['gambar'] . ".jpg'>";
+                            if (strpos($row['gambar'], '.') !== false) {
+                                echo "<img draggable='false' class='shop-image' alt='shop item' src='images/" . $row['gambar'] . "'>";
+                            } else {
+                                echo "<img draggable='false' class='shop-image' alt='shop item' src='images/" . $row['gambar'] . ".jpg'>";
+                            }
                             echo "</div>";
                             echo "</div>";
                         }

@@ -392,7 +392,24 @@ if (isset($_POST['continue'])) {
                     // Optional
                     onSuccess: function(result) {
                         alert('Berhasil Bayar!');
-                        window.location.href = "payment.php";
+                        <?php
+                            $query = "SELECT * FROM cart, barang WHERE cart.c_IdBarang = barang.IdBarang AND cart.c_username = '$_SESSION[username]'";
+                            $result = mysqli_query($conn, $query);
+                            $total = 0;
+                            $query2 = "SELECT * FROM sold GROUP BY inv_num";
+                            $result2 = mysqli_query($conn, $query2);
+                            $jum = mysqli_num_rows($result2) + 1;
+                            foreach ($result as $row) {
+                                $total += $row['Harga'] * $row['quantity'];
+                            }
+                            $tgl = date("Y-m-d");
+                            $inv = "INV" . date("Ymd") . floor($jum / 100) . floor($jum / 10 % 10) . ($jum % 10);
+                            foreach ($result as $row) {
+                                $query3 = "INSERT INTO sold (s_username, s_date, inv_num, s_IdBarang, qty, total) VALUES ('{$_SESSION['username']}', '{$tgl}', '{$inv}', {$row['IdBarang']}, {$row['quantity']}, {$total})";
+                                $result3 = mysqli_query($conn, $query3);
+                            }
+                        ?>
+                        window.location.href = "index.php";
                     },
                     // Optional
                     onPending: function(result) {

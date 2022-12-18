@@ -17,9 +17,17 @@ if (isset($_POST['tambahBarang'])) {
     $stokBarang = $_POST['stokBarang'];
     $deskripsi = $_POST['deskripsiBarang'];
 
+    // var_dump($namaBarang);
+    // var_dump($hargaBarang);
+    // var_dump($stokBarang);
+    // var_dump($deskripsi);
+
     $namaGambar = uploadGambar();
 
     $namaBarang = mysqli_real_escape_string($conn, $namaBarang);
+    $deskripsi = mysqli_real_escape_string($conn, $deskripsi);
+    // $namaBarang = addslashes($namaBarang);
+    var_dump($namaBarang);
 
     if (!$namaGambar) {
         // return false;
@@ -27,16 +35,25 @@ if (isset($_POST['tambahBarang'])) {
         echo "window.location.href = 'MasterBarang.php';";
         echo "</script>";
     } else {
-        if ($namaBarang == "" || $hargaBarang == "" || $stokBarang == "" || $deskripsi == "") {
+        if ($namaBarang == ""  || $deskripsi == "") {
             echo "<script>";
             echo "alert('Data tidak boleh kosong');";
             echo "</script>";
         } else {
-            $query = "INSERT INTO barang (NamaBarang, Harga, Stok, Deskripsi, gambar) VALUES ('$namaBarang', '$hargaBarang', '$stokBarang', '$deskripsi', '$namaGambar')";
+
+            $IdBarang = 0;
+            $query = "SELECT * FROM barang ORDER BY IdBarang DESC LIMIT 1";
             $result = mysqli_query($conn, $query);
+            $row = mysqli_fetch_assoc($result);
+            $IdBarang = $row['IdBarang'] + 1;
+
+            $query = "INSERT INTO barang (IdBarang, NamaBarang, Harga, Stok, Deskripsi, gambar) VALUES ('$IdBarang', '$namaBarang', '$hargaBarang', '$stokBarang', '$deskripsi', '$namaGambar')";
+
+            $result = mysqli_query($conn, $query);
+            var_dump($result);
             if ($result) {
                 echo "<script>";
-                echo "alert('Data berhasil ditambahkan');";
+                // echo "alert('Data berhasil ditambahkan');";
                 echo "fetch_table_barang()";
                 echo "</script>";
             } else {
@@ -157,16 +174,16 @@ if (isset($_POST['editBarang'])) {
                 <br><br>
                 Deskripsi: <input type="text" name="deskripsiBarang" placeholder="Deskripsi Barang">
                 <br><br>
-                Harga Barang: <input type="text" name="hargaBarang" placeholder="Harga Barang">
+                Harga Barang: <input type="text" name="hargaBarang" placeholder="Harga Barang" id="hargaBarang">
                 <br><br>
-                Stok Barang: <input type="text" name="stokBarang" placeholder="Stok Barang">
+                Stok Barang: <input type="text" name="stokBarang" placeholder="Stok Barang" id="stokBarang">
                 <br><br>
-                Gambar Barang: <input type="file" name="gambarBarang">
+                Gambar Barang: <input type="file" name="gambarBarang" accept="image/*">
                 <br><br>
-                <button name="tambahBarang">Tambah Barang</button>
+                <button name="tambahBarang" id="tambahBarang">Tambah Barang</button>
             </form>
         </fieldset>
-        <fieldset id="right">
+        <fieldset id="right" disabled>
             <legend>Edit Barang</legend>
             <form action="" method="post" enctype="multipart/form-data">
                 Nama Barang: <input type="text" name="namaBarangEdit" placeholder="Nama Barang" id="namaBarangEdit">
@@ -198,6 +215,8 @@ if (isset($_POST['editBarang'])) {
 
         document.addEventListener("DOMContentLoaded", function() {
             fetch_table_barang();
+            randomNumber2();
+            document.getElementById("stokBarang").value = randomNumber();
         });
 
         function editBarang(noBarang) {
@@ -214,7 +233,24 @@ if (isset($_POST['editBarang'])) {
             document.getElementById("hargaBarangEdit").value = hargaBarang;
             document.getElementById("stokBarangEdit").value = stokBarang;
             document.getElementById("IdBarangEdit").value = noBarang;
+
+            document.getElementById("right").disabled = false;
         }
+
+        function randomNumber() {
+            return Math.floor(Math.random() * 100) + 1;
+        }
+
+        function randomNumber2() {
+            let rand = Math.floor(Math.random() * 100) + 1 + "," + Math.floor(Math.random() * 10) + 1;
+            document.getElementById("hargaBarang").value = rand;
+        }
+
+        document.getElementById("tambahBarang").addEventListener("click", function() {
+            // document.getElementById("hargaBarang").value = randomNumber2();
+            document.getElementById("stokBarang").value = randomNumber();
+            randomNumber2();
+        });
     </script>
 
 </body>

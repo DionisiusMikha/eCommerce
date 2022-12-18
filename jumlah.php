@@ -7,4 +7,4 @@ $result = mysqli_query($conn, $query);
 foreach ($result as $row) {
     $jumlah++;
 }
-echo "<p style='color:red;'>Total items($jumlah)</p>";
+echo "<p style='color:red;'>Total items(". "<span id='totalss'>$jumlah</span>" .")</p>";

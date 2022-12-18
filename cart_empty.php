@@ -80,7 +80,7 @@ if (isset($_POST['btnBuy'])) {
     <div class="search-popup" id="search-popup">
         <form action="" class="search-form">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search" id="searchInput" name="searchInput">
+                <input type="text" class="form-control" placeholder="Search" id="q" name="q">
                 <div class="tampil">
                     <ul id="output">
 

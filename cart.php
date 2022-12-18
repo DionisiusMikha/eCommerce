@@ -64,7 +64,7 @@ if (mysqli_num_rows($result) == 0) {
     <div class="search-popup" id="search-popup">
         <form action="" class="search-form">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search" id="searchInput" name="searchInput">
+                <input type="text" class="form-control" placeholder="Search" id="q" name="q">
                 <div class="tampil">
                     <ul id="output">
 
@@ -103,6 +103,9 @@ if (mysqli_num_rows($result) == 0) {
                             </li>
                             <li>
                                 <a href="cart.php">Cart</a>
+                            </li>
+                            <li>
+                                <a href="history.php">Transaction</a>
                             </li>
                         </ul>
                     </li>
@@ -302,31 +305,6 @@ if (mysqli_num_rows($result) == 0) {
     </div>
     <!-- back to top area end -->
 
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
-        Launch static backdrop modal
-    </button>
-
-    <!-- Modal -->
-    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Understood</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- jquery -->
     <script src="assets/js/jquery-2.2.4.min.js"></script>
     <!-- popper -->
@@ -361,7 +339,7 @@ if (mysqli_num_rows($result) == 0) {
     <script src="assets/js/script.js"></script>
     <script src="assets/js/main.js"></script>
 
-    <script>
+    <script async>
         let plus = document.getElementById('plus');
         let minus = document.getElementById('minus');
 
@@ -407,40 +385,52 @@ if (mysqli_num_rows($result) == 0) {
             lol.send();
         }
 
-        function tambahQuantity(IdCart) {
+        function tambahQuantity(IdBarang) {
             dor = new XMLHttpRequest();
             dor.onreadystatechange = function() {
+                // alert(dor.readyState);
                 if (dor.readyState == 4 && dor.status == 200) {
-                    document.getElementsByClassName('kwan')[IdCart - 1].innerHTML = dor.responseText;
+                    document.getElementById('barang-' + IdBarang).innerHTML = dor.responseText;
                     fetch_harga();
-                    console.log(dor.responseText);
+                    // console.log(dor.responseText);
                 }
             }
             dor.open("POST", "tambahQuantity.php", true);
             dor.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             // alert(IdCart);
-            dor.send("plus=" + IdCart);
+            dor.send("plus=" + IdBarang);
         }
 
-        function kurangQuantity(IdCart) {
-            let quantity = parseInt(document.getElementsByClassName('kwan')[IdCart - 1].innerHTML);
-            if (quantity <= 1)[
-                deleteBarang(IdCart)
-            ]
-            else {
+        setInterval(() => {
+            let jumlahBarang = parseInt(document.getElementById('totalss').innerText);
+            if (jumlahBarang == 0) {
+                window.location.href = "cart_empty.php";
+            }
+
+        }, 500);
+
+        function kurangQuantity(IdBarang) {
+            let quantity = document.getElementById('barang-' + IdBarang).innerHTML;
+            console.log(quantity);
+
+            if (quantity <= 1) {
+                deleteBarang(IdBarang)
+                let jumlahBarang = parseInt(document.getElementById('totalss').innerHTML);
+                if (jumlahBarang == 0) {
+                    window.location.href = "cart_empty.php";
+                }
+            } else {
                 dionisius = new XMLHttpRequest();
                 dionisius.onreadystatechange = function() {
                     if (dionisius.readyState == 4 && dionisius.status == 200) {
-                        document.getElementsByClassName('kwan')[IdCart - 1].innerHTML = dionisius.responseText;
+                        document.getElementById('barang-' + IdBarang).innerHTML = dionisius.responseText;
                         fetch_harga();
                         console.log(dionisius.responseText);
-                        // fetch_quantity();
-
                     }
                 }
                 dionisius.open("POST", "kurangQuantity.php", true);
                 dionisius.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                dionisius.send("minus=" + IdCart);
+                dionisius.send("minus=" + IdBarang);
             }
 
         }
@@ -448,11 +438,9 @@ if (mysqli_num_rows($result) == 0) {
         function deleteBarang(IdCart) {
             let conf = confirm("Apakah anda yakin ingin menghapus barang ini?");
             if (conf == true) {
-                // let trash = document.getElementById('trash');
                 wilbert = new XMLHttpRequest();
                 wilbert.onreadystatechange = function() {
                     if (wilbert.readyState == 4 && wilbert.status == 200) {
-                        // document.getElementByClassName('kwan')[IdCart - 1].innerHTML = wilbert.responseText;
                         fetch_harga();
                         jumlah();
                         fetch_quantity();
@@ -470,7 +458,6 @@ if (mysqli_num_rows($result) == 0) {
             window.history.back();
         });
     </script>
-
 </body>
 
 </html>

@@ -57,7 +57,7 @@ session_start();
         <div class="search-popup" id="search-popup">
             <form action="" class="search-form">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search" id="searchInput">
+                    <input type="text" class="form-control" placeholder="Search" id="q">
                     <div class="tampil">
                         <ul id="output">
 
@@ -146,16 +146,16 @@ session_start();
                     </div>
                     <div class="col-xl-4 col-md-6 position-relative">
                         <div class="middle-left">
-                            <img src="assets/img/shop/anya.png" alt="">
+                            <img draggable="false" src="assets/img/shop/anya.png" alt="">
                         </div>
                         <div class="middle-right">
-                            <img src="assets/img/shop/anya3.png" alt="">
+                            <img draggable="false" src="assets/img/shop/anya3.png" alt="">
                         </div>
                     </div>
                     <div class="col-xl-4 d-none d-xl-block position-relative">
                         <div class="right-part">
-                            <img class="img1" src="assets/img/shop/anya2.png" alt="">
-                            <img class="img2" src="assets/img/shop/anya1.png" alt="">
+                            <img draggable="false" class="img1" src="assets/img/shop/anya2.png" alt="">
+                            <img draggable="false" class="img2" src="assets/img/shop/anya1.png" alt="">
                         </div>
                     </div>
                 </div>
@@ -209,7 +209,7 @@ session_start();
                                                 echo "<li><a href='product-details.php?id=" . $row['IdBarang'] . "'><i class='fa fa-shopping-cart'></i></a></li>";
                                                 echo "</ul>";
                                                 echo "<a href='product-details.php?id=" . $row['IdBarang'] . "'>";
-                                                echo "<img draggable='false' class='shop-image' alt='shop item' src='images/" . $row['gambar'] . ".jpg'>";
+                                                echo "<img loading='lazy' draggable='false' class='shop-image' alt='shop item' src='images/" . $row['gambar'] . ".jpg'>";
                                                 echo "</a>";
                                                 ?>
                                             </div>
@@ -267,7 +267,7 @@ session_start();
                                         echo "</ul>";
                                         if (strpos($row['gambar'], '.') !== false) {
                                             echo "<a href='product-details.php?id=" . $row['IdBarang'] . "'>";
-                                            echo "<img draggable='false' class='shop-image' alt='shop item' src='images/" . $row['gambar'] . "'>";
+                                            echo "<img loading='lazy' draggable='false' class='shop-image' alt='shop item' src='images/" . $row['gambar'] . "'>";
                                             echo "</a>";
                                         } else {
                                             echo "<a href='product-details.php?id=" . $row['IdBarang'] . "'>";

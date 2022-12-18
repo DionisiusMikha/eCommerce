@@ -7,7 +7,7 @@ if (isset($_POST['btnSignIn'])) {
 
     if ($username == "admin" || $password == "siPalingBackend") {
         $_SESSION['khususAdmin'] = $username;
-        header("Location: Homeadmin.php");
+        header("Location: homeAdmin.php");
     }
 }
 ?>

@@ -1,4 +1,4 @@
-let input = document.getElementById("searchInput");
+let input = document.getElementById("q");
 
 function fetch_search() {
   let search = input.value;
@@ -10,7 +10,7 @@ function fetch_search() {
     });
 }
 
-input.addEventListener("keyup", function () {
+document.getElementById("q").addEventListener("keyup", function () {
   if (input.value.length > 0) {
     fetch_search();
   } else {

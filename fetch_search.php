@@ -9,7 +9,12 @@ if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) {
         echo "<li>";
         echo "<a href='product-details.php?id=" . $row['IdBarang'] . "'>";
-        echo "<img draggable=false src='images/" . $row['gambar'] . ".jpg' alt='' loading='lazy' />";
+        if (strpos($row['gambar'], '.') !== false) {
+            echo "<img loading='lazy' draggable='false' class='shop-image' alt='shop item' src='images/" . $row['gambar'] . "'>";
+        } else {
+            echo "<img draggable='false' class='shop-image' alt='shop item' src='images/" . $row['gambar'] . ".jpg'>";
+        }
+
         echo "<div class='judul'>";
         echo "<h3>" . $row['NamaBarang'] . "</h3>";
         echo "<p>$" . number_format($row['Harga']) . "</p>";

@@ -72,7 +72,7 @@ session_start();
                             }
                             ?>
                         </div>
-                        <div class="action">
+                        <div class="action" id="action">
                             <div class="action-left">
                                 <a href="forgot-password.php" class="text-dark">Forgot Password?</a>
                             </div>
