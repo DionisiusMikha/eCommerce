@@ -1,4 +1,3 @@
--- Active: 1670555790266@@127.0.0.1@3306@db_ecommerce
 /*
 SQLyog Community v13.1.9 (64 bit)
 MySQL - 10.4.24-MariaDB : Database - db_ecommerce
@@ -37,10 +36,10 @@ CREATE TABLE `barang` (
 /*Data for the table `barang` */
 
 insert  into `barang`(`IdBarang`,`NamaBarang`,`Harga`,`Stok`,`gambar`,`brand`,`seller`,`rating`,`Deskripsi`) values 
-(1,'sailor-moon-eternal-super-sailor-moon-ii-ver-a-q-glitter-glamours-banpresto',45956,122,'sailor-moon-eternal-super-sailor-moon-ii-ver-a-q-glitter-glamours-banpresto','','','1','Merol muspi rolod tis tema rutetcesnoc gnicisipida tile. Eropmet mairepa tnuicsen muitnesearp atidepxe orebil silicaf mainev rutnuuqesnoc mauqsiuq? Eadnaiduper siroproc aguf tnuicsen eadnasucer saila murolod muspi mallu tis siitidnalb etneipas ouq atcid, silicaf sunim, tu euqmuc tse taecalp irutpecxe orev di. Satpulov isin tiredneherper, rorre sitaicipsrep apluc saitselom tua oitpo?esr ereh'),
-(2,'bleach-ichigo-kurosaki-mub-tsume',55193,56,'bleach-ichigo-kurosaki-mub-tsume','','','1.5',''),
-(3,'dc-multiverse-batman-dc-future-state-mcfarlane-toys',11434,4,'dc-multiverse-batman-dc-future-state-mcfarlane-toys','','','1.5',''),
-(4,'dragon-ball-super-broly-full-power-sh-figuarts-bandai',27767,64,'dragon-ball-super-broly-full-power-sh-figuarts-bandai','','','1.5',''),
+(1,'sailor-moon-eternal-super-sailor-moon-ii-ver-a-q-glitter-glamours-banpresto',45956,122,'sailor-moon-eternal-super-sailor-moon-ii-ver-a-q-glitter-glamours-banpresto','Suruga-ya','','1','Merol muspi rolod tis tema rutetcesnoc gnicisipida tile. Eropmet mairepa tnuicsen muitnesearp atidepxe orebil silicaf mainev rutnuuqesnoc mauqsiuq? Eadnaiduper siroproc aguf tnuicsen eadnasucer saila murolod muspi mallu tis siitidnalb etneipas ouq atcid, silicaf sunim, tu euqmuc tse taecalp irutpecxe orev di. Satpulov isin tiredneherper, rorre sitaicipsrep apluc saitselom tua oitpo?esr ereh'),
+(2,'bleach-ichigo-kurosaki-mub-tsume',55193,56,'bleach-ichigo-kurosaki-mub-tsume','Aniplex+','','1.5',''),
+(3,'dc-multiverse-batman-dc-future-state-mcfarlane-toys',11434,4,'dc-multiverse-batman-dc-future-state-mcfarlane-toys','MelonBooks','','1.5',''),
+(4,'dragon-ball-super-broly-full-power-sh-figuarts-bandai',27767,64,'dragon-ball-super-broly-full-power-sh-figuarts-bandai','Cdjapan','','1.5',''),
 (5,'dragon-ball-super-gohan-ss-chousenshi-retsuden-banpresto',22286,17,'dragon-ball-super-gohan-ss-chousenshi-retsuden-banpresto','','','1',''),
 (6,'final-fantasy-vii-advent-children-cloud-strife-fenrir-play-arts-kai-square-enix',75609,74,'final-fantasy-vii-advent-children-cloud-strife-fenrir-play-arts-kai-square-enix','','','2',''),
 (7,'fortnite-victory-royale-ragsy-hasbro',29215,13,'fortnite-victory-royale-ragsy-hasbro','','','1',''),
@@ -124,14 +123,14 @@ insert  into `barang`(`IdBarang`,`NamaBarang`,`Harga`,`Stok`,`gambar`,`brand`,`s
 (86,'Bungo Stray Dogs Osamu Dazai Orange Rouge',45,121,'bungo-stray-dogs-osamu-dazai-orange-rouge.jpeg','','','','Bungo Stray Dogs Osamu Dazai Orange Rouge'),
 (87,'Bungo Stray Dogs Osamu Dazai Orange Rouge',45,121,'bungo-stray-dogs-osamu-dazai-orange-rouge.jpeg','','','','Bungo Stray Dogs Osamu Dazai Orange Rouge'),
 (88,'River Nendoroid Good Smile Arts Shanghai',44,14,'river-nendoroid-good-smile-arts-shanghai.jpeg','','','','River Nendoroid Good Smile Arts Shanghai'),
-(90,'Horimiya Kyoko Hori Nendoroid Good Smile Company',0,0,'horimiya-kyoko-hori-nendoroid-good-smile-company.jpeg','','','','Horimiya Kyoko Hori Nendoroid Good Smile Company'),
+(90,'Horimiya Kyoko Hori Nendoroid Good Smile Company',227,14,'horimiya-kyoko-hori-nendoroid-good-smile-company.jpeg','','','','Horimiya Kyoko Hori Nendoroid Good Smile Company'),
 (91,'NIJISANJI Lize Helesta Nendoroid Good Smile Company',2,9,'nijisanji-lize-helesta-nendoroid-good-smile-company (1).png','','','','NIJISANJI Lize Helesta Nendoroid Good Smile Company'),
 (92,'The Rising of the Shield Hero Season 2 Raphtalia L Pop Up Parade Good Smile Company',17,60,'the-rising-of-the-shield-hero-season-2-raphtalia-l-pop-up-parade-good-smile-company.jpeg','','','','The Rising of the Shield Hero Season 2 Raphtalia L Pop Up Parade Good Smile Company'),
 (93,'The Rising of the Shield Hero Season 2 Raphtalia L Pop Up Parade Good Smile Company',17,60,'the-rising-of-the-shield-hero-season-2-raphtalia-l-pop-up-parade-good-smile-company.jpeg','','','','The Rising of the Shield Hero Season 2 Raphtalia L Pop Up Parade Good Smile Company'),
 (94,'The Rising of the Shield Hero Season 2 Raphtalia L Pop Up Parade Good Smile Company',17,60,'the-rising-of-the-shield-hero-season-2-raphtalia-l-pop-up-parade-good-smile-company.jpeg','','','','The Rising of the Shield Hero Season 2 Raphtalia L Pop Up Parade Good Smile Company'),
 (95,'Azur Lane Pola Seaside Coincidence Ver. Alter',79,65,'azur-lane-pola-seaside-coincidence-ver-alter.jpeg','','','','Azur Lane Pola Seaside Coincidence Ver. Alter'),
 (96,'Azur Lane Takao Beach Rhapsody Ver. Alter',29,79,'azur-lane-takao-beach-rhapsody-ver-alter.jpeg','','','','Azur Lane Takao Beach Rhapsody Ver. Alter'),
-(97,'Azur Lane Atago Summer March Ver. Alter',1,80,'azur-lane-atago-summer-march-ver-alter.jpeg','','','','Azur Lane Atago Summer March Ver. Alter'),
+(97,'Azur Lane Atago Summer March Ver. Alter',786,80,'azur-lane-atago-summer-march-ver-alter.jpeg','','','','Azur Lane Atago Summer March Ver. Alter'),
 (98,'Marvel The Infinity Saga Black Panther DLX Threezero',91,80,'marvel-the-infinity-saga-black-panther-dlx-threezero.jpeg','','','','Marvel The Infinity Saga Black Panther DLX Threezero'),
 (99,'Chainsaw Man Makima Taito',98,39,'chainsaw-man-makima-taito.jpeg','','','','Chainsaw Man Makima Taito'),
 (100,'Senren Banka Yoshino Tomotake AliceGlint',55,43,'senren-banka-yoshino-tomotake-aliceglint.jpeg','','','','Senren Banka Yoshino Tomotake AliceGlint'),
@@ -232,9 +231,9 @@ insert  into `barang`(`IdBarang`,`NamaBarang`,`Harga`,`Stok`,`gambar`,`brand`,`s
 (195,'Saekano How to Raise a Boring Girlfriend Megumi Kato Alter',33,36,'saekano-how-to-raise-a-boring-girlfriend-megumi-kato-alter.jpeg','','','','Saekano How to Raise a Boring Girlfriend Megumi Kato Alter'),
 (196,'Azur Lane Baltimore Light Equipment Ver. Alter',56,34,'azur-lane-baltimore-light-equipment-ver-alter.jpeg','','','','Azur Lane Baltimore Light Equipment Ver. Alter'),
 (197,'Azur Lane Atago Weirdly Beautiful Max Speed Ver. Alter',99,27,'azur-lane-atago-weirdly-beautiful-max-speed-ver-alter.jpeg','','','','Azur Lane Atago Weirdly Beautiful Max Speed Ver. Alter'),
-(198,'Fuuki Midashichaimasu ka...? Kanon Misaki illustration by Cut Daiki Kougyou',28,51,'fuuki-midashichaimasu-ka-kanon-misaki-illustration-by-cut-daiki-kougyou.jpeg','','','','Fuuki Midashichaimasu ka...? Kanon Misaki illustration by Cut Daiki Kougyou'),
-(199,'Original Character Miyan NEONMAX',38,90,'original-character-miyan-neonmax.jpeg','','','','Original Character Miyan NEONMAX'),
-(200,'Original Character by Warabino Festival Ayaka Sagara Barefoot Bunny Ver. Creators Opinion BINDing',54,64,'original-character-by-warabino-festival-ayaka-sagara-barefoot-bunny-ver-creators-opinion-binding.jpeg','','','','Original Character by Warabino Festival Ayaka Sagara Barefoot Bunny Ver. Creators Opinion BINDing');
+(198,'Fuuki Midashichaimasu ka...? Kanon Misaki illustration by Cut Daiki Kougyou',28,51,'fuuki-midashichaimasu-ka-kanon-misaki-illustration-by-cut-daiki-kougyou.jpeg','Suruga-ya','','','Fuuki Midashichaimasu ka...? Kanon Misaki illustration by Cut Daiki Kougyou'),
+(199,'Original Character Miyan NEONMAX',38,90,'original-character-miyan-neonmax.jpeg','Suruga-ya','','','Original Character Miyan NEONMAX'),
+(200,'Original Character by Warabino Festival Ayaka Sagara Barefoot Bunny Ver. Creators Opinion BINDing',54,64,'original-character-by-warabino-festival-ayaka-sagara-barefoot-bunny-ver-creators-opinion-binding.jpeg','Suruga-ya','','','Original Character by Warabino Festival Ayaka Sagara Barefoot Bunny Ver. Creators Opinion BINDing');
 
 /*Table structure for table `cart` */
 
@@ -253,7 +252,45 @@ CREATE TABLE `cart` (
 /*Data for the table `cart` */
 
 insert  into `cart`(`IdCart`,`c_username`,`quantity`,`c_harga`,`c_IdBarang`) values 
-(2,'check1',12,63466,38);
+(1,'mikha_ion',1,89628,10),
+(2,'check1',18,63466,38),
+(2,'check2',19,37703,13);
+
+/*Table structure for table `sold` */
+
+DROP TABLE IF EXISTS `sold`;
+
+CREATE TABLE `sold` (
+  `s_username` varchar(20) NOT NULL,
+  `s_date` date NOT NULL,
+  `inv_num` varchar(15) NOT NULL,
+  `s_IdBarang` int(10) NOT NULL,
+  `qty` int(10) NOT NULL,
+  `total` int(10) NOT NULL,
+  PRIMARY KEY (`s_username`,`inv_num`,`s_IdBarang`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+/*Data for the table `sold` */
+
+insert  into `sold`(`s_username`,`s_date`,`inv_num`,`s_IdBarang`,`qty`,`total`) values 
+('check1','2022-12-18','INV20221218004',38,12,761592),
+('check1','2022-12-18','INV20221218005',38,12,761592),
+('check1','2022-12-18','INV20221218006',38,12,761592),
+('check1','2022-12-18','INV20221218007',38,12,761592),
+('check1','2022-12-18','INV20221218008',38,12,761592),
+('check1','2022-12-18','INV20221218009',38,12,761592),
+('check1','2022-12-18','INV20221218010',38,12,761592),
+('check1','2022-12-18','INV20221218011',38,12,761592),
+('check1','2022-12-18','INV20221218012',38,12,761592),
+('check2','2022-05-12','INV20221217001',123,1,84),
+('check2','2022-12-17','INV20221217002',9,1,49277),
+('check2','2022-12-17','INV20221217003',3,2,98477),
+('check2','2022-12-17','INV20221217003',6,1,98477),
+('mikha_ion','2022-12-19','INV20221219013',10,1,89628),
+('mikha_ion','2022-12-19','INV20221219014',10,1,89628),
+('mikha_ion','2022-12-19','INV20221219015',10,1,89628),
+('mikha_ion','2022-12-19','INV20221219016',10,1,89628),
+('mikha_ion','2022-12-19','INV20221219017',10,1,89628);
 
 /*Table structure for table `users` */
 
@@ -277,28 +314,6 @@ insert  into `users`(`username`,`email`,`password`,`full_name`,`token`,`saldo`,`
 ('check2','Check2@Check2.com','$2y$10$a/.HGOvC2H8mrauMLXQ.seyOQJvPRuFMzeEOtlBi2HooljnDnPyhq','check2','f7d170a5977357a8bbd314ccd791cd9b',99999999,'1'),
 ('check3','check3@check3.com','$2y$10$1ubnU4m.60wEml7WqeeXNOT3STHKGRbDLhGaepZBONgv.CEM1NRmi','check3','c8bcd9df3f8f0943da8b2dceac601d94',99999999,'1'),
 ('Mikha_ion','vitoutama82@gmail.com','$2y$10$qq1R4H8OpdHAnQn2DUkfGOFraCxrap53XJJ1PI1ZCnlf7kCVZO2li','Dionisius MIkha','150ce2fd696a406be9c8694d5de1cc96',99999999,'1');
-
-/*Table structure for table `sold` */
-
-DROP TABLE IF EXISTS `sold`;
-
-CREATE TABLE `sold` (
-  `s_username` varchar(20) NOT NULL,
-  `s_date` date NOT NULL,
-  `inv_num` varchar(15) NOT NULL,
-  `s_IdBarang` int(10) NOT NULL,
-  `qty` int(10) NOT NULL,
-  `total` int(10) NOT NULL,
-  PRIMARY KEY (`s_username`, `inv_num`, `s_IdBarang`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-/*Data for the table `sold` */
-
-insert  into `sold`(`s_username`,`s_date`,`inv_num`,`s_IdBarang`, `qty`, `total`) values 
-('check2','2022-5-12','INV20221217001', 123, 1, 84),
-('check2','2022-12-17','INV20221217002', 9, 1, 49277),
-('check2','2022-12-17','INV20221217003', 3, 2, 98477),
-('check2','2022-12-17','INV20221217003', 6, 1, 98477); 
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
