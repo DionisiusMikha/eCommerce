@@ -12,7 +12,8 @@
     <!-- animate -->
     <link rel="stylesheet" href="assets/css/animate.css">
     <!-- bootstrap -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css
+">
     <!-- magnific popup -->
     <link rel="stylesheet" href="assets/css/magnific-popup.css">
     <!-- Slick -->
@@ -31,7 +32,28 @@
     <!-- responsive Stylesheet -->
     <link rel="stylesheet" href="assets/css/responsive.css">
 
+    <style>
+        :root {
+            --borderWidth: 9px;
+            --height: 28px;
+            --width: 16px;
+            --borderColor: #78b13f;
+        }
 
+        body {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .check {
+            display: inline-block;
+            transform: rotate(45deg);
+            height: var(--height);
+            width: var(--width);
+            border-bottom: var(--borderWidth) solid var(--borderColor);
+            border-right: var(--borderWidth) solid var(--borderColor);
+        }
+    </style>
 </head>
 
 <body>
@@ -47,183 +69,35 @@
     </div>
     <!-- preloader area end -->
 
-    <div class="payment-area padding-bottom-50">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xl-8 col-lg-7">
-                    <div class="row">
-                        <div class="payment-content">
-                            <div class="title">
-                                <h2>Choose Your Payment options</h2>
-                            </div>
-                            <div class="payment-tab">
-                                <ul class="nav nav-pills">
-                                    <li class="active">
-                                        <a data-toggle="pill" href="#home" class="active">
-                                            <h2 class="tab-menu-title">Pay With Mastercard</h2>
-                                            <div class="img">
-                                                <img src="assets/img/payment/mastercard.png" alt="">
-                                            </div>
-                                        </a>
-                                    </li>
-                                </ul>
+    <!-- accept invoice -->
+    <div class="invoice text-black text-center mt-5 pt-3">
+        <?php
+        require_once 'Koneksi.php';
+        session_start();
+        $inv = $_GET['inv'];
+        $query = "SELECT * FROM sold WHERE s_username = '" . $_SESSION['username'] . "'";
+        $result = mysqli_query($conn, $query);
+        $row = mysqli_fetch_assoc($result);
+        ?>
 
-                                <div class="tab-content">
-                                    <div id="home" class="tab-pane fade in active show">
-                                        <div class="all-tab-content">
-                                            <h2>Pay by Mastercard</h2>
-                                            <div class="card-option">
-                                                <img src="assets/img/payment/card-logo.png" alt="">
-                                                <div class="form-group">
-                                                    <form action="#" class="form">
-                                                        <div class="form-field margin-top-20">
-                                                            <label for="number">Card Number</label>
-                                                            <input id="number" type="number" placeholder="0000 - 0000 - 0000 - 0000" class="input-form" />
-                                                        </div>
-                                                        <div class="form-field width-30 margin-top-20 margin-bottom-30 position-form">
-                                                            <label for="cvc">CVC</label>
-                                                            <input id="cvc" type="password" placeholder="***" class="input-form" />
-                                                        </div>
-                                                        <div class="form-field width-30 margin-top-20 margin-bottom-10">
-                                                            <label for="Month">Month</label>
-                                                            <input id="Month" type="text" placeholder="0 0" class="input-form" />
-                                                        </div>
-                                                        <div class="form-field width-30 margin-top-20 margin-bottom-10">
-                                                            <label for="Year">Year</label>
-                                                            <input id="Year" type="text" placeholder="0 0" class="input-form" />
-                                                        </div>
-                                                        <div class="form-field width-30 margin-top-20 margin-bottom-10">
-                                                            <label for="n">Name</label>
-                                                            <input id="n" type="text" placeholder="Name" class="input-form" />
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
 
-                                            <div class="btn-wrapper desktop-left">
-                                                <a href="#invoice" onclick="invoice()" class="btn sm-btn confirm-btn">Confirm Payment</a>
-                                            </div>
-
-                                            <div class="privacy-policy">
-                                                <h2>Privacy Policy</h2>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet semper augue. Maecenas gravida tortor sit amet enim venenatis tristique. Nulla vehicula porta tortor non maximus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam eu viverra augue. Donec aliquet dignissim augue, nec posuere augue pharetra sed. Pellentesque consequat ornare ornare. Aliquam erat volutpat.<br><br> Nullam posuere porttitor lectus, ut efficitur nisi tincidunt posuere. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet semper augue. Maecenas gravida tortor sit amet enim venenatis tristique. Nulla vehicula porta tortor non maximus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam eu viverra augue. Donec aliquet dignissim augue, nec posuere augue pharetra sed. Pellentesque consequat ornare ornare. Aliquam erat volutpat. Nullam posuere porttitor lectus, ut efficitur nisi tincidunt posuere.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="menu1" class="tab-pane fade">
-                                        <div class="all-tab-content">
-                                            <h2>Pay by mastercard</h2>
-                                            <div class="card-option">
-                                                <img src="assets/img/payment/card-logo.png" alt="">
-                                                <div class="form-group">
-                                                    <form action="#" class="form">
-                                                        <div class="form-field margin-top-20">
-                                                            <label for="number1">Card Number</label>
-                                                            <input id="number1" type="number" placeholder="0000 - 0000 - 0000 - 0000" class="input-form" />
-                                                        </div>
-                                                        <div class="form-field width-30 margin-top-20 margin-bottom-30 position-form">
-                                                            <label for="cvc1">CVC</label>
-                                                            <input id="cvc1" type="password" placeholder="***" class="input-form" />
-                                                        </div>
-                                                        <div class="form-field width-30 margin-top-20 margin-bottom-10">
-                                                            <label for="Month1">Month</label>
-                                                            <input id="Month1" type="text" placeholder="0 0" class="input-form" />
-                                                        </div>
-                                                        <div class="form-field width-30 margin-top-20 margin-bottom-10">
-                                                            <label for="Year1">Year</label>
-                                                            <input id="Year1" type="text" placeholder="0 0" class="input-form" />
-                                                        </div>
-                                                        <div class="form-field width-30 margin-top-20 margin-bottom-10">
-                                                            <label for="n1">Name</label>
-                                                            <input id="n1" type="text" placeholder="Name" class="input-form" />
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-
-                                            <div class="btn-wrapper desktop-left">
-                                                <a href="#" class="btn sm-btn confirm-btn">Confirm Payment</a>
-                                            </div>
-
-                                            <div class="privacy-policy">
-                                                <h2>Privacy Policy</h2>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet semper augue. Maecenas gravida tortor sit amet enim venenatis tristique. Nulla vehicula porta tortor non maximus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam eu viverra augue. Donec aliquet dignissim augue, nec posuere augue pharetra sed. Pellentesque consequat ornare ornare. Aliquam erat volutpat.<br><br> Nullam posuere porttitor lectus, ut efficitur nisi tincidunt posuere. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet semper augue. Maecenas gravida tortor sit amet enim venenatis tristique. Nulla vehicula porta tortor non maximus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam eu viverra augue. Donec aliquet dignissim augue, nec posuere augue pharetra sed. Pellentesque consequat ornare ornare. Aliquam erat volutpat. Nullam posuere porttitor lectus, ut efficitur nisi tincidunt posuere.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-lg-5">
-                    <div class="invoice" id="invoice">
-                        <div class="invoice-top">
-                            <h1>Summary</h1>
-                            <h2>Invoice # 428836 Summary</h2>
-                            <h6>Thanks For Shopping With Us</h6>
-                        </div>
-                        <div class="invoice-bottom">
-                            <h2 class="date">Estimated Delivery : 25 - 28 July</h2>
-                            <p class="address">Delivery: Pucang Sewu, Gubeng, Kota Surabaya, Jawa Timur Jl. Ngagel Jaya Utara No.32, RT.003/RW.04</p>
-                            <p class="item-title">Items (6)</p>
-                            <ul class="single-item">
-                                <li class="single-cart-item">
-                                    <div class="thumb">
-                                        <img src="item-checkout" alt="">
-                                    </div>
-                                    <div class="content">
-                                        <h3>Figure<br> <span>For Men, Made in ISTTS, 2022</span></h3>
-                                        <span>$250.00</span>
-                                    </div>
-                                </li>
-                                <li class="single-cart-item">
-                                    <div class="thumb">
-                                        <img src="item-checkout" alt="">
-                                    </div>
-                                    <div class="content">
-                                        <h3>Figure<br> <span>For Men, Made in ISTTS, 2022</span></h3>
-                                        <span>$250.00</span>
-                                    </div>
-                                </li>
-                                <li class="single-cart-item">
-                                    <div class="thumb">
-                                        <img src="item-checkout" alt="">
-                                    </div>
-                                    <div class="content">
-                                        <h3>Figure<br> <span>For Men, Made in ISTTS, 2022</span></h3>
-                                        <span>$250.00</span>
-                                    </div>
-                                </li>
-                                <li class="single-cart-item">
-                                    <div class="thumb">
-                                        <img src="item-checkout" alt="">
-                                    </div>
-                                    <div class="content">
-                                        <h3>Figure<br> <span>For Men, Made in ISTTS, 2022</span></h3>
-                                        <span>$250.00</span>
-                                    </div>
-                                </li>
-                                <li class="single-cart-item">
-                                    <div class="thumb">
-                                        <img src="item-checkout" alt="">
-                                    </div>
-                                    <div class="content">
-                                        <h3>Figure<br> <span>For Men, Made in ISTTS, 2022</span></h3>
-                                        <span>$250.00</span>
-                                    </div>
-                                </li>
-                            </ul>
-                            <div class="total">
-                                <h3>Total</h3>
-                                <p class="text-right">$1250.00</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="top d-flex justify-content-center">
+            <div class="pymnt">
+                <h2>Payment Received</h2>
             </div>
+            <div class="check mt-2 ms-4"></div>
         </div>
+        <h5>Thank you for your payment. Your order will be processed soon.</h5>
+        <h5 class="fw-bold font-monospace fs-1"><?php echo $inv; ?></h5>
+
+        <script>
+            setTimeout(function() {
+                window.location.href = "history.php";
+            }, 10000);
+        </script>
     </div>
+
+    <!-- end invoice -->
 
     <div class="brand-area">
         <div class="container">
@@ -328,7 +202,7 @@
     <!-- popper -->
     <script src="assets/js/popper.min.js"></script>
     <!-- bootstrap -->
-    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- magnific popup -->
     <script src="assets/js/jquery.magnific-popup.js"></script>
     <!-- swiper -->

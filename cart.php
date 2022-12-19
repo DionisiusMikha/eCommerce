@@ -9,6 +9,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true) {
 }
 
 if (isset($_POST['btnBuy'])) {
+    $_SESSION['sudahPencetBtnBuy'] = true;
     header('Location: checkout.php');
 }
 

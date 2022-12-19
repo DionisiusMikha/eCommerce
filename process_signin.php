@@ -17,10 +17,10 @@ if (isset($_POST['btnSignIn'])) {
                 if ($row['status'] == 0) {
                     $_SESSION['error'] = "Akun anda sedang di suspend!";
                     echo "<script>window.location.href='signin.php'</script>";
-
                 } else {
                     $_SESSION['username'] = $username;
                     $_SESSION['full_name'] = $row['full_name'];
+                    $_SESSION['email'] = $row['email'];
                     $_SESSION['logged_in'] = true;
                     echo "<script>alert('Sign In Success!')</script>";
                     echo "<script>window.location.href='index.php'</script>";

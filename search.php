@@ -4,6 +4,14 @@ session_start();
 
 if (!isset($_GET['q'])) {
     header("Location: index.php");
+} else {
+    $q = $_GET['q'];
+}
+
+if (isset($_POST['submitFilter'])) {
+    $minValue = $_POST['min'];
+    $maxValue = $_POST['max'];
+    header("Location: search.php?q=$q&min=$minValue&max=$maxValue");
 }
 ?>
 
@@ -21,7 +29,7 @@ if (!isset($_GET['q'])) {
         <!-- animate -->
         <link rel="stylesheet" href="assets/css/animate.css">
         <!-- bootstrap -->
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <!-- magnific popup -->
         <link rel="stylesheet" href="assets/css/magnific-popup.css">
         <!-- Slick -->
@@ -39,6 +47,139 @@ if (!isset($_GET['q'])) {
         <link rel="stylesheet" href="assets/css/style.css">
         <!-- responsive Stylesheet -->
         <link rel="stylesheet" href="assets/css/responsive.css">
+
+        <style>
+            .range-slider {
+                width: 300px;
+                margin: auto;
+                text-align: center;
+                position: relative;
+                height: 6em;
+            }
+
+            .range-slider svg,
+            .range-slider input[type=range] {
+                position: absolute;
+                left: 0;
+                bottom: 0;
+            }
+
+            input[type=number] {
+                border: 1px solid #ddd;
+                text-align: center;
+                font-size: 1.6em;
+                -moz-appearance: textfield;
+            }
+
+            input[type=number]::-webkit-outer-spin-button,
+            input[type=number]::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+            }
+
+            input[type=number]:invalid,
+            input[type=number]:out-of-range {
+                border: 2px solid #ff6347;
+            }
+
+            input[type=range] {
+                -webkit-appearance: none;
+                width: 100%;
+            }
+
+            input[type=range]:focus {
+                outline: none;
+            }
+
+            input[type=range]:focus::-webkit-slider-runnable-track {
+                background: #2497e3;
+            }
+
+            input[type=range]:focus::-ms-fill-lower {
+                background: #2497e3;
+            }
+
+            input[type=range]:focus::-ms-fill-upper {
+                background: #2497e3;
+            }
+
+            input[type=range]::-webkit-slider-runnable-track {
+                width: 100%;
+                height: 5px;
+                cursor: pointer;
+                animate: 0.2s;
+                background: #2497e3;
+                border-radius: 1px;
+                box-shadow: none;
+                border: 0;
+            }
+
+            input[type=range]::-webkit-slider-thumb {
+                z-index: 2;
+                position: relative;
+                box-shadow: 0px 0px 0px #000;
+                border: 1px solid #2497e3;
+                height: 18px;
+                width: 18px;
+                border-radius: 25px;
+                background: #a1d0ff;
+                cursor: pointer;
+                -webkit-appearance: none;
+                margin-top: -7px;
+            }
+
+            input[type=range]::-moz-range-track {
+                width: 100%;
+                height: 5px;
+                cursor: pointer;
+                animate: 0.2s;
+                background: #2497e3;
+                border-radius: 1px;
+                box-shadow: none;
+                border: 0;
+            }
+
+            input[type=range]::-moz-range-thumb {
+                z-index: 2;
+                position: relative;
+                box-shadow: 0px 0px 0px #000;
+                border: 1px solid #2497e3;
+                height: 18px;
+                width: 18px;
+                border-radius: 25px;
+                background: #a1d0ff;
+                cursor: pointer;
+            }
+
+            input[type=range]::-ms-track {
+                width: 100%;
+                height: 5px;
+                cursor: pointer;
+                animate: 0.2s;
+                background: transparent;
+                border-color: transparent;
+                color: transparent;
+            }
+
+            input[type=range]::-ms-fill-lower,
+            input[type=range]::-ms-fill-upper {
+                background: #2497e3;
+                border-radius: 1px;
+                box-shadow: none;
+                border: 0;
+            }
+
+            input[type=range]::-ms-thumb {
+                z-index: 2;
+                position: relative;
+                box-shadow: 0px 0px 0px #000;
+                border: 1px solid #2497e3;
+                height: 18px;
+                width: 18px;
+                border-radius: 25px;
+                background: #a1d0ff;
+                cursor: pointer;
+            }
+        </style>
     </head>
 
     <body>
@@ -140,170 +281,158 @@ if (!isset($_GET['q'])) {
             </div>
         </nav>
         <!-- nav area end -->
+        <div class="animate__animated animate__fadeIn d-flex">
+            <!-- shop-tab start -->
+            <div class="filter w-25">
+                <h2 class="text-center">Filter</h2>
+                <div class="range-slider">
+                    <form action="" method="post">
+                        <span>
+                            <?php
+                            $queryMin = "SELECT MIN(Harga) FROM barang WHERE NamaBarang LIKE '%$q%' OR Deskripsi LIKE '%$q%'";
+                            $resultMin = mysqli_query($conn, $queryMin);
+                            $min = mysqli_fetch_assoc($resultMin);
+                            $queryMax = "SELECT MAX(Harga) FROM barang WHERE NamaBarang LIKE '%$q%' OR Deskripsi LIKE '%$q%'";
+                            $resultMax = mysqli_query($conn, $queryMax);
+                            $max = mysqli_fetch_assoc($resultMax);
 
-        <!-- shop-banner start -->
-        <!-- <div class="shop-banner padding-bottom-30 padding-top-40">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-xl-4 col-md-6">
-                        <h1>Choose the Best one That’s right for you.</h1>
-                    </div>
-                    <div class="col-xl-4 col-md-6 position-relative">
-                        <div class="middle-left">
-                            <img draggable="false" src="assets/img/shop/anya.png" alt="">
+                            echo "<input type='number' value='" . $min['MIN(Harga)'] . "' min='0' max='" . $max['MAX(Harga)'] . "' name='min' />";
+                            echo "<input type='number' value='" . $max['MAX(Harga)'] . "' min='" . $min['MIN(Harga)'] . "' max='" . $max['MAX(Harga)'] . "' name='max' />";
+                            ?>
+                        </span>
+                        <?php
+                        echo "<input value='" . $min['MIN(Harga)'] . "'  min='" . $min['MIN(Harga)'] . "' max='" . $max['MAX(Harga)'] . "' step='1' type='range' />";
+                        echo "<input value='" . $max['MAX(Harga)'] . "' min='" . $min['MIN(Harga)'] . "' max='" . $max['MAX(Harga)'] . "' step='1' type='range' />";
+                        ?>
+                        <br> <br> <br> <br>
+                        <!-- filter by brand -->
+                        <h4 class="fs-3">Brand</h4>
+                        <div class="fs-5 form-check form-check-inline text-dark d-flex">
+                            <input class="form-check" type="checkbox" id="inlineCheckbox1" value="option1">
+                            <label class="form-check" for="inlineCheckbox1">Hobby Search</label>
                         </div>
-                        <div class="middle-right">
-                            <img draggable="false" src="assets/img/shop/anya3.png" alt="">
+                        <div class="fs-5 form-check form-check-inline text-dark d-flex">
+                            <input class="form-check" type="checkbox" id="inlineCheckbox2" value="option2">
+                            <label class="form-check" for="inlineCheckbox1">Suruga-ya</label>
                         </div>
-                    </div>
-                    <div class="col-xl-4 d-none d-xl-block position-relative">
-                        <div class="right-part">
-                            <img draggable="false" class="img1" src="assets/img/shop/anya2.png" alt="">
-                            <img draggable="false" class="img2" src="assets/img/shop/anya1.png" alt="">
+                        <div class="fs-5 form-check form-check-inline text-dark d-flex">
+                            <input class="form-check" type="checkbox" id="inlineCheckbox3" value="option3">
+                            <label class="form-check" for="inlineCheckbox1">Aniplex+</label>
                         </div>
-                    </div>
+                        <div class="fs-5 form-check form-check-inline text-dark d-flex">
+                            <input class="form-check" type="checkbox" id="inlineCheckbox4" value="option4">
+                            <label class="form-check" for="inlineCheckbox1">MelonBooks</label>
+                        </div>
+                        <div class="fs-5 form-check form-check-inline text-dark d-flex">
+                            <input class="form-check" type="checkbox" id="inlineCheckbox4" value="option4">
+                            <label class="form-check" for="inlineCheckbox1">cdJapan</label>
+                        </div>
+
+                        <button type="submit" name="submitFilter" class="btn btn-primary w-100">Submit</button>
+                    </form>
+
+
                 </div>
             </div>
-        </div> -->
-        <!-- shop-banner end -->
+            <div class="shop-tab w-75">
+                <div class="tab-content">
+                    <div class="container">
+                        <div class="tab-content-area">
+                            <div class="tab-one-content inactive active">
+                                <?php
 
-        <!-- shop-tab start -->
-        <div class="shop-tab">
-            <div class="tab-content">
-                <div class="container">
-                    <div class="tab-content-area">
+                                $jumlahDataPerHalaman = 16;
+                                $jumlahData = "";
 
-                        <!-- Tab-one start-->
-                        <div class="tab-one-content inactive active">
-                            <div class="row padding-top-120">
-                                <div class="col-xl-3 col-lg-4">
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-6">
-                                            <div class="shop-content">
-                                                <h2>Figma product is here</h2>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sit amet semper augue.</p>
-                                                <div class="btn-wrapper">
-                                                    <a href="#" class="btn sm-btn btn-style-3">See Details</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12 col-md-6">
-                                            <div class="shop-item">
-                                                <?php
-                                                $q = $_GET['q'];
-                                                $query = "SELECT * FROM barang WHERE NamaBarang LIKE '%$q%' OR Deskripsi LIKE '%$q%'";
-                                                $result = mysqli_query($conn, $query);
-                                                $row = mysqli_fetch_assoc($result);
-                                                $splitNama = "";
-                                                if (strlen($row['NamaBarang']) > 15) {
-                                                    $splitNama = substr($row['NamaBarang'], 0, 15) . "...";
-                                                } else {
-                                                    $splitNama = $row['NamaBarang'];
-                                                }
-
-                                                $deskripsi = "";
-                                                if (strlen($row['Deskripsi']) > 30) {
-                                                    $deskripsi = substr($row['Deskripsi'], 0, 30) . "...";
-                                                } else {
-                                                    $deskripsi = $row['Deskripsi'];
-                                                }
-                                                echo "<h1 class='top-text'>" . $splitNama . "</h1>";
-                                                echo "<ul class='cart-menu'>";
-                                                echo "<li><a>$" . number_format($row['Harga']) . "</a></li>";
-                                                echo "<li><a><i class='fa fa-heart'></i></a></li>";
-                                                echo "<li><a href='product-details.php?id=" . $row['IdBarang'] . "'><i class='fa fa-shopping-cart'></i></a></li>";
-                                                echo "</ul>";
-                                                echo "<a href='product-details.php?id=" . $row['IdBarang'] . "'>";
-                                                echo "<img loading='lazy' draggable='false' class='shop-image' alt='shop item' src='images/" . $row['gambar'] . ".jpg'>";
-                                                echo "</a>";
-                                                ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-9 col-lg-8">
-                                    <div class="shop-big-thumb">
-                                        <img draggable="false" src="assets/img/shop/shop-big-item.png" alt="shop">
-                                    </div>
-                                </div>
-                            </div>
-                            <?php
-
-                            $jumlahDataPerHalaman = 16;
-                            $jumlahData = "SELECT COUNT(*) FROM barang WHERE NamaBarang LIKE '%$q%' OR Deskripsi LIKE '%$q%'";
-                            $resultData = mysqli_query($conn, $jumlahData);
-                            $rowData = mysqli_fetch_assoc($resultData);
-                            $jumlahData = $rowData['COUNT(*)'];
-                            $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
-                            $page = (isset($_GET['page'])) ? $_GET['page'] : 1;
-                            $page = mysqli_escape_string($conn, $page);
-
-                            if ($page > $jumlahHalaman) {
-                                $page = $jumlahHalaman;
-                                header("Location: market.php?page=$page");
-                            } else if ($page < 1) {
-                                $page = 1;
-                            }
-
-                            $data = ($jumlahDataPerHalaman * $page) - $jumlahDataPerHalaman + 1;
-
-                            // $query = "SELECT * from barang LIMIT $data, $jumlahDataPerHalaman";
-                            $query = "SELECT * FROM barang WHERE NamaBarang LIKE '%$q%' OR Deskripsi LIKE '%$q%' LIMIT $data, $jumlahDataPerHalaman";
-                            $result = mysqli_query($conn, $query);
-                            $jumlahRow = mysqli_num_rows($result);
-                            $jumlahCol = 4;
-                            $jumlahRowPerCol = ceil($jumlahRow / $jumlahCol);
-                            for ($i = 0; $i < $jumlahRowPerCol; $i++) {
-                                echo "<div class='row'>";
-                                for ($j = 0; $j < $jumlahCol; $j++) {
-                                    $row = mysqli_fetch_array($result);
-                                    $namaSplit = "";
-                                    if (strlen($row['NamaBarang']) > 15) {
-                                        $namaSplit = substr($row['NamaBarang'], 0, 15) . "...";
-                                    } else {
-                                        $namaSplit = $row['NamaBarang'];
-                                    }
-                                    if ($row) {
-                                        echo "<div class='col-xl-3 col-lg-4 col-md-6 col-12'>";
-                                        echo "<div class='shop-item'>";
-                                        echo "<h1 class='top-text'>" . $namaSplit . "</h1>";
-                                        echo "<ul class='cart-menu'>";
-                                        echo "<li style='color:#888888;'>$" . number_format($row['Harga']) . "</li>";
-                                        echo "<li><a href='product-details.php?id=" . $row['IdBarang'] . "'><i class='fa fa-shopping-cart'></i></a></li>";
-                                        echo "</ul>";
-                                        if (strpos($row['gambar'], '.') !== false) {
-                                            echo "<a href='product-details.php?id=" . $row['IdBarang'] . "'>";
-                                            echo "<img loading='lazy' draggable='false' class='shop-image' alt='shop item' src='images/" . $row['gambar'] . "'>";
-                                            echo "</a>";
-                                        } else {
-                                            echo "<a href='product-details.php?id=" . $row['IdBarang'] . "'>";
-                                            echo "<img draggable='false' class='shop-image' alt='shop item' src='images/" . $row['gambar'] . ".jpg'>";
-                                            echo "</a>";
-                                        }
-                                        // echo "<span class='bottom-text'>For Men, Made in China, 2017</span>";
-                                        echo "<span class='rating'>";
-                                        for ($k = 0; $k < 5; $k++) {
-                                            if ($k < $row['rating']) {
-                                                echo "<i class='fa fa-star'></i>";
-                                            } else {
-                                                echo "<i class='fa fa-star-o'></i>";
-                                            }
-                                        }
-                                        echo "</div>";
-                                        echo "</div>";
-                                    }
+                                if (isset($_GET['min']) && isset($_GET['max'])) {
+                                    $min = $_GET['min'];
+                                    $max = $_GET['max'];
+                                    $jumlahData = "SELECT COUNT(*) FROM barang WHERE Harga BETWEEN $min AND $max AND (NamaBarang LIKE '%$q%' OR Deskripsi LIKE '%$q%')";
+                                } else {
+                                    $jumlahData = "SELECT COUNT(*) FROM barang WHERE NamaBarang LIKE '%$q%' OR Deskripsi LIKE '%$q%'";
                                 }
-                                echo "</div>";
-                            }
+
+                                $resultData = mysqli_query($conn, $jumlahData);
+                                $rowData = mysqli_fetch_assoc($resultData);
+                                $jumlahData = $rowData['COUNT(*)'];
+                                $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
+                                $page = (isset($_GET['page'])) ? $_GET['page'] : 1;
+                                $page = mysqli_escape_string($conn, $page);
+
+                                if ($page > $jumlahHalaman) {
+                                    $page = $jumlahHalaman;
+                                    header("Location: market.php?page=$page");
+                                } else if ($page < 1) {
+                                    $page = 1;
+                                }
+
+                                $data = ($jumlahDataPerHalaman * $page) - $jumlahDataPerHalaman + 1;
+
+                                $query = "";
+
+                                if (isset($_GET['min']) && isset($_GET['max'])) {
+                                    $min = $_GET['min'];
+                                    $max = $_GET['max'];
+                                    $query = "SELECT * FROM barang WHERE Harga BETWEEN $min AND $max AND (NamaBarang LIKE '%$q%' OR Deskripsi LIKE '%$q%') LIMIT $data, $jumlahDataPerHalaman";
+                                } else {
+                                    $query = "SELECT * FROM barang WHERE NamaBarang LIKE '%$q%' OR Deskripsi LIKE '%$q%'";
+                                }
+
+                                $result = mysqli_query($conn, $query);
+                                $jumlahRow = mysqli_num_rows($result);
+                                $jumlahCol = 4;
+                                $jumlahRowPerCol = ceil($jumlahRow / $jumlahCol);
+                                for ($i = 0; $i < $jumlahRowPerCol; $i++) {
+                                    echo "<div class='row'>";
+                                    for ($j = 0; $j < $jumlahCol; $j++) {
+                                        $row = mysqli_fetch_array($result);
+                                        $namaSplit = "";
+                                        if (strlen($row['NamaBarang']) > 15) {
+                                            $namaSplit = substr($row['NamaBarang'], 0, 15) . "...";
+                                        } else {
+                                            $namaSplit = $row['NamaBarang'];
+                                        }
+                                        if ($row) {
+                                            echo "<div class='col-xl-3 col-lg-4 col-md-6 col-12'>";
+                                            echo "<div class='shop-item'>";
+                                            echo "<h1 class='top-text'>" . $namaSplit . "</h1>";
+                                            echo "<ul class='cart-menu'>";
+                                            echo "<li style='color:#888888;'>$" . number_format($row['Harga']) . "</li>";
+                                            echo "<li><a href='product-details.php?id=" . $row['IdBarang'] . "'><i class='fa fa-shopping-cart'></i></a></li>";
+                                            echo "</ul>";
+                                            if (strpos($row['gambar'], '.') !== false) {
+                                                echo "<a href='product-details.php?id=" . $row['IdBarang'] . "'>";
+                                                echo "<img loading='lazy' draggable='false' class='shop-image' alt='shop item' src='images/" . $row['gambar'] . "'>";
+                                                echo "</a>";
+                                            } else {
+                                                echo "<a href='product-details.php?id=" . $row['IdBarang'] . "'>";
+                                                echo "<img draggable='false' class='shop-image' alt='shop item' src='images/" . $row['gambar'] . ".jpg'>";
+                                                echo "</a>";
+                                            }
+                                            // echo "<span class='bottom-text'>For Men, Made in China, 2017</span>";
+                                            echo "<span class='rating'>";
+                                            for ($k = 0; $k < 5; $k++) {
+                                                if ($k < $row['rating']) {
+                                                    echo "<i class='fa fa-star'></i>";
+                                                } else {
+                                                    echo "<i class='fa fa-star-o'></i>";
+                                                }
+                                            }
+                                            echo "</div>";
+                                            echo "</div>";
+                                        }
+                                    }
+                                    echo "</div>";
+                                }
 
 
-                            ?>
+                                ?>
+                            </div>
+                            <!-- Tab-one end -->
                         </div>
-                        <!-- Tab-one end -->
-                    </div>
-                    <div class="shop-pagination">
-                        <ul>
-                            <!-- <li>
+                        <div class="shop-pagination">
+                            <ul>
+                                <!-- <li>
                                 <span class="page-bumber">1</span>
                             </li>
                             <li>
@@ -322,34 +451,36 @@ if (!isset($_GET['q'])) {
                                 <span class="next page-bumber"><i class="fa fa-long-arrow-right"></i></span>
                             </li> -->
 
-                            <!-- pagination PHP -->
-                            <?php
-                            for ($i = 1; $i <= $jumlahHalaman; $i++) {
-                                // jika page > 5 maka tampilkan tambahan ...
-                                if ($i > 5) {
-                                    echo "<li><span class='page-bumber'>...</span></li>";
-                                    break;
+                                <!-- pagination PHP -->
+                                <?php
+                                for ($i = 1; $i <= $jumlahHalaman; $i++) {
+                                    // jika page > 5 maka tampilkan tambahan ...
+                                    if ($i > 5) {
+                                        echo "<li><span class='page-bumber'>...</span></li>";
+                                        break;
+                                    }
+                                    if ($i == $page) {
+                                        echo "<li><span class=''>$i</span></li>";
+                                    } else {
+                                        echo "<li><a href='search.php?page=$i'><span class=''>$i</span></a></li>";
+                                    }
                                 }
-                                if ($i == $page) {
-                                    echo "<li><span class=''>$i</span></li>";
+                                // if there isnt next page disable next button
+                                if ($page == $jumlahHalaman) {
+                                    echo "<li><span class='next page-bumber'><i class='fa fa-long-arrow-right'></i></span></li>";
                                 } else {
-                                    echo "<li><a href='search.php?page=$i'><span class=''>$i</span></a></li>";
+                                    echo "<li><a href='search.php?page=" . ($page + 1) . "'><span class='next page-bumber'><i class='fa fa-long-arrow-right'></i></span></a></li>";
                                 }
-                            }
-                            // if there isnt next page disable next button
-                            if ($page == $jumlahHalaman) {
-                                echo "<li><span class='next page-bumber'><i class='fa fa-long-arrow-right'></i></span></li>";
-                            } else {
-                                echo "<li><a href='search.php?page=" . ($page + 1) . "'><span class='next page-bumber'><i class='fa fa-long-arrow-right'></i></span></a></li>";
-                            }
 
-                            ?>
-                        </ul>
+                                ?>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
+            <!-- shop-tab end -->
+
         </div>
-        <!-- shop-tab end -->
 
         <!-- brand-area start -->
         <div class="brand-area">
@@ -456,7 +587,7 @@ if (!isset($_GET['q'])) {
         <!-- popper -->
         <script src="assets/js/popper.min.js"></script>
         <!-- bootstrap -->
-        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
         <!-- magnific popup -->
         <script src="assets/js/jquery.magnific-popup.js"></script>
         <!-- swiper -->
@@ -486,6 +617,49 @@ if (!isset($_GET['q'])) {
         <script src="assets/js/main.js"></script>
         <script src="assets/js/index.js"></script>
 
+        <script>
+            (function() {
+
+                var parent = document.querySelector(".range-slider");
+                if (!parent) return;
+
+                var
+                    rangeS = parent.querySelectorAll("input[type=range]"),
+                    numberS = parent.querySelectorAll("input[type=number]");
+
+                rangeS.forEach(function(el) {
+                    el.oninput = function() {
+                        var slide1 = parseFloat(rangeS[0].value),
+                            slide2 = parseFloat(rangeS[1].value);
+
+                        if (slide1 > slide2) {
+                            [slide1, slide2] = [slide2, slide1];
+                        }
+
+                        numberS[0].value = slide1;
+                        numberS[1].value = slide2;
+                    }
+                });
+
+                numberS.forEach(function(el) {
+                    el.oninput = function() {
+                        var number1 = parseFloat(numberS[0].value),
+                            number2 = parseFloat(numberS[1].value);
+
+                        if (number1 > number2) {
+                            var tmp = number1;
+                            numberS[0].value = number2;
+                            numberS[1].value = tmp;
+                        }
+
+                        rangeS[0].value = number1;
+                        rangeS[1].value = number2;
+
+                    }
+                });
+
+            })();
+        </script>
     </body>
 
 </php>

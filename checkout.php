@@ -19,8 +19,8 @@ $params = array(
         'gross_amount' => rand(),
     ),
     'customer_details' => array(
-        'first_name' => 'Dionisius Mikha',
-        'email' => 'tolongdigantinanti@gmail.com',
+        'first_name' => $_SESSION['full_name'],
+        'email' => $_SESSION['email'],
         'phone' => '081',
     ),
 );
@@ -36,6 +36,15 @@ echo "
 $sudahPencet = false;
 if (isset($_POST['continue'])) {
     $sudahPencet = true;
+}
+
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] != true) {
+    echo "<script>alert('Please sign in first!')</script>";
+    echo "<script>window.location.href='signin.php'</script>";
+}
+if (!isset($_SESSION['sudahPencetBtnBuy']) || $_SESSION['sudahPencetBtnBuy'] != true) {
+    // back to last page
+    echo "<script>window.history.back()</script>";
 }
 ?>
 
@@ -144,61 +153,11 @@ if (isset($_POST['continue'])) {
                             echo "<h5>Estimated Delivery : " . $tanggalEstimasiAwal . " - " . $tanggalEstimasiAkhir . " </h5>";
                         }
                         ?>
-                        <!-- <div class="invoice-top">
-                            <h1>Invoice # 428836 Summary</h1>
-                            <h5>Estimated Delivery : 25 - 28 July</h5>
-                        </div> -->
                         <div class="invoice-bottom">
-                            <!-- <p class="item-title">Items (6)</p> -->
                             <div class="item-title" id="outputItemTitle">
 
                             </div>
                             <ul class="single-item">
-                                <!-- <li class="single-cart-item">
-                                    <div class="thumb">
-                                        <img src="item-checkout" alt="">
-                                    </div>
-                                    <div class="content">
-                                        <h3>Figure<br> <span>For Men, Made in ISTTS, 2022</span></h3>
-                                        <span>$250.00</span>
-                                    </div>
-                                </li>
-                                <li class="single-cart-item">
-                                    <div class="thumb">
-                                        <img src="item-checkout" alt="">
-                                    </div>
-                                    <div class="content">
-                                        <h3>Figure<br> <span>For Men, Made in ISTTS, 2022</span></h3>
-                                        <span>$250.00</span>
-                                    </div>
-                                </li>
-                                <li class="single-cart-item">
-                                    <div class="thumb">
-                                        <img src="item-checkout" alt="">
-                                    </div>
-                                    <div class="content">
-                                        <h3>Figure<br> <span>For Men, Made in ISTTS, 2022</span></h3>
-                                        <span>$250.00</span>
-                                    </div>
-                                </li>
-                                <li class="single-cart-item">
-                                    <div class="thumb">
-                                        <img src="item-checkout" alt="">
-                                    </div>
-                                    <div class="content">
-                                        <h3>Figure<br> <span>For Men, Made in ISTTS, 2022</span></h3>
-                                        <span>$250.00</span>
-                                    </div>
-                                </li>
-                                <li class="single-cart-item">
-                                    <div class="thumb">
-                                        <img src="item-checkout" alt="">
-                                    </div>
-                                    <div class="content">
-                                        <h3>Figure<br> <span>For Men, Made in ISTTS, 2022</span></h3>
-                                        <span>$250.00</span>
-                                    </div>
-                                </li> -->
                                 <?php
                                 $query = "SELECT * FROM cart, barang WHERE cart.c_IdBarang = barang.IdBarang AND cart.c_username = '$_SESSION[username]'";
                                 $result = mysqli_query($conn, $query);
@@ -392,24 +351,35 @@ if (isset($_POST['continue'])) {
                     // Optional
                     onSuccess: function(result) {
                         alert('Berhasil Bayar!');
+                        // session sudahPencetBtnBuy di hapus
+                        $_SESSION['sudahPencetBtnBuy'] = false;
                         <?php
-                            $query = "SELECT * FROM cart, barang WHERE cart.c_IdBarang = barang.IdBarang AND cart.c_username = '$_SESSION[username]'";
-                            $result = mysqli_query($conn, $query);
-                            $total = 0;
-                            $query2 = "SELECT * FROM sold GROUP BY inv_num";
-                            $result2 = mysqli_query($conn, $query2);
-                            $jum = mysqli_num_rows($result2) + 1;
-                            foreach ($result as $row) {
-                                $total += $row['Harga'] * $row['quantity'];
-                            }
-                            $tgl = date("Y-m-d");
-                            $inv = "INV" . date("Ymd") . floor($jum / 100) . floor($jum / 10 % 10) . ($jum % 10);
-                            foreach ($result as $row) {
-                                $query3 = "INSERT INTO sold (s_username, s_date, inv_num, s_IdBarang, qty, total) VALUES ('{$_SESSION['username']}', '{$tgl}', '{$inv}', {$row['IdBarang']}, {$row['quantity']}, {$total})";
-                                $result3 = mysqli_query($conn, $query3);
-                            }
+                        $query = "SELECT * FROM cart, barang WHERE cart.c_IdBarang = barang.IdBarang AND cart.c_username = '$_SESSION[username]'";
+                        $result = mysqli_query($conn, $query);
+                        $total = 0;
+                        $query2 = "SELECT * FROM sold GROUP BY inv_num";
+                        $result2 = mysqli_query($conn, $query2);
+                        $jum = mysqli_num_rows($result2) + 1;
+                        foreach ($result as $row) {
+                            $total += $row['Harga'] * $row['quantity'];
+                        }
+                        $tgl = date("Y-m-d");
+                        $inv = "INV" . date("Ymd") . floor($jum / 100) . floor($jum / 10 % 10) . ($jum % 10);
+                        foreach ($result as $row) {
+                            $query3 = "INSERT INTO sold (s_username, s_date, inv_num, s_IdBarang, qty, total) VALUES ('{$_SESSION['username']}', '{$tgl}', '{$inv}', {$row['IdBarang']}, {$row['quantity']}, {$total})";
+                            $result3 = mysqli_query($conn, $query3);
+                        }
                         ?>
-                        window.location.href = "index.php";
+
+                        <?php
+                        $to = $_SESSION['email'];
+                        $subject = "Berhasil Bayar";
+                        $message = "Terima kasih telah berbelanja di Berhala Shop, barang akan segera kami kirimkan ke alamat anda. <br> Invoice Number : " . $inv . "<br> Total : " . $total;
+                        $headers = "From: Berhala Shop";
+                        mail($to, $subject, $message, $headers);
+                        ?>
+
+                        window.location.href = "payment.php?inv=<?php echo $inv; ?>";
                     },
                     // Optional
                     onPending: function(result) {
